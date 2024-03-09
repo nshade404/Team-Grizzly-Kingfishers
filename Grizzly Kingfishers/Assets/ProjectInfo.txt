@@ -1,0 +1,66 @@
+
+
+
+Details regarding our project and maybe who is doing what pieces:
+
+Needs: [Name]
+Devs: Ryan Brown, Joshua Calhoun, Andrew Phipps, Damien Remington
+
+
+First Person Shooter
+
+Player:
+	Move
+	shoot
+	health
+	Currently equipped ammo types (limit 2-3), any new ones picked up replace currently selected slot?
+		- NOTE: we can start with only one selected that you can pickup and replace with other pickups, and if we have time
+			we can start looking into doing 2-3 selectable ones.
+
+Enemy:
+	move
+	shoot
+	health
+	element type (what type of ammo they use? can color them based off that too?)
+
+Camera:
+	self explanitory mostly, but ability to look around, likely will mimic that which we did in class for the most part, unless
+		someone has any upgrade features in mind?
+
+GameManager:
+	Run UI elements? (gonna list these seperately below somewhere)
+	manage enemies currently spawned in the game, how many have been killed, and any other ways we want to track enemies.
+	Manage spawn/respawn of enemies.
+
+UI Function Library:
+	List of functions to call on the various buttons we implement in the game to send the correct information where it needs to go.
+
+Ammo:
+	Damage
+	Speed?
+	Type? (ie normal, fire, ice, poision, etc...)
+	Time To Live (TTL)
+
+
+
+
+
+
+
+Possible Nice to haves and Upgrades
+	Ammo - adds a Damage over Time effect to who it hits,
+	Resistances/Weaknesses - Different enemy types have damage resistance/weaknesses to types of ammo the player uses on them
+	Collectibles as win conditions?
+	Multiple game modes? IE Survive the waves for as long as possible to get a high score, or find and collect certain items in the map.
+
+
+
+Work Responsibilities:
+
+Ryan - 
+
+Josh - 
+
+Andrew -
+
+Damien - 
