@@ -5,7 +5,7 @@ using UnityEngine;
 public class cameraController : MonoBehaviour
 {
     [SerializeField] int sensitivity;
-    [SerializeField] int lockVertmin, lockVertmax;
+    [SerializeField] int lockVertMin, lockVertMax;
     [SerializeField] bool invertY;
 
     float rotX;
@@ -20,22 +20,25 @@ public class cameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // get input
         float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivity;
         float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * sensitivity;
 
-        if (invertY)
-        {
+        // invert look up/down
+        if (invertY) {
             rotX += mouseY;
         }
-        else
-        {
+        else {
             rotX -= mouseY;
         }
-        //lock vertical rotations
-        rotX = Mathf.Clamp(rotX, lockVertmin, lockVertmax);
-        //rotate camera on x-axis
+
+        // clamp rot on the x-axis
+        rotX = Mathf.Clamp(rotX, lockVertMin, lockVertMax);
+
+        // rotate the cam on the x-axis
         transform.localRotation = Quaternion.Euler(rotX, 0, 0);
-        //rotate player on y axis
-        transform.parent.Rotate(Vector3.up * mouseX);
+
+        // rotate the player on the y-axis
+        transform.parent.Rotate(mouseX * Vector3.up);
     }
 }
