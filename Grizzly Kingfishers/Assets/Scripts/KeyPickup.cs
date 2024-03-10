@@ -4,52 +4,49 @@ using UnityEngine;
 
 public class KeyPickup : MonoBehaviour
 {
-    public GameObject Key;
-    public GameObject keyistrue;
-    public bool isPlayer;
+    public GameObject keyObject; 
+    public Transform player; 
+
+    private bool hasKey = false; 
+
     
-    void Start()
-    {
-        isPlayer = false;
-
-        
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        
+        if (other.CompareTag("Player") && !hasKey)
         {
-            isPlayer = true;
+            
+            keyObject.SetActive(false);
+
+            
+            hasKey = true;
+
             
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    
+    public bool HasKey()
     {
-        if(other.tag == "Player")
-        {
-            isPlayer= false;
-        }
-        
+        return hasKey;
     }
 
-
-    void Update()
+    
+    public void UseKey()
     {
-        if (isPlayer)
-        {
-                {
-                    if(Input.GetKey(KeyCode.E)) 
-                    {
-                    Key.SetActive(true);
-                    keyistrue.SetActive(true);
-                    Destroy(gameObject);
-
-                    }
-                }
-                
-            
-        }
         
+        if (hasKey)
+        {
+           
+            Debug.Log("Using key to open a door...");
+
+            
+            hasKey = false;
+        }
+        else
+        {
+            Debug.Log("Player doesn't have the key!");
+        }
     }
 }
+
