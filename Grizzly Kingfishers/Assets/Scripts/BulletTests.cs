@@ -15,11 +15,17 @@ public class BulletTests : MonoBehaviour
     }
 
     [SerializeField] Bullets bulletChoice;
+    [SerializeField] int numPoison;
+    [SerializeField] int numFire;
+    [SerializeField] int numIce;
+    [SerializeField] int numStone;
+    [SerializeField] int numElectric;
+    [SerializeField] int numSand;
     bool isSwapping = false;
     // Start is called before the first frame update
     void Start()
     {
-        
+        //inventory check for bullet types <----
     }
 
     // Update is called once per frame
