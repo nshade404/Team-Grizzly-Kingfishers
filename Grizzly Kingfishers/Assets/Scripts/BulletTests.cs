@@ -38,7 +38,7 @@ public class BulletTests : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse1) && !isSwapping)
         {
             StartCoroutine(Swap());
-            
+            Debug.Log(ammoName);
         }
 
     }
@@ -83,6 +83,12 @@ public class BulletTests : MonoBehaviour
                     bulletChoice = Bullets.PocketSand;
                     currentAmmo = numSand;
                     ammoName = "Sand";
+                }
+                else
+                {
+                    bulletChoice = Bullets.None;
+                    currentAmmo = 0;
+                    ammoName = "----";
                 }
                 break;
             case Bullets.Poison:
