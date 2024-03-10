@@ -16,6 +16,7 @@ public class BulletTests : MonoBehaviour
     }
 
     [SerializeField] Bullets bulletChoice;
+    [SerializeField] int currentAmmo;
     [SerializeField] int numPoison;
     [SerializeField] int numFire;
     [SerializeField] int numIce;
@@ -37,7 +38,7 @@ public class BulletTests : MonoBehaviour
         {
             StartCoroutine(Swap());
         }
-        Debug.Log(bulletChoice);
+        Debug.Log(bulletChoice+ "/" +currentAmmo);
     }
     IEnumerator Swap()
     {
@@ -48,60 +49,74 @@ public class BulletTests : MonoBehaviour
                 if (numPoison > 0)
                 {
                     bulletChoice = Bullets.Poison;
+                    currentAmmo = numPoison;
                 }
                 else if (numFire > 0)
                 {
                     bulletChoice = Bullets.Fire;
+                    currentAmmo = numFire;
                 }
                 else if (numIce > 0)
                 {
                     bulletChoice = Bullets.Ice;
+                    currentAmmo = numIce;
                 }
                 else if (numStone > 0)
                 {
                     bulletChoice = Bullets.Stone;
+                    currentAmmo = numStone;
                 }
                 else if (numElectric > 0)
                 {
                     bulletChoice = Bullets.Electric;
+                    currentAmmo = numElectric;
                 }
                 else if (numSand > 0)
                 {
                     bulletChoice = Bullets.PocketSand;
+                    currentAmmo = numSand;
                 }
                 else
                 {
                     bulletChoice = Bullets.None;
+                    currentAmmo = 0;
                 }
                 break;
             case Bullets.Poison:
                     if(numFire > 0)
                 {
                     bulletChoice = Bullets.Fire;
+                    currentAmmo = numFire;
                 }
                 else if(numIce > 0)
                 {
                     bulletChoice = Bullets.Ice;
+                    currentAmmo = numIce;
                 }
                 else if (numStone > 0)
                 {
                     bulletChoice = Bullets.Stone;
+                    currentAmmo = numStone;
                 }
                 else if (numElectric > 0)
                 {
                     bulletChoice = Bullets.Electric;
+                    currentAmmo = numElectric;
                 }
                 else if (numSand > 0)
                 {
                     bulletChoice = Bullets.PocketSand;
+                    currentAmmo = numSand;
                 }
                 else if (numPoison > 0)
                 {
                     bulletChoice = Bullets.Poison;
+                    currentAmmo = numPoison;
                 }
                 else
                 {
                     bulletChoice = Bullets.None;
+                    currentAmmo = 0;
                 }
                 break;
                 case Bullets.Fire:
@@ -109,30 +124,37 @@ public class BulletTests : MonoBehaviour
                 if (numIce > 0)
                 {
                     bulletChoice = Bullets.Ice;
+                    currentAmmo = numIce;
                 }
                 else if (numStone > 0)
                 {
                     bulletChoice = Bullets.Stone;
+                    currentAmmo = numStone;
                 }
                 else if (numElectric > 0)
                 {
                     bulletChoice = Bullets.Electric;
+                    currentAmmo = numElectric;
                 }
                 else if (numSand > 0)
                 {
                     bulletChoice = Bullets.PocketSand;
+                    currentAmmo = numSand;
                 }
                 else if (numPoison > 0)
                 {
                     bulletChoice = Bullets.Poison;
+                    currentAmmo = numPoison;
                 }
                 else if (numFire > 0)
                 {
                     bulletChoice = Bullets.Fire;
+                    currentAmmo = numFire;
                 }
                 else
                 {
                     bulletChoice = Bullets.None;
+                    currentAmmo = 0;
                 }
                 break;
                 case Bullets.Ice:
@@ -140,30 +162,37 @@ public class BulletTests : MonoBehaviour
                 if (numStone > 0)
                 {
                     bulletChoice = Bullets.Stone;
+                    currentAmmo = numStone;
                 }
                 else if (numElectric > 0)
                 {
                     bulletChoice = Bullets.Electric;
+                    currentAmmo = numElectric;
                 }
                 else if (numSand > 0)
                 {
                     bulletChoice = Bullets.PocketSand;
+                    currentAmmo = numSand;
                 }
                 else if (numPoison > 0)
                 {
                     bulletChoice = Bullets.Poison;
+                    currentAmmo = numPoison;
                 }
                 else if (numFire > 0)
                 {
                     bulletChoice = Bullets.Fire;
+                    currentAmmo = numFire;
                 }
                 else if (numIce > 0)
                 {
                     bulletChoice = Bullets.Ice;
+                    currentAmmo = numIce;
                 }
                 else
                 {
                     bulletChoice = Bullets.None;
+                    currentAmmo = 0;
                 }
                 break;
                 case Bullets.Stone:
@@ -171,30 +200,37 @@ public class BulletTests : MonoBehaviour
                 if (numElectric > 0)
                 {
                     bulletChoice = Bullets.Electric;
+                    currentAmmo = numElectric;
                 }
                 else if (numSand > 0)
                 {
                     bulletChoice = Bullets.PocketSand;
+                    currentAmmo = numSand;
                 }
                 else if (numPoison > 0)
                 {
                     bulletChoice = Bullets.Poison;
+                    currentAmmo = numPoison;
                 }
                 else if (numFire > 0)
                 {
                     bulletChoice = Bullets.Fire;
+                    currentAmmo = numFire;
                 }
                 else if (numIce > 0)
                 {
                     bulletChoice = Bullets.Ice;
+                    currentAmmo = numIce;
                 }
                 else if (numStone > 0)
                 {
                     bulletChoice = Bullets.Stone;
+                    currentAmmo = numStone;
                 }
                 else
                 {
                     bulletChoice = Bullets.None;
+                    currentAmmo = 0;
                 }
                 break;
                 case Bullets.Electric:
@@ -202,30 +238,37 @@ public class BulletTests : MonoBehaviour
                 if (numSand > 0)
                 {
                     bulletChoice = Bullets.PocketSand;
+                    currentAmmo = numSand;
                 }
                 else if (numPoison > 0)
                 {
                     bulletChoice = Bullets.Poison;
+                    currentAmmo = numPoison;
                 }
                 else if (numFire > 0)
                 {
                     bulletChoice = Bullets.Fire;
+                    currentAmmo = numFire;
                 }
                 else if (numIce > 0)
                 {
                     bulletChoice = Bullets.Ice;
+                    currentAmmo = numIce;
                 }
                 else if (numStone > 0)
                 {
                     bulletChoice = Bullets.Stone;
+                    currentAmmo = numStone;
                 }
                 else if (numElectric > 0)
                 {
                     bulletChoice = Bullets.Electric;
+                    currentAmmo = numElectric;
                 }
                 else
                 {
                     bulletChoice = Bullets.None;
+                    currentAmmo = 0;
                 }
                 break;
                 case Bullets.PocketSand:
@@ -233,34 +276,42 @@ public class BulletTests : MonoBehaviour
                 if(numPoison > 0)
                 {
                     bulletChoice = Bullets.Poison;
+                    currentAmmo = numPoison;
                 }
                 else if (numFire > 0)
                 {
                     bulletChoice = Bullets.Fire;
+                    currentAmmo = numFire;
                 }
                 else if (numIce > 0)
                 {
                     bulletChoice = Bullets.Ice;
+                    currentAmmo = numIce;
                 }
                 else if (numStone > 0)
                 {
                     bulletChoice = Bullets.Stone;
+                    currentAmmo = numStone;
                 }
                 else if (numElectric > 0)
                 {
                     bulletChoice = Bullets.Electric;
+                    currentAmmo = numElectric;
                 }
                 else if (numSand > 0)
                 {
                     bulletChoice = Bullets.PocketSand;
+                    currentAmmo = numSand;
                 }
                 else
                 {
                     bulletChoice = Bullets.None;
+                    currentAmmo = 0;
                 }
                 break;
                 default:
                     bulletChoice = Bullets.None;
+                    currentAmmo = 0;
                     break;
 
             }
