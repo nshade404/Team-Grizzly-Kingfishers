@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2463141448153731826}
   - component: {fileID: 4254229773635392086}
   - component: {fileID: 2749188180546824993}
+  - component: {fileID: 92373816254281288}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -55,9 +56,9 @@ MonoBehaviour:
   jumps: 2
   jumpSpeed: 12
   gravity: -25
-  shootDamage: 0
-  shootDist: 0
-  shootRate: 0
+  shootDamage: 1
+  shootDist: 50
+  shootRate: 0.25
 --- !u!33 &4348775018340891747
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -157,6 +158,22 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!208 &92373816254281288
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3725882325504470215}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 1, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &8190014280377636313
 GameObject:
   m_ObjectHideFlags: 0

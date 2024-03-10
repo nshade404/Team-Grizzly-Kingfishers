@@ -15,13 +15,9 @@ public class NewBehaviourScript : MonoBehaviour, IDamage {
     [Range(-15, -35)][SerializeField] int gravity;
 
     [Header("----- Gun Stats -----")]
-    [SerializeField] int shootDamage;
-    [SerializeField] int shootDist;
-    [SerializeField] float shootRate;
-
-    //[Header("----- Example Stats -----")]
-    // Used this for doing the test of spawning cube at hit location.
-    //[SerializeField] GameObject cube;
+    [Range(0, 5)][SerializeField] int shootDamage;
+    [Range(0, 100)][SerializeField] int shootDist;
+    [Range(0, 1)][SerializeField] float shootRate;
 
     int jumpCount;
     Vector3 moveDir;
@@ -88,10 +84,6 @@ public class NewBehaviourScript : MonoBehaviour, IDamage {
             if (hit.transform != transform && dmg != null) {
                 dmg.takeDamage(shootDamage);
             }
-
-            // Keeping this as it was an example in class of spawning object at location. Just thought it was fun
-            // so wanted to keep reference for a bit.
-            //Instantiate(cube, hit.point, transform.rotation);
         }
 
         yield return new WaitForSeconds(shootRate);
