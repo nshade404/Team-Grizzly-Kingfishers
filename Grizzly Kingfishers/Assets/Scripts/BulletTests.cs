@@ -56,7 +56,7 @@ public class BulletTests : MonoBehaviour
                     break;
 
             }
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(.2f);
             isSwapping = false;
         }
     }
