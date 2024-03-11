@@ -22,8 +22,8 @@ public class gameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        player = GameObject.FindWithTag("Player");
-        playerScript.GetComponent<NewBehaviourScript>();
+       // player = GameObject.FindWithTag("Player");
+       // playerScript.GetComponent<NewBehaviourScript>();
         timeScaleOrig = Time.timeScale;
     }
 
@@ -56,15 +56,4 @@ public class gameManager : MonoBehaviour
         menuActive = null;
     }
 
-    public void updateGameGoal(int amount)
-    {
-        enemyCount += amount;
-
-        if (enemyCount <= 0)
-        {
-            statePaused();
-            menuActive = menuWin;
-            menuActive.SetActive(true);
-        }
-    }
 }
