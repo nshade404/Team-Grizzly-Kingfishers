@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class enemyAI : MonoBehaviour, IDamage {
+public class EnemyAI : MonoBehaviour, IDamage {
     [Header("----- Components -----")]
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] GameObject player; // temporary reference to the player until gameManager is up and running.
+    [SerializeField] SphereCollider aggroCollider;
+    //[SerializeField] GameObject player; // temporary reference to the player until gameManager is up and running.
 
     [Header("----- Enemy Stats -----")]
     [Range(0, 10)][SerializeField] int health;
@@ -27,15 +28,26 @@ public class enemyAI : MonoBehaviour, IDamage {
     Color startColor = Color.white;
     bool isShooting;
     Vector3 wanderPos;
-    bool isWandering;
+    bool isWandering; // Tracks if we are in wander mode or not.
+    bool isAggroing; // Tracks whether or not we are actively tracking the player for aggro.
+
+
+
+    public void SetIsAggroing(bool newAggro) {
+        isAggroing = newAggro;
+    }
 
     // Start is called before the first frame update
     void Start() {
-        if (model != null) // capture initial material color.
+        if (model != null) { // capture initial material color.
             startColor = model.material.color;
+        } else {
+            Debug.Log("Forgot to set reference for 'model' in EnemyAI!!");
+        }
 
-        // Fire off a timer that waits for 1 second to make sure player is loaded.
-        player = GameObject.FindWithTag("Player");
+        if(aggroCollider != null) {
+            aggroCollider.radius = aggroDist;
+        }
     }
 
     // Update is called once per frame
@@ -46,12 +58,15 @@ public class enemyAI : MonoBehaviour, IDamage {
             disableEnemy = !disableEnemy;
         }
 
-        if(player != null && !disableEnemy) {
-            // Aware this likely isn't the most effective way to perform this and probably should put on a timer
-            // But doing for now to get the logic working.
-            float distanceToPlayer = Mathf.Abs(Vector3.Distance(transform.position, player.transform.position));
-            if (distanceToPlayer <= aggroDist) { // we see the player, move towards and attack...
-                agent.SetDestination(player.transform.position);
+#if UNITY_EDITOR // Allow us to adjust the size of the collider in editor if we are trying out differen sizes.
+        if(aggroDist != aggroCollider.radius) {
+            aggroCollider.radius = aggroDist;
+        }
+#endif
+
+        if (!disableEnemy) {
+            if (isAggroing) { // we see the player, move towards and attack...
+                    agent.SetDestination(gameManager.instance.player.transform.position);
                 if (!isShooting) {
                     StartCoroutine(Shoot());
                 }
@@ -86,7 +101,7 @@ public class enemyAI : MonoBehaviour, IDamage {
         if(bullet != null) {
             Instantiate(bullet, shootPos.position, transform.rotation);
         } else {
-            Debug.Log(gameObject + " is firing!");
+            Debug.Log(gameObject + " is firing! No");
         }
 
         yield return new WaitForSeconds(shootRate);
