@@ -75,17 +75,16 @@ public class playerController : MonoBehaviour, IDamage {
 
     IEnumerator Shoot() {
         isShooting = true;
-
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist)) {
             Debug.Log(hit.collider.name);
 
             IDamage dmg = hit.collider.GetComponent<IDamage>();
             if (hit.transform != transform && dmg != null) {
+                Debug.Log("Are we getting into the hit.takedamage");
                 dmg.takeDamage(shootDamage);
             }
         }
-
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
