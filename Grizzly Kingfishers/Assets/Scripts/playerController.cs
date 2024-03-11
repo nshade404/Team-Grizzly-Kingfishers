@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class NewBehaviourScript : MonoBehaviour, IDamage {
+public class playerController : MonoBehaviour, IDamage {
     [Header("----- Components -----")]
     [SerializeField] CharacterController controller;
 
@@ -38,7 +38,8 @@ public class NewBehaviourScript : MonoBehaviour, IDamage {
 #endif
             Movement();
 
-            if (Input.GetButton("Shoot") && !isShooting) {
+            if (Input.GetButton("Shoot") && !isShooting)
+            {
                 StartCoroutine(Shoot());
             }
         }
