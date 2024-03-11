@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class NewBehaviourScript : MonoBehaviour, IDamage {
+public class playerController : MonoBehaviour, IDamage {
     [Header("----- Components -----")]
     [SerializeField] CharacterController controller;
 
@@ -31,14 +31,14 @@ public class NewBehaviourScript : MonoBehaviour, IDamage {
 
     // Update is called once per frame
     void Update() {
-        //if (!GameManager.instance.isPaused) {
-        if (true) {
+        if (!gameManager.instance.isPaused) {
 #if UNITY_EDITOR 
             Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.blue);
 #endif
             Movement();
 
-            if (Input.GetButton("Shoot") && !isShooting) {
+            if (Input.GetButton("Shoot") && !isShooting)
+            {
                 StartCoroutine(Shoot());
             }
         }
