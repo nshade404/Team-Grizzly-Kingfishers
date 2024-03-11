@@ -31,8 +31,7 @@ public class playerController : MonoBehaviour, IDamage {
 
     // Update is called once per frame
     void Update() {
-        //if (!GameManager.instance.isPaused) {
-        if (true) {
+        if (!gameManager.instance.isPaused) {
 #if UNITY_EDITOR 
             Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.blue);
 #endif
