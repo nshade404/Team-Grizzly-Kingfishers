@@ -998,12 +998,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletChoice: 0
   currentAmmo: 0
-  numPoison: 5
-  numFire: 2
+  numPoison: 0
+  numFire: 0
   numIce: 0
-  numStone: 2
-  numElectric: 7
-  numSand: 20
+  numStone: 0
+  numElectric: 0
+  numSand: 0
 --- !u!20 &1977235974 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 5592327700004721630, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
