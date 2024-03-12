@@ -39,6 +39,8 @@ public class EnemyAI : MonoBehaviour, IDamage {
 
     // Start is called before the first frame update
     void Start() {
+        gameManager.instance.updateGameGoal(1);
+
         if (model != null) { // capture initial material color.
             startColor = model.material.color;
         } else {
@@ -115,6 +117,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
 
         if(health <= 0)
         {
+            gameManager.instance.updateGameGoal(-1);
             Destroy(gameObject);
         }
     }
