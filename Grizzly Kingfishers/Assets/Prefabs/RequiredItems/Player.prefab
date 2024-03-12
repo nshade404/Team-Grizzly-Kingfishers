@@ -52,6 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 2749188180546824993}
   health: 10
+  maxHealth: 10
   speed: 4
   jumps: 2
   jumpSpeed: 12

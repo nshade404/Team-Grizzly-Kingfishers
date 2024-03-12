@@ -9,6 +9,7 @@ public class playerController : MonoBehaviour, IDamage {
 
     [Header("----- Player Stats -----")]
     [Range(0, 10)][SerializeField] int health;
+    [Range(1, 10)][SerializeField] int maxHealth;
     [Range(1, 5)][SerializeField] float speed;
     [Range(1, 3)][SerializeField] int jumps;
     [Range(5, 25)][SerializeField] int jumpSpeed;
@@ -23,15 +24,11 @@ public class playerController : MonoBehaviour, IDamage {
     Vector3 moveDir;
     Vector3 playerVel;
     bool isShooting;
-    int HPOrig;
 
     // Start is called before the first frame update
     void Start()
     {
-        HPOrig = health;
         updatePlayerUI();
-
-
     }
 
     // Update is called once per frame
@@ -58,9 +55,6 @@ public class playerController : MonoBehaviour, IDamage {
         // 1st person camera controls
         moveDir = Input.GetAxis("Horizontal") * transform.right
                 + Input.GetAxis("Vertical") * transform.forward;
-
-        // Topdown camera controls
-        //moveDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
         float locSpeed = speed;
         if (Input.GetButton("Sprint"))
@@ -107,13 +101,13 @@ public class playerController : MonoBehaviour, IDamage {
 
     IEnumerator flashDamageScreen()
     {
-        gameManager.instance.playerDamageFlash.SetActive(true);
+        gameManager.instance.flashPlayerDamage(true);
         yield return new WaitForSeconds(0.1f);
-        gameManager.instance.playerDamageFlash.SetActive(false);
+        gameManager.instance.flashPlayerDamage(false);
     }
 
     void updatePlayerUI()
     {
-        gameManager.instance.playerHPBar.fillAmount = (float)health / HPOrig;
+        gameManager.instance.updatePlayerHealthBar((float)(health / maxHealth));
     }
 }

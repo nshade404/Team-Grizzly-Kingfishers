@@ -14,7 +14,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuLose;
     [SerializeField] TMP_Text enemyCountText;
     public Image playerHPBar;
-    public GameObject playerDamageFlash;
+    GameObject playerDamageFlash;
 
     public GameObject player;
     public playerController playerScript;
@@ -27,8 +27,8 @@ public class gameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        //player = GameObject.FindWithTag("Player");
-        //playerScript = player.GetComponent<playerController>();
+        player = GameObject.FindWithTag("Player");
+        playerScript = player.GetComponent<playerController>();
         timeScaleOrig = Time.timeScale;
     }
 
@@ -64,7 +64,10 @@ public class gameManager : MonoBehaviour
     public void updateGameGoal(int amount)
     {
         enemyCount += amount;
-        enemyCountText.text = enemyCount.ToString("F0");
+
+        if(enemyCountText != null) {
+            enemyCountText.text = enemyCount.ToString("F0");
+        }
 
         if (enemyCount <= 0)
         {
@@ -76,8 +79,23 @@ public class gameManager : MonoBehaviour
     public void youHaveLost()
     {
         statePaused();
-        menuActive = menuLose;
-        menuActive.SetActive(true);
+        if(menuLose != null) {
+            menuActive = menuLose;
+            menuActive.SetActive(true);
+        }
     }
 
+    public void flashPlayerDamage(bool isWidgetActive) {
+        if(playerDamageFlash != null) {
+            playerDamageFlash.SetActive(isWidgetActive);
+        } else {
+            Debug.Log("gameManager.playerDamageFlash is null!");
+        }
+    }
+
+    public void updatePlayerHealthBar(float amount) {
+        if(playerHPBar != null) {
+            playerHPBar.fillAmount = amount;
+        }
+    }
 }

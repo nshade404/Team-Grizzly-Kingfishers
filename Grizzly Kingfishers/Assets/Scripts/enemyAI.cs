@@ -103,7 +103,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
         if(bullet != null) {
             Instantiate(bullet, shootPos.position, transform.rotation);
         } else {
-            Debug.Log(gameObject + " is firing! No");
+            Debug.Log(gameObject + " is firing!");
         }
 
         yield return new WaitForSeconds(shootRate);

@@ -127,7 +127,7 @@ Transform:
   m_GameObject: {fileID: 7421984340597790670}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.981, y: 1, z: -22.843}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -227,10 +227,10 @@ MonoBehaviour:
   speed: 3
   wanderWaitTime: 4
   wanderDist: 5
-  aggroDist: 10
+  aggroDist: 20
   shootRate: 0.5
   shootPos: {fileID: 2584418419935249650}
-  bullet: {fileID: 0}
+  bullet: {fileID: 3158101410210616644, guid: e668838dd27c01f43bbf3227e71d1bde, type: 3}
   disableEnemy: 0
 --- !u!195 &7868265011649633409
 NavMeshAgent:
