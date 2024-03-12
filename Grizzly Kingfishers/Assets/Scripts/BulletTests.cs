@@ -77,22 +77,23 @@ public class BulletTests : MonoBehaviour
         None.currentCount = 0;
 
         ammo[0] = None;
+        ammo[1] = Poison;
+        ammo[2] = Fire;
+        ammo[3] = Ice;
+        ammo[4] = Stone;
+        ammo[5] = Electric;
+        ammo[6] = Sand;
+        ammo[7] = Fun;
     }
 
     // Update is called once per frame
     void Update()
     {
-        foreach(Bullet bullet in ammo)
-        {
-            if(bullet.currentCount == 0)
-            {
-                currentSlot++;
-            }
-        }
         if (Input.GetKey(KeyCode.Mouse1) && !isSwapping)
         {
             StartCoroutine(Swap());
         }
+        Debug.Log(ammo[currentSlot].name.ToString());
     }
     IEnumerator Swap()
     {
@@ -110,8 +111,7 @@ public class BulletTests : MonoBehaviour
         }
         else
         {
-            ammoName = "----";
-            currentAmmo = 0;
+            currentSlot = 0;
         }
 
         yield return new WaitForSeconds(.1f);
