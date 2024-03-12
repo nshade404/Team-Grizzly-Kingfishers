@@ -23,9 +23,14 @@ public class playerController : MonoBehaviour, IDamage {
     Vector3 moveDir;
     Vector3 playerVel;
     bool isShooting;
+    int HPOrig;
 
     // Start is called before the first frame update
-    void Start() {
+    void Start()
+    {
+        HPOrig = health;
+        updatePlayerUI();
+
 
     }
 
@@ -91,5 +96,24 @@ public class playerController : MonoBehaviour, IDamage {
 
     public void takeDamage(int amount) {
         health -= amount;
+        StartCoroutine(flashDamageScreen());
+        updatePlayerUI();
+
+        if (health <= 0)
+        {
+            gameManager.instance.youHaveLost();
+        }
+    }
+
+    IEnumerator flashDamageScreen()
+    {
+        gameManager.instance.playerDamageFlash.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        gameManager.instance.playerDamageFlash.SetActive(false);
+    }
+
+    void updatePlayerUI()
+    {
+        gameManager.instance.playerHPBar.fillAmount = (float)health / HPOrig;
     }
 }
