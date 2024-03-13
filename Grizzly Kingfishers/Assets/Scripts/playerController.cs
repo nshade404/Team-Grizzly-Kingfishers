@@ -108,6 +108,6 @@ public class playerController : MonoBehaviour, IDamage {
 
     void updatePlayerUI()
     {
-        gameManager.instance.updatePlayerHealthBar((float)(health / maxHealth));
+        gameManager.instance.updatePlayerHealthBar((float)health / maxHealth);
     }
 }
