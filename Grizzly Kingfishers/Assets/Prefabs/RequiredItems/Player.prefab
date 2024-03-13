@@ -54,6 +54,7 @@ MonoBehaviour:
   health: 10
   maxHealth: 10
   speed: 4
+  sprintMod: 2
   jumps: 2
   jumpSpeed: 12
   gravity: -25
