@@ -13,10 +13,10 @@ public class Interactor : MonoBehaviour
 
     private void Update()
     {
-        _numFound = Physics.OverlapBoxNonAlloc(_interactionPoint.position,
-                                               _interactionpointRadius,
-                                               _colliders,
-                                               _interactableMask);
+       // _numFound = Physics.OverlapBoxNonAlloc(_interactionPoint.position,
+                                      //         _interactionpointRadius,
+                                            //   _colliders,
+                                         //      _interactableMask);
 
     }
 }
