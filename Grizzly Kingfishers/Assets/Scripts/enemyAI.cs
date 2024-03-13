@@ -101,7 +101,13 @@ public class EnemyAI : MonoBehaviour, IDamage {
     IEnumerator Shoot() {
         isShooting = true;
         if(bullet != null) {
-            Instantiate(bullet, shootPos.position, transform.rotation);
+            Bullet.DamageType type = bullet.GetComponent<Bullet>().GetDamageType();
+            if (bullet.GetComponent<Bullet>().GetDamageType() == Bullet.DamageType.visciousMockery) {
+                Debug.Log("Insult Made!");
+            } else {
+                Instantiate(bullet, shootPos.position, transform.rotation);
+            }
+
         } else {
             Debug.Log(gameObject + " is firing!");
         }

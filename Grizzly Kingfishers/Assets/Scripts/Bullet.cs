@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
 
-    enum DamageType {
+    public enum DamageType {
         Normal = 0,
         Poison,
         Fire,
@@ -21,6 +21,10 @@ public class Bullet : MonoBehaviour {
     [SerializeField] int speed;
     [SerializeField] int destroyTime;
     [SerializeField] DamageType type;
+
+    public DamageType GetDamageType() {
+        return type;
+    }
 
     // Start is called before the first frame update
     void Start() {
