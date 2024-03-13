@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class gameManager : MonoBehaviour
 {
@@ -10,6 +12,9 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
+    [SerializeField] TMP_Text enemyCountText;
+    public Image playerHPBar;
+    GameObject playerDamageFlash;
 
     public GameObject player;
     public playerController playerScript;
@@ -22,8 +27,8 @@ public class gameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        //player = GameObject.FindWithTag("Player");
-        //playerScript = player.GetComponent<playerController>();
+        player = GameObject.FindWithTag("Player");
+        playerScript = player.GetComponent<playerController>();
         timeScaleOrig = Time.timeScale;
     }
 
@@ -56,4 +61,51 @@ public class gameManager : MonoBehaviour
         menuActive = null;
     }
 
+    public void updateGameGoal(int amount)
+    {
+        enemyCount += amount;
+
+        if(enemyCountText != null) {
+            enemyCountText.text = enemyCount.ToString("F0");
+        }
+
+        if (enemyCount <= 0)
+        {
+            statePaused();
+            if(menuWin != null) {
+                menuActive = menuWin;
+                menuActive.SetActive(true);
+            } else {
+                Debug.Log("gameManager.menuWin not set!");
+            }
+        }
+    }
+    public void youHaveLost()
+    {
+        statePaused();
+        if(menuLose != null) {
+            menuActive = menuLose;
+            menuActive.SetActive(true);
+        }
+        else {
+            Debug.Log("gameManager.menuLose not set!");
+        }
+    }
+
+    public void flashPlayerDamage(bool isWidgetActive) {
+        if(playerDamageFlash != null) {
+            playerDamageFlash.SetActive(isWidgetActive);
+        } else {
+            Debug.Log("gameManager.playerDamageFlash is null!");
+        }
+    }
+
+    public void updatePlayerHealthBar(float amount) {
+        if(playerHPBar != null) {
+            playerHPBar.fillAmount = amount;
+        }
+        else {
+            Debug.Log("gameManager.playerHPBar not set!");
+        }
+    }
 }

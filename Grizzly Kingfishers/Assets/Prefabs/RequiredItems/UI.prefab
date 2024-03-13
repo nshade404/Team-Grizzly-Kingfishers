@@ -257,7 +257,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 96598345882497998}
         m_TargetAssemblyTypeName: buttonFunctions, Assembly-CSharp
         m_MethodName: resume
         m_Mode: 1
@@ -1341,7 +1341,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 96598345882497998}
         m_TargetAssemblyTypeName: buttonFunctions, Assembly-CSharp
         m_MethodName: quit
         m_Mode: 1
@@ -1474,7 +1474,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 96598345882497998}
         m_TargetAssemblyTypeName: buttonFunctions, Assembly-CSharp
         m_MethodName: restart
         m_Mode: 1

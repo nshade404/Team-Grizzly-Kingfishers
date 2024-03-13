@@ -9,7 +9,9 @@ public class playerController : MonoBehaviour, IDamage {
 
     [Header("----- Player Stats -----")]
     [Range(0, 10)][SerializeField] int health;
+    [Range(1, 10)][SerializeField] int maxHealth;
     [Range(1, 5)][SerializeField] float speed;
+    [Range(1, 4)] [SerializeField] float sprintMod;
     [Range(1, 3)][SerializeField] int jumps;
     [Range(5, 25)][SerializeField] int jumpSpeed;
     [Range(-15, -35)][SerializeField] int gravity;
@@ -25,8 +27,9 @@ public class playerController : MonoBehaviour, IDamage {
     bool isShooting;
 
     // Start is called before the first frame update
-    void Start() {
-
+    void Start()
+    {
+        updatePlayerUI();
     }
 
     // Update is called once per frame
@@ -35,6 +38,8 @@ public class playerController : MonoBehaviour, IDamage {
 #if UNITY_EDITOR 
             Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.blue);
 #endif
+
+            Sprint();
             Movement();
 
             if (Input.GetButton("Shoot") && !isShooting)
@@ -54,14 +59,7 @@ public class playerController : MonoBehaviour, IDamage {
         moveDir = Input.GetAxis("Horizontal") * transform.right
                 + Input.GetAxis("Vertical") * transform.forward;
 
-        // Topdown camera controls
-        //moveDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-
-        float locSpeed = speed;
-        if (Input.GetButton("Sprint"))
-            locSpeed *= 2;
-
-        controller.Move(moveDir * locSpeed * Time.deltaTime);
+        controller.Move(moveDir * speed * Time.deltaTime);
 
         if (Input.GetButtonDown("Jump") && jumpCount < jumps) {
             playerVel.y = jumpSpeed;
@@ -73,24 +71,51 @@ public class playerController : MonoBehaviour, IDamage {
         controller.Move(playerVel * Time.deltaTime);
     }
 
+    void Sprint() {
+        if (Input.GetButtonDown("Sprint")) {
+            speed *= sprintMod;
+        }
+        else if (Input.GetButtonUp("Sprint")) {
+            speed /= sprintMod;
+        }
+    }
+
     IEnumerator Shoot() {
         isShooting = true;
-
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist)) {
             Debug.Log(hit.collider.name);
 
             IDamage dmg = hit.collider.GetComponent<IDamage>();
             if (hit.transform != transform && dmg != null) {
+                Debug.Log("Are we getting into the hit.takedamage");
                 dmg.takeDamage(shootDamage);
             }
         }
-
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
 
     public void takeDamage(int amount) {
         health -= amount;
+        StartCoroutine(flashDamageScreen());
+        updatePlayerUI();
+
+        if (health <= 0)
+        {
+            gameManager.instance.youHaveLost();
+        }
+    }
+
+    IEnumerator flashDamageScreen()
+    {
+        gameManager.instance.flashPlayerDamage(true);
+        yield return new WaitForSeconds(0.1f);
+        gameManager.instance.flashPlayerDamage(false);
+    }
+
+    void updatePlayerUI()
+    {
+        gameManager.instance.updatePlayerHealthBar((float)health / maxHealth);
     }
 }

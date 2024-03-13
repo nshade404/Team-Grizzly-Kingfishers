@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 92373816254281288}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52,7 +52,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 2749188180546824993}
   health: 10
+  maxHealth: 10
   speed: 4
+  sprintMod: 2
   jumps: 2
   jumpSpeed: 12
   gravity: -25

@@ -13,12 +13,12 @@ public class EnemyAI : MonoBehaviour, IDamage {
     [Header("----- Enemy Stats -----")]
     [Range(0, 10)][SerializeField] int health;
     [Range(0, 5)][SerializeField] int speed;
-    [Range(0, 5)][SerializeField] int wanderWaitTime;
-    [Range(0, 5)][SerializeField] float wanderDist = 5.0f;
+    [Range(0, 10)][SerializeField] int wanderWaitTime;
+    [Range(0, 5)][SerializeField] float wanderDist;
     [Range(0, 50)][SerializeField] float aggroDist;
 
     [Header("----- Weapon Stats -----")]
-    [Range(0, 1)][SerializeField] float shootRate;
+    [Range(0, 5)][SerializeField] float shootRate;
     [SerializeField] Transform shootPos;
     [SerializeField] GameObject bullet;
 
@@ -39,6 +39,8 @@ public class EnemyAI : MonoBehaviour, IDamage {
 
     // Start is called before the first frame update
     void Start() {
+        gameManager.instance.updateGameGoal(1);
+
         if (model != null) { // capture initial material color.
             startColor = model.material.color;
         } else {
@@ -99,9 +101,15 @@ public class EnemyAI : MonoBehaviour, IDamage {
     IEnumerator Shoot() {
         isShooting = true;
         if(bullet != null) {
-            Instantiate(bullet, shootPos.position, transform.rotation);
+            Bullet.DamageType type = bullet.GetComponent<Bullet>().GetDamageType();
+            if (bullet.GetComponent<Bullet>().GetDamageType() == Bullet.DamageType.visciousMockery) {
+                FireInsult();
+            } else {
+                Instantiate(bullet, shootPos.position, transform.rotation);
+            }
+
         } else {
-            Debug.Log(gameObject + " is firing! No");
+            Debug.Log(gameObject + " is firing!");
         }
 
         yield return new WaitForSeconds(shootRate);
@@ -115,6 +123,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
 
         if(health <= 0)
         {
+            gameManager.instance.updateGameGoal(-1);
             Destroy(gameObject);
         }
     }
@@ -124,5 +133,33 @@ public class EnemyAI : MonoBehaviour, IDamage {
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
         model.material.color = startColor;
+    }
+
+    /// <summary>
+    /// I realize this is not the most efficient way, but we are having fun with this....
+    /// please dont judge.... -Josh
+    /// </summary>
+    public void FireInsult() {
+        int choice = Random.Range(0, 5);
+        string saying = "";
+        switch (choice) {
+            case 0:
+                saying = "You sure you don't need glasses?!";
+                break;
+            case 1:
+                saying = "Grandma has more gun stability than you!";
+                break;
+            case 2:
+                saying = "What're you? A Stormtrooper??";
+                break;
+            case 3:
+                saying = "I think your brain is AFK.";
+                break;
+            case 4:
+                saying = "Your father smelled of elderberries!";
+                break;
+        }
+
+        Debug.Log(saying);
     }
 }
