@@ -56,6 +56,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bullet_Normal Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 4515654022019995692, guid: e668838dd27c01f43bbf3227e71d1bde, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7097542821256135504, guid: e668838dd27c01f43bbf3227e71d1bde, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
