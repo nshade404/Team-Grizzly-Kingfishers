@@ -72,8 +72,12 @@ public class gameManager : MonoBehaviour
         if (enemyCount <= 0)
         {
             statePaused();
-            menuActive = menuWin;
-            menuActive.SetActive(true);
+            if(menuWin != null) {
+                menuActive = menuWin;
+                menuActive.SetActive(true);
+            } else {
+                Debug.Log("gameManager.menuWin not set!");
+            }
         }
     }
     public void youHaveLost()
@@ -82,6 +86,9 @@ public class gameManager : MonoBehaviour
         if(menuLose != null) {
             menuActive = menuLose;
             menuActive.SetActive(true);
+        }
+        else {
+            Debug.Log("gameManager.menuLose not set!");
         }
     }
 
@@ -96,6 +103,9 @@ public class gameManager : MonoBehaviour
     public void updatePlayerHealthBar(float amount) {
         if(playerHPBar != null) {
             playerHPBar.fillAmount = amount;
+        }
+        else {
+            Debug.Log("gameManager.playerHPBar not set!");
         }
     }
 }
