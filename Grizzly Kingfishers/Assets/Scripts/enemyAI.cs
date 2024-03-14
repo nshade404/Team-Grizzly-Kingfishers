@@ -67,6 +67,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
 #endif
 
         if (!disableEnemy) {
+
             if (isAggroing) { // we see the player, move towards and attack...
                     agent.SetDestination(gameManager.instance.player.transform.position);
                 if (!isShooting) {
