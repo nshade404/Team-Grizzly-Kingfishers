@@ -16,6 +16,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
     [Range(0, 10)][SerializeField] int wanderWaitTime;
     [Range(0, 5)][SerializeField] float wanderDist;
     [Range(0, 50)][SerializeField] float aggroDist;
+    //[SerializeField] Enemy enemyInfo;
 
     [Header("----- Weapon Stats -----")]
     [Range(0, 5)][SerializeField] float shootRate;

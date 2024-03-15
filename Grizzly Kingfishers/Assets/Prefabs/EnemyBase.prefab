@@ -228,6 +228,9 @@ MonoBehaviour:
   wanderWaitTime: 4
   wanderDist: 5
   aggroDist: 20
+  enemyInfo:
+    enemyPrefab: {fileID: 0}
+    cost: 0
   shootRate: 0.5
   shootPos: {fileID: 2584418419935249650}
   bullet: {fileID: 3158101410210616644, guid: e668838dd27c01f43bbf3227e71d1bde, type: 3}
