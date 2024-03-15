@@ -16,7 +16,9 @@ public class EnemyAI : MonoBehaviour, IDamage {
     [Range(0, 10)][SerializeField] int wanderWaitTime;
     [Range(0, 5)][SerializeField] float wanderDist;
     [Range(0, 50)][SerializeField] float aggroDist;
-    //[SerializeField] Enemy enemyInfo;
+
+    private Wavespawner wavespawner;
+    
 
     [Header("----- Weapon Stats -----")]
     [Range(0, 5)][SerializeField] float shootRate;
@@ -51,6 +53,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
         if(aggroCollider != null) {
             aggroCollider.radius = aggroDist;
         }
+        wavespawner = GetComponentInParent<Wavespawner>();
     }
 
     // Update is called once per frame
@@ -127,6 +130,8 @@ public class EnemyAI : MonoBehaviour, IDamage {
         {
             gameManager.instance.updateGameGoal(-1);
             Destroy(gameObject);
+
+           
         }
     }
 
