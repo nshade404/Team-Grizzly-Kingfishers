@@ -4,26 +4,37 @@ using UnityEngine;
 
 public class KeyPickup : MonoBehaviour
 {
-    public GameObject keyObject; 
+    public GameObject keyObject;
+    public GameObject healthObject;
     public Transform player; 
 
-    private bool hasKey = false; 
+    private bool hasKey = false;
+    private bool hasHealth = false;
 
     
     private void OnTriggerEnter(Collider other)
     {
-        
+
         if (other.CompareTag("Player") && !hasKey)
         {
-            
+
             keyObject.SetActive(false);
 
-            
-            hasKey = true;
 
-            
+            hasKey = true;
         }
+
+        else if (gameObject == healthObject && !hasHealth)
+        {
+            healthObject.SetActive(false);
+            
+            
+            hasHealth = true;
+        }
+
+
     }
+    
 
     
     public bool HasKey()

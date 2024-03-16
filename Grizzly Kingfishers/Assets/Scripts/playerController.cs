@@ -15,6 +15,7 @@ public class playerController : MonoBehaviour, IDamage {
     [Range(1, 3)][SerializeField] int jumps;
     [Range(5, 25)][SerializeField] int jumpSpeed;
     [Range(-15, -35)][SerializeField] int gravity;
+    public int healthPickupAmount = 10;
 
     [Header("----- Gun Stats -----")]
     [Range(0, 5)][SerializeField] int shootDamage;
@@ -117,5 +118,29 @@ public class playerController : MonoBehaviour, IDamage {
     void updatePlayerUI()
     {
         gameManager.instance.updatePlayerHealthBar((float)health / maxHealth);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("HealthPickup"))
+        {
+            PickUpHealth(other.gameObject);
+        }
+    }
+
+    void PickUpHealth(GameObject healthPickup)
+    {
+       
+        health += healthPickupAmount;
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
+
+        
+        Destroy(healthPickup);
+
+        
+        updatePlayerUI();
     }
 }
