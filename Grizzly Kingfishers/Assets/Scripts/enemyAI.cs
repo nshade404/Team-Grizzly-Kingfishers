@@ -7,15 +7,10 @@ public class EnemyAI : MonoBehaviour, IDamage {
     [Header("----- Components -----")]
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] SphereCollider aggroCollider;
-    //[SerializeField] GameObject player; // temporary reference to the player until gameManager is up and running.
 
     [Header("----- Enemy Stats -----")]
     [Range(0, 10)][SerializeField] int health;
     [Range(0, 5)][SerializeField] int speed;
-    [Range(0, 10)][SerializeField] int wanderWaitTime;
-    [Range(0, 5)][SerializeField] float wanderDist;
-    [Range(0, 50)][SerializeField] float aggroDist;
 
     private Wavespawner wavespawner;
     
@@ -25,20 +20,28 @@ public class EnemyAI : MonoBehaviour, IDamage {
     [SerializeField] Transform shootPos;
     [SerializeField] GameObject bullet;
 
+    [Header("----- Detection Settings -----")]
+    [SerializeField] Transform headPos;
+    [SerializeField] float aggroDist; // the size of our aggro collider
+    [SerializeField] int viewCone; // our field of view
+    [SerializeField] int faceTargetSpeed; // Spped in which we face the player when not moving.
+
+    [Header("----- Wander Settings -----")]
+    [SerializeField] float roamDist; // How far from the starting position we will wander around.
+    [SerializeField] int roamPauseTime;
+
     [Header("----- Debug Testing -----")]
     [SerializeField] bool disableEnemy;
 
     Color startColor = Color.white;
     bool isShooting;
-    Vector3 wanderPos;
-    bool isWandering; // Tracks if we are in wander mode or not.
-    bool isAggroing; // Tracks whether or not we are actively tracking the player for aggro.
+    bool destinationChosen; // Tracks if we are in wander mode or not.
+    float originalStoppingDistance; // used to capture our defined stopping distance on nav mesh agent.
+    Vector3 startingPos; // captures our starting position for our wandering functionality.
 
-
-
-    public void SetIsAggroing(bool newAggro) {
-        isAggroing = newAggro;
-    }
+    Vector3 playerDir; // Tracks the direction to the player.
+    float angleToPlayer; // current angle player is to relative to us
+    bool playerInRange; // Tracks whether or not we are actively tracking the player for aggro.
 
     // Start is called before the first frame update
     void Start() {
@@ -50,9 +53,10 @@ public class EnemyAI : MonoBehaviour, IDamage {
             Debug.Log("Forgot to set reference for 'model' in EnemyAI!!");
         }
 
-        if(aggroCollider != null) {
-            aggroCollider.radius = aggroDist;
-        }
+        // Set our aggro collider to the radius defined.
+        GetComponent<SphereCollider>().radius = aggroDist;
+        originalStoppingDistance = agent.stoppingDistance;
+        startingPos = transform.position; 
         wavespawner = GetComponentInParent<Wavespawner>();
     }
 
@@ -65,42 +69,73 @@ public class EnemyAI : MonoBehaviour, IDamage {
         }
 
 #if UNITY_EDITOR // Allow us to adjust the size of the collider in editor if we are trying out differen sizes.
-        if(aggroDist != aggroCollider.radius) {
-            aggroCollider.radius = aggroDist;
+        if(aggroDist != GetComponent<SphereCollider>().radius) {
+            // If we changed in editor for testing, go ahead and update to the new value.
+            GetComponent<SphereCollider>().radius = aggroDist;
         }
 #endif
+        // Debugging functionality to prevent enemies from doing actions while we are testing.
+        if (disableEnemy) {
+            return;
+        }
 
-        if (!disableEnemy) {
-
-            if (isAggroing) { // we see the player, move towards and attack...
-                    agent.SetDestination(gameManager.instance.player.transform.position);
-                if (!isShooting) {
-                    StartCoroutine(Shoot());
-                }
-            }
-            else { // wander around a little bit.
-
-                if (!isWandering) {
-                    StartCoroutine(Wander());
-                }
-                else {
-                    float distance = Mathf.Abs(Vector3.Distance(transform.position, wanderPos));
-                    if(distance >= 0.1f) {
-                        agent.SetDestination(wanderPos);
-                    }
-                }
-            }
+        if (playerInRange && !CanSeePlayer()) {
+            StartCoroutine(Roam());
+        }
+        else if (!playerInRange) {
+            StartCoroutine(Roam());
         }
     }
 
-    IEnumerator Wander() {
-        isWandering = true;
-        float newX = Random.Range(-wanderDist, wanderDist) + transform.position.x;
-        float newZ = Random.Range(-wanderDist, wanderDist) + transform.position.z;
-        wanderPos = new Vector3(newX, 0, newZ);
+    IEnumerator Roam() {
+        if (agent.remainingDistance < 0.05f && !destinationChosen) {
 
-        yield return new WaitForSeconds(wanderWaitTime);
-        isWandering = false;
+            destinationChosen = true;
+            agent.stoppingDistance = 0;
+
+            yield return new WaitForSeconds(roamPauseTime);
+
+            Vector3 randomPos = Random.insideUnitSphere * roamDist;
+            randomPos += startingPos;
+            NavMeshHit hit;
+            NavMesh.SamplePosition(randomPos, out hit, roamDist, 1);
+            agent.SetDestination(hit.position);
+
+            destinationChosen = false;
+        }
+    }
+
+    bool CanSeePlayer() {
+        playerDir = gameManager.instance.player.transform.position - headPos.position;
+        angleToPlayer = Vector3.Angle(playerDir, transform.forward);
+        //Debug.Log(angleToPlayer);
+        Debug.DrawRay(headPos.position, playerDir);
+        RaycastHit hit;
+        if (Physics.Raycast(headPos.position, playerDir, out hit)) {
+            //Debug.Log(hit.collider.name);
+
+            if (hit.collider.CompareTag("Player") && angleToPlayer <= viewCone) {
+                agent.stoppingDistance = originalStoppingDistance;
+                agent.SetDestination(gameManager.instance.player.transform.position);
+
+                if (!isShooting) {
+                    StartCoroutine(Shoot());
+                }
+
+                if (agent.remainingDistance <= agent.stoppingDistance) {
+                    FaceTarget();
+                }
+
+                return true;
+            }
+        }
+        agent.stoppingDistance = 0;
+        return false;
+    }
+
+    void FaceTarget() {
+        Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, transform.position.y, playerDir.z));
+        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
     }
 
     IEnumerator Shoot() {
@@ -112,11 +147,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
             } else {
                 Instantiate(bullet, shootPos.position, transform.rotation);
             }
-
-        } else {
-            Debug.Log(gameObject + " is firing!");
         }
-
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
@@ -124,14 +155,11 @@ public class EnemyAI : MonoBehaviour, IDamage {
     public void takeDamage(int amount)
     {
         health -= amount;
+        agent.SetDestination(gameManager.instance.player.transform.position);
         StartCoroutine(flashRed());
-
-        if(health <= 0)
-        {
+        if (health <= 0) {
             gameManager.instance.updateGameGoal(-1);
             Destroy(gameObject);
-
-           
         }
     }
 
@@ -168,5 +196,18 @@ public class EnemyAI : MonoBehaviour, IDamage {
         }
 
         Debug.Log(saying);
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("Player")) {
+            playerInRange = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other) {
+        if (other.CompareTag("Player")) {
+            playerInRange = false;
+            agent.stoppingDistance = 0;
+        }
     }
 }
