@@ -10,6 +10,7 @@ public class Wavespawner : MonoBehaviour
 
     public SpawnState state = SpawnState.COUNTING;
 
+    
     public Transform enemyPrefab;
     public float timeBetweenWaves = 5f;
     public float countDown = 2f;
