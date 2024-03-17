@@ -35,6 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8165065268657157553}
+  - {fileID: 4823807244903345058}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8493498545602200069
@@ -57,9 +58,14 @@ MonoBehaviour:
   jumps: 2
   jumpSpeed: 12
   gravity: -25
+  healthPickupAmount: 10
   shootDamage: 1
   shootDist: 50
   shootRate: 0.25
+  selectedBullet: {fileID: 5053413113548928227, guid: 9775495c50eaa9442bcf323a0853604b, type: 3}
+  shootPos: {fileID: 4823807244903345058}
+  selectedTurret: {fileID: 3609307614998996605, guid: b89449145d9d5014f90c754420f7a542, type: 3}
+  turretPlacementDist: 10
 --- !u!33 &4348775018340891747
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -159,6 +165,37 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &3957802227330196194
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4823807244903345058}
+  m_Layer: 0
+  m_Name: ShootPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4823807244903345058
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3957802227330196194}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.3, z: 0.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6506310894502256878}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8190014280377636313
 GameObject:
   m_ObjectHideFlags: 0

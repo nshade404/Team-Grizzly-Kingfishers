@@ -12,9 +12,6 @@ public class EnemyAI : MonoBehaviour, IDamage {
     [Range(0, 10)][SerializeField] int health;
     [Range(0, 5)][SerializeField] int speed;
 
-    private Wavespawner wavespawner;
-    
-
     [Header("----- Weapon Stats -----")]
     [Range(0, 5)][SerializeField] float shootRate;
     [SerializeField] Transform shootPos;
@@ -57,7 +54,6 @@ public class EnemyAI : MonoBehaviour, IDamage {
         GetComponent<SphereCollider>().radius = aggroDist;
         originalStoppingDistance = agent.stoppingDistance;
         startingPos = transform.position; 
-        wavespawner = GetComponentInParent<Wavespawner>();
     }
 
     // Update is called once per frame

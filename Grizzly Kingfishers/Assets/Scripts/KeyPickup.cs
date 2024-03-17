@@ -28,7 +28,6 @@ public class KeyPickup : MonoBehaviour
         {
             healthObject.SetActive(false);
             
-            
             hasHealth = true;
         }
 

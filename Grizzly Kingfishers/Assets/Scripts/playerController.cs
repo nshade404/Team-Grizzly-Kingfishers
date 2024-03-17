@@ -21,6 +21,12 @@ public class playerController : MonoBehaviour, IDamage {
     [Range(0, 5)][SerializeField] int shootDamage;
     [Range(0, 100)][SerializeField] int shootDist;
     [Range(0, 1)][SerializeField] float shootRate;
+    [SerializeField] GameObject selectedBullet;
+    [SerializeField] Transform shootPos;
+
+    [Header("----- Turret Stats -----")]
+    [SerializeField] GameObject selectedTurret;
+    [SerializeField] int turretPlacementDist;
 
     int jumpCount;
     Vector3 moveDir;
@@ -47,6 +53,19 @@ public class playerController : MonoBehaviour, IDamage {
             {
                 StartCoroutine(Shoot());
             }
+
+            if (Input.GetButtonDown("PlaceTurret")) {
+                RaycastHit hit;
+                if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, turretPlacementDist)) {
+                    Instantiate(selectedTurret, hit.point, transform.rotation);
+                }
+            }
+
+            if (Input.GetButtonDown("SpawnTest")) {
+                EnemySpawner spawner = GameObject.FindWithTag("Spawner").GetComponent<EnemySpawner>();
+                spawner.StartSpawnEnemies(10);
+            }
+
         }
     }
 
@@ -83,16 +102,19 @@ public class playerController : MonoBehaviour, IDamage {
 
     IEnumerator Shoot() {
         isShooting = true;
-        RaycastHit hit;
-        if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist)) {
-            Debug.Log(hit.collider.name);
 
-            IDamage dmg = hit.collider.GetComponent<IDamage>();
-            if (hit.transform != transform && dmg != null) {
-                Debug.Log("Are we getting into the hit.takedamage");
-                dmg.takeDamage(shootDamage);
-            }
-        }
+        Instantiate(selectedBullet, shootPos.position, transform.rotation);
+
+        //RaycastHit hit;
+        //if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist)) {
+        //    Debug.Log(hit.collider.name);
+
+        //    IDamage dmg = hit.collider.GetComponent<IDamage>();
+        //    if (hit.transform != transform && dmg != null) {
+        //        Debug.Log("Are we getting into the hit.takedamage");
+        //        dmg.takeDamage(shootDamage);
+        //    }
+        //}
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
