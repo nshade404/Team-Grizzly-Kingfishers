@@ -16,9 +16,9 @@ public class gameManager : MonoBehaviour
     [SerializeField] TMP_Text enemyCountText;
 
     [SerializeField] GameObject enemySpawn;
-    [SerializeField] float spawnTime;
-    [SerializeField] float spawnDelay;
-    [SerializeField] int enemiesPerWave;
+    public float spawnTime;
+    public float spawnDelay;
+    public int enemiesPerWave;
     
     public Image playerHPBar;
     public GameObject playerDamageFlash;
