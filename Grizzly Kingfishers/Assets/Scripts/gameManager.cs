@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using JetBrains.Annotations;
 
 public class gameManager : MonoBehaviour
 {
@@ -13,6 +14,12 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
     [SerializeField] TMP_Text enemyCountText;
+
+    [SerializeField] GameObject enemySpawn;
+    [SerializeField] float spawnTime;
+    [SerializeField] float spawnDelay;
+    [SerializeField] int enemiesPerWave;
+    
     public Image playerHPBar;
     public GameObject playerDamageFlash;
 
@@ -20,8 +27,14 @@ public class gameManager : MonoBehaviour
     public playerController playerScript;
 
     public bool isPaused;
+    public bool isSpawning;
     float timeScaleOrig;
     int enemyCount;
+    public int enemyWaveCount;
+    public int maxEnemies = 50;
+    
+    [SerializeField] Transform enemySpawnPoint;
+
 
     // Start is called before the first frame update
     void Awake()
@@ -30,6 +43,7 @@ public class gameManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<playerController>();
         timeScaleOrig = Time.timeScale;
+        StartCoroutine(SpawnEnemies());
     }
 
     // Update is called once per frame
@@ -106,6 +120,27 @@ public class gameManager : MonoBehaviour
         }
         else {
             Debug.Log("gameManager.playerHPBar not set!");
+        }
+    }
+
+    IEnumerator SpawnEnemies()
+    {
+        yield return new WaitForSeconds(spawnDelay);
+
+        if (enemyCount < maxEnemies)
+        {
+            enemiesPerWave = enemyWaveCount * 3;
+            for (int i = 0; i < enemiesPerWave; i++)
+            {
+                Instantiate(enemySpawn, enemySpawnPoint.position, enemySpawnPoint.rotation);
+                yield return new WaitForSeconds(spawnTime);
+            }
+            enemyWaveCount++;
+            yield return new WaitForSeconds(spawnDelay);
+        }
+        else
+        {
+            yield return null;
         }
     }
 }
