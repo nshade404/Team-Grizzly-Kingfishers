@@ -2,62 +2,85 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Turrets : MonoBehaviour
+public class Turrets : MonoBehaviour, IDamage
 {
-    [Range(1, 10)][SerializeField] int scrapCost;
+    [Header("----- Components -----")]
+    [SerializeField] Renderer model;
+    [SerializeField] GameObject turretHead;
 
     [Header("----- Turret Stats -----")]
-    [SerializeField] Transform shootPos;
+    [Range(0, 50)][SerializeField] int health;
+    [SerializeField] Transform[] cannonBarrels;
     [SerializeField] GameObject bullet;
     [Range(0, 5)][SerializeField] float shootRate;
+    [Range(1, 10)][SerializeField] int scrapCost;
+    [Range(0, 5)][SerializeField] int turretRotateSpeed;
 
+    Color startColor = Color.white;
+    bool isShooting;
+    int currentCannon;
+
+    Transform target;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        currentCannon = 0;
+        startColor = model.material.color;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (bullet != null)
-        {
-            Bullet.DamageType type = bullet.GetComponent<Bullet>().GetDamageType();
-            if (bullet.GetComponent<Bullet>().GetDamageType() == Bullet.DamageType.visciousMockery)
-            {
-                FireInsult();
-            }
-            else
-            {
-                Instantiate(bullet, shootPos.position, transform.rotation);
-            }
+        if(target != null) {
+            Vector3 targetDir = target.position - turretHead.transform.position;
+            Quaternion rot = Quaternion.LookRotation(new Vector3(targetDir.x, transform.position.y, targetDir.z));
+            turretHead.transform.rotation = Quaternion.Lerp(turretHead.transform.rotation, rot, Time.deltaTime * turretRotateSpeed);
+        }
+
+        if (!isShooting && target != null) {
+            //StartCoroutine(FireCannon());
+        }
+
+    }
+
+    IEnumerator FireCannon()
+    {
+        isShooting = true;
+        Instantiate(bullet, cannonBarrels[currentCannon].position, turretHead.transform.rotation);
+
+        currentCannon++; // increment to next barrel for next shot,
+        if (currentCannon == cannonBarrels.Length) { // If we are at num barrels.length, cycle back to 0
+            currentCannon = 0;
+        }
+
+        yield return new WaitForSeconds(shootRate);
+        isShooting = false;
+    }
+
+    public void takeDamage(int amount) {
+        health -= amount;
+        StartCoroutine(flashRed());
+        if (health <= 0) {
+            gameManager.instance.updateGameGoal(-1);
+            Destroy(gameObject);
         }
     }
 
-    public void FireInsult()
-    {
-        int choice = Random.Range(0, 5);
-        string saying = "";
-        switch (choice)
-        {
-            case 0:
-                saying = "You sure you don't need glasses?!";
-                break;
-            case 1:
-                saying = "Grandma has more gun stability than you!";
-                break;
-            case 2:
-                saying = "What're you? A Stormtrooper??";
-                break;
-            case 3:
-                saying = "I think your brain is AFK.";
-                break;
-            case 4:
-                saying = "Your father smelled of elderberries!";
-                break;
-        }
+    IEnumerator flashRed() {
+        model.material.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        model.material.color = startColor;
+    }
 
-        Debug.Log(saying);
+    private void OnTriggerEnter(Collider other) {
+        if (other.isTrigger) {
+            return;
+        }
+        target = other.GetComponent<Transform>();
+    }
+
+    private void OnTriggerExit(Collider other) {
+        target = null;
     }
 }
