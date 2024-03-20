@@ -18,6 +18,8 @@ public class playerController : MonoBehaviour, IDamage
     [Range(-15, -35)][SerializeField] int gravity;
     public List<GameObject> collectedItems = new List<GameObject>();
     public int healthPickupAmount = 10;
+    public int keysCollected = 0;
+    
 
     [Header("----- Gun Stats -----")]
     [Range(0, 5)][SerializeField] int shootDamage;
@@ -163,6 +165,10 @@ public class playerController : MonoBehaviour, IDamage
         {
             PickUpHealth(other.gameObject);
         }
+        else if (other.CompareTag("Key"))
+        {
+            PickUpKey(other.gameObject);
+        }
     }
 
     void PickUpHealth(GameObject healthPickup)
@@ -181,4 +187,15 @@ public class playerController : MonoBehaviour, IDamage
         updatePlayerUI();
     }
 
+    void PickUpKey(GameObject keyPickup)
+    {
+        keysCollected++;
+        Destroy(keyPickup);
+
+    }
+
+    public bool HasKey()
+    {  return keysCollected > 0; }
 }
+
+
