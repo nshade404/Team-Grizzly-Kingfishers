@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class playerController : MonoBehaviour, IDamage {
+public class playerController : MonoBehaviour, IDamage
+{
     [Header("----- Components -----")]
     [SerializeField] CharacterController controller;
 
@@ -11,10 +12,11 @@ public class playerController : MonoBehaviour, IDamage {
     [Range(0, 10)][SerializeField] int health;
     [Range(1, 10)][SerializeField] int maxHealth;
     [Range(1, 5)][SerializeField] float speed;
-    [Range(1, 4)] [SerializeField] float sprintMod;
+    [Range(1, 4)][SerializeField] float sprintMod;
     [Range(1, 3)][SerializeField] int jumps;
     [Range(5, 25)][SerializeField] int jumpSpeed;
     [Range(-15, -35)][SerializeField] int gravity;
+    public List<GameObject> collectedItems = new List<GameObject>();
     public int healthPickupAmount = 10;
 
     [Header("----- Gun Stats -----")]
@@ -40,8 +42,10 @@ public class playerController : MonoBehaviour, IDamage {
     }
 
     // Update is called once per frame
-    void Update() {
-        if (!gameManager.instance.isPaused) {
+    void Update()
+    {
+        if (!gameManager.instance.isPaused)
+        {
 #if UNITY_EDITOR 
             Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.blue);
 #endif
@@ -54,14 +58,17 @@ public class playerController : MonoBehaviour, IDamage {
                 StartCoroutine(Shoot());
             }
 
-            if (Input.GetButtonDown("PlaceTurret")) {
+            if (Input.GetButtonDown("PlaceTurret"))
+            {
                 RaycastHit hit;
-                if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, turretPlacementDist)) {
+                if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, turretPlacementDist))
+                {
                     Instantiate(selectedTurret, hit.point, transform.rotation);
                 }
             }
 
-            if (Input.GetButtonDown("SpawnTest")) {
+            if (Input.GetButtonDown("SpawnTest"))
+            {
                 EnemySpawner spawner = GameObject.FindWithTag("Spawner").GetComponent<EnemySpawner>();
                 spawner.StartSpawnEnemies(10);
             }
@@ -69,8 +76,10 @@ public class playerController : MonoBehaviour, IDamage {
         }
     }
 
-    void Movement() {
-        if (controller.isGrounded) {
+    void Movement()
+    {
+        if (controller.isGrounded)
+        {
             jumpCount = 0;
             playerVel = Vector3.zero;
         }
@@ -81,7 +90,8 @@ public class playerController : MonoBehaviour, IDamage {
 
         controller.Move(moveDir * speed * Time.deltaTime);
 
-        if (Input.GetButtonDown("Jump") && jumpCount < jumps) {
+        if (Input.GetButtonDown("Jump") && jumpCount < jumps)
+        {
             playerVel.y = jumpSpeed;
             jumpCount++;
         }
@@ -91,16 +101,20 @@ public class playerController : MonoBehaviour, IDamage {
         controller.Move(playerVel * Time.deltaTime);
     }
 
-    void Sprint() {
-        if (Input.GetButtonDown("Sprint")) {
+    void Sprint()
+    {
+        if (Input.GetButtonDown("Sprint"))
+        {
             speed *= sprintMod;
         }
-        else if (Input.GetButtonUp("Sprint")) {
+        else if (Input.GetButtonUp("Sprint"))
+        {
             speed /= sprintMod;
         }
     }
 
-    IEnumerator Shoot() {
+    IEnumerator Shoot()
+    {
         isShooting = true;
 
         Instantiate(selectedBullet, shootPos.position, transform.rotation);
@@ -119,7 +133,8 @@ public class playerController : MonoBehaviour, IDamage {
         isShooting = false;
     }
 
-    public void takeDamage(int amount) {
+    public void takeDamage(int amount)
+    {
         health -= amount;
         StartCoroutine(flashDamageScreen());
         updatePlayerUI();
@@ -152,17 +167,18 @@ public class playerController : MonoBehaviour, IDamage {
 
     void PickUpHealth(GameObject healthPickup)
     {
-       
+
         health += healthPickupAmount;
         if (health > maxHealth)
         {
             health = maxHealth;
         }
 
-        
+
         Destroy(healthPickup);
 
-        
+
         updatePlayerUI();
     }
+
 }

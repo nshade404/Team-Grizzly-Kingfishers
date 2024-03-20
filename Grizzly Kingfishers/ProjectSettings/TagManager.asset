@@ -6,6 +6,8 @@ TagManager:
   tags:
   - HealthPickup
   - Spawner
+  - Key
+  - RocketPiece
   layers:
   - Default
   - TransparentFX

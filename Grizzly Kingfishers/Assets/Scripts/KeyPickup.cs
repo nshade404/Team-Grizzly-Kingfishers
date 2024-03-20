@@ -1,62 +1,68 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class KeyPickup : MonoBehaviour
 {
-    public GameObject keyObject;
-    public GameObject healthObject;
-    public Transform player; 
-
+    public List<GameObject> pickups;
+    private Dictionary<GameObject, bool> pickupStates = new Dictionary<GameObject, bool>();
     private bool hasKey = false;
-    private bool hasHealth = false;
+    private bool hasRocketPiece = false;
 
-    
+    private void Start()
+    {
+        foreach (GameObject pickup in pickups)
+        {
+            pickupStates[pickup] = false;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-
-        if (other.CompareTag("Player") && !hasKey)
+        if (other.CompareTag("Player"))
         {
+            foreach (GameObject pickup in pickups)
+            {
+                if (pickup.activeSelf && !pickupStates[pickup])
+                {
+                    PickupItem(pickup);
+                }
+            }
+        }
+    }
 
-            keyObject.SetActive(false);
+    private void PickupItem(GameObject pickup)
+    {
+        pickup.SetActive(false);
+        pickupStates[pickup] = true;
 
-
+        if (pickup.CompareTag("Key"))
+        {
+           
             hasKey = true;
         }
-
-        else if (gameObject == healthObject && !hasHealth)
+        else if (pickup.CompareTag("HealthPickup"))
         {
-            healthObject.SetActive(false);
             
-            hasHealth = true;
         }
 
-
+        else if (pickup.CompareTag("RocketPiece"))
+        {
+            Debug.Log("Player picked up a rocket piece!");
+            hasRocketPiece = true;
+        }
     }
-    
 
-    
     public bool HasKey()
     {
         return hasKey;
     }
 
-    
-    public void UseKey()
+    public bool HasRocketPiece()
     {
-        
-        if (hasKey)
-        {
-           
-            Debug.Log("Using key to open a door...");
-
-            
-            hasKey = false;
-        }
-        else
-        {
-            Debug.Log("Player doesn't have the key!");
-        }
+        return hasRocketPiece;
     }
 }
+
 
