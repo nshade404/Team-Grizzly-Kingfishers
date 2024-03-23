@@ -14,6 +14,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
     [SerializeField] TMP_Text enemyCountText;
+    [SerializeField] TMP_Text rocketPiecesCollectedText;
 
     [SerializeField] GameObject enemySpawn;
     public float spawnTime;
@@ -34,6 +35,9 @@ public class gameManager : MonoBehaviour
     public int maxEnemies = 50;
     
     [SerializeField] Transform enemySpawnPoint;
+
+    public int rocketPiecesCollected = 0;
+    public int rocketPiecesRequired = 3;
 
 
     // Start is called before the first frame update
@@ -79,17 +83,21 @@ public class gameManager : MonoBehaviour
     {
         enemyCount += amount;
 
-        if(enemyCountText != null) {
+        if (enemyCountText != null)
+        {
             enemyCountText.text = enemyCount.ToString("F0");
         }
 
-        if (enemyCount <= 0)
+        if (enemyCount <= 0 && rocketPiecesCollected >= rocketPiecesRequired)
         {
             statePaused();
-            if(menuWin != null) {
+            if (menuWin != null)
+            {
                 menuActive = menuWin;
                 menuActive.SetActive(true);
-            } else {
+            }
+            else
+            {
                 Debug.Log("gameManager.menuWin not set!");
             }
         }
@@ -120,6 +128,18 @@ public class gameManager : MonoBehaviour
         }
         else {
             Debug.Log("gameManager.playerHPBar not set!");
+        }
+    }
+
+    public void updateRocketPiecesUI() 
+    {
+        if (rocketPiecesCollectedText != null)
+        {
+            rocketPiecesCollectedText.text = rocketPiecesCollected + " / " + rocketPiecesRequired;
+        }
+        else
+        {
+            Debug.Log("gameManager.rocketPiecesCollectedText not set!");
         }
     }
 

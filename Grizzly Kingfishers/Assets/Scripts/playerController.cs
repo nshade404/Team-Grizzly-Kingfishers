@@ -19,6 +19,7 @@ public class playerController : MonoBehaviour, IDamage
     public List<GameObject> collectedItems = new List<GameObject>();
     public int healthPickupAmount = 10;
     public int keysCollected = 0;
+    public int rocketPiecesCollected = 0;
     
 
     [Header("----- Gun Stats -----")]
@@ -159,6 +160,8 @@ public class playerController : MonoBehaviour, IDamage
         gameManager.instance.updatePlayerHealthBar((float)health / maxHealth);
     }
 
+    bool hasRocketPiece = false;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("HealthPickup"))
@@ -169,6 +172,40 @@ public class playerController : MonoBehaviour, IDamage
         {
             PickUpKey(other.gameObject);
         }
+        else if (other.CompareTag("RocketPiece"))
+        {
+            
+            if (!hasRocketPiece)
+            {
+                PickUpRocket(other.gameObject);
+            }
+        }
+        else if (other.CompareTag("StartingRoom")) 
+        {
+            
+            if (hasRocketPiece)
+            {
+                RemoveRocketPiece();
+                gameManager.instance.updateRocketPiecesUI();
+            }
+        }
+    }
+
+    void PickUpRocket(GameObject rocket)
+    {
+        hasRocketPiece = true; 
+        rocketPiecesCollected++;
+        gameManager.instance.updateRocketPiecesUI();
+        Destroy(rocket);
+    }
+
+    void RemoveRocketPiece()
+    {
+        hasRocketPiece = false; 
+       
+        rocketPiecesCollected--;
+       
+        gameManager.instance.updateGameGoal(-1);
     }
 
     void PickUpHealth(GameObject healthPickup)
@@ -196,6 +233,15 @@ public class playerController : MonoBehaviour, IDamage
 
     public bool HasKey()
     {  return keysCollected > 0; }
+
+    
+
+    public bool HasRocketPiece()
+    { 
+        return rocketPiecesCollected > 0;
+    }
+
+    
 }
 
 
