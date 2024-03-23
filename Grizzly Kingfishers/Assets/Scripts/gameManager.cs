@@ -88,7 +88,7 @@ public class gameManager : MonoBehaviour
             enemyCountText.text = enemyCount.ToString("F0");
         }
 
-        if (enemyCount <= 0 && rocketPiecesCollected >= rocketPiecesRequired)
+        if (enemyCount <= 0 )
         {
             statePaused();
             if (menuWin != null)
