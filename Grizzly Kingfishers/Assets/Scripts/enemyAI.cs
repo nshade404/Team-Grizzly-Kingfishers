@@ -38,7 +38,9 @@ public class EnemyAI : MonoBehaviour, IDamage {
 
     Vector3 playerDir; // Tracks the direction to the player.
     float angleToPlayer; // current angle player is to relative to us
-    bool playerInRange; // Tracks whether or not we are actively tracking the player for aggro.
+    public bool playerInRange; // Tracks whether or not we are actively tracking the player for aggro.
+
+    public Transform target;
 
     // Start is called before the first frame update
     void Start() {
@@ -51,7 +53,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
         }
 
         // Set our aggro collider to the radius defined.
-        GetComponent<SphereCollider>().radius = aggroDist;
+        GetComponentInChildren<SphereCollider>().radius = aggroDist;
         originalStoppingDistance = agent.stoppingDistance;
         startingPos = transform.position;
 
@@ -67,9 +69,9 @@ public class EnemyAI : MonoBehaviour, IDamage {
         }
 
 #if UNITY_EDITOR // Allow us to adjust the size of the collider in editor if we are trying out differen sizes.
-        if(aggroDist != GetComponent<SphereCollider>().radius) {
+        if(aggroDist != GetComponentInChildren<SphereCollider>().radius) {
             // If we changed in editor for testing, go ahead and update to the new value.
-            GetComponent<SphereCollider>().radius = aggroDist;
+            GetComponentInChildren<SphereCollider>().radius = aggroDist;
         }
 #endif
         // Debugging functionality to prevent enemies from doing actions while we are testing.
@@ -78,10 +80,10 @@ public class EnemyAI : MonoBehaviour, IDamage {
         }
 
         if (playerInRange && !CanSeePlayer()) {
-            StartCoroutine(Roam());
+            //StartCoroutine(Roam());
         }
         else if (!playerInRange) {
-            StartCoroutine(Roam());
+            //StartCoroutine(Roam());
         }
     }
 
@@ -104,17 +106,20 @@ public class EnemyAI : MonoBehaviour, IDamage {
     }
 
     bool CanSeePlayer() {
-        playerDir = gameManager.instance.player.transform.position - headPos.position;
+        if(target == null)
+            return false;
+
+        playerDir = target.position - headPos.position;
         angleToPlayer = Vector3.Angle(playerDir, transform.forward);
         //Debug.Log(angleToPlayer);
-        Debug.DrawRay(headPos.position, playerDir);
+        Debug.DrawRay(shootPos.position, playerDir);
         RaycastHit hit;
         if (Physics.Raycast(headPos.position, playerDir, out hit)) {
             //Debug.Log(hit.collider.name);
 
-            if (hit.collider.CompareTag("Player") && angleToPlayer <= viewCone) {
+            if ((hit.collider.CompareTag("Player") || hit.collider.CompareTag("Turret")) && angleToPlayer <= viewCone) {
                 agent.stoppingDistance = originalStoppingDistance;
-                agent.SetDestination(gameManager.instance.player.transform.position);
+                //agent.SetDestination(target.position);
 
                 if (!isShooting) {
                     StartCoroutine(Shoot());
@@ -142,8 +147,9 @@ public class EnemyAI : MonoBehaviour, IDamage {
             Bullet.DamageType type = bullet.GetComponent<Bullet>().GetDamageType();
             if (bullet.GetComponent<Bullet>().GetDamageType() == Bullet.DamageType.visciousMockery) {
                 FireInsult();
-            } else {
-                Instantiate(bullet, shootPos.position, transform.rotation);
+            } else { 
+                Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.z));
+                Instantiate(bullet, shootPos.position, rot);
             }
         }
         yield return new WaitForSeconds(shootRate);
@@ -196,16 +202,17 @@ public class EnemyAI : MonoBehaviour, IDamage {
         Debug.Log(saying);
     }
 
-    private void OnTriggerEnter(Collider other) {
-        if (other.CompareTag("Player")) {
-            playerInRange = true;
-        }
-    }
+    //private void OnTriggerEnter(Collider other) {
+    //    if (other.CompareTag("Player") || other.CompareTag("Turret")) {
+    //        playerInRange = true;
+    //        target = other.GetComponent<Transform>();
+    //    }
+    //}
 
-    private void OnTriggerExit(Collider other) {
-        if (other.CompareTag("Player")) {
-            playerInRange = false;
-            agent.stoppingDistance = 0;
-        }
-    }
+    //private void OnTriggerExit(Collider other) {
+    //    if (other.CompareTag("Player") || other.CompareTag("Turret")) {
+    //        playerInRange = false;
+    //        //agent.stoppingDistance = 0;
+    //    }
+    //}
 }

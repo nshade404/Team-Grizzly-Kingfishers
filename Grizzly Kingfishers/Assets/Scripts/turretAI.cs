@@ -61,7 +61,6 @@ public class Turrets : MonoBehaviour, IDamage
         health -= amount;
         StartCoroutine(flashRed());
         if (health <= 0) {
-            gameManager.instance.updateGameGoal(-1);
             Destroy(gameObject);
         }
     }
@@ -76,7 +75,7 @@ public class Turrets : MonoBehaviour, IDamage
         if (other.isTrigger) {
             return;
         }
-        Debug.Log(other.gameObject.name);
+        //Debug.Log(other.gameObject.name);
 
         if (other.CompareTag("Enemy"))
             target = other.GetComponent<Transform>();

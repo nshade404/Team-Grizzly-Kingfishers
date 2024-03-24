@@ -56,15 +56,18 @@ MonoBehaviour:
   speed: 4
   sprintMod: 2
   jumps: 1
-  jumpSpeed: 12
+  jumpSpeed: 9
   gravity: -25
+  collectedItems: []
   healthPickupAmount: 10
+  keysCollected: 0
+  rocketPiecesCollected: 0
   shootDamage: 1
   shootDist: 50
   shootRate: 0.25
   selectedBullet: {fileID: 5053413113548928227, guid: 9775495c50eaa9442bcf323a0853604b, type: 3}
   shootPos: {fileID: 4823807244903345058}
-  selectedTurret: {fileID: 3609307614998996605, guid: b89449145d9d5014f90c754420f7a542, type: 3}
+  selectedTurret: {fileID: 6321060550718320091, guid: 1fb5cc4a8b54fb54ab4ec3d7bc16f5e4, type: 3}
   turretPlacementDist: 10
 --- !u!33 &4348775018340891747
 MeshFilter:

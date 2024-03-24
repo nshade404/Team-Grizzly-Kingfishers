@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2133154625826563969, guid: 7dda40ce5efef3143b0a763cf7888c68, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 52.347942
+      value: 56.63
       objectReference: {fileID: 0}
     - target: {fileID: 2133154625826563969, guid: 7dda40ce5efef3143b0a763cf7888c68, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2133154625826563969, guid: 7dda40ce5efef3143b0a763cf7888c68, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -38.94273
+      value: 16.77
       objectReference: {fileID: 0}
     - target: {fileID: 2133154625826563969, guid: 7dda40ce5efef3143b0a763cf7888c68, type: 3}
       propertyPath: m_LocalRotation.w
@@ -48,6 +48,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2840146266340885588, guid: 7dda40ce5efef3143b0a763cf7888c68, type: 3}
+      propertyPath: m_Radius
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2887622992043916515, guid: 7dda40ce5efef3143b0a763cf7888c68, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -56,10 +60,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_Normal Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 7491663051255774310, guid: 7dda40ce5efef3143b0a763cf7888c68, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8963620569247573537, guid: 7dda40ce5efef3143b0a763cf7888c68, type: 3}
       propertyPath: bullet
       value: 
       objectReference: {fileID: 5053413113548928227, guid: 9775495c50eaa9442bcf323a0853604b, type: 3}
+    - target: {fileID: 8963620569247573537, guid: 7dda40ce5efef3143b0a763cf7888c68, type: 3}
+      propertyPath: health
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
