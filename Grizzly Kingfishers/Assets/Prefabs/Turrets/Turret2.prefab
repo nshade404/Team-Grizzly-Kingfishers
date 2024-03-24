@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7785268839340724118}
   - component: {fileID: 3374595000800317166}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: Bullet_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,8 +61,7 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -118,7 +117,7 @@ GameObject:
   - component: {fileID: 355720699540909914}
   - component: {fileID: 1735305137516247554}
   m_Layer: 0
-  m_Name: Cube (3)
+  m_Name: Bullet_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,8 +165,7 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -223,7 +221,7 @@ GameObject:
   - component: {fileID: 3256192029122116007}
   - component: {fileID: 4956524835083430322}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Bullet_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -271,8 +269,7 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -328,7 +325,7 @@ GameObject:
   - component: {fileID: 2245477225267662947}
   - component: {fileID: 7432183196347290245}
   m_Layer: 0
-  m_Name: Cube (5)
+  m_Name: Bullet_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -376,8 +373,7 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -433,7 +429,7 @@ GameObject:
   - component: {fileID: 6745864560502939548}
   - component: {fileID: 593039278805458067}
   m_Layer: 0
-  m_Name: Cube (2)
+  m_Name: Bullet_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -481,8 +477,7 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -538,7 +533,7 @@ GameObject:
   - component: {fileID: 4170262878132305402}
   - component: {fileID: 1428382506421651393}
   m_Layer: 0
-  m_Name: Cube (4)
+  m_Name: Bullet_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -586,8 +581,7 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -751,16 +745,16 @@ MonoBehaviour:
   turretHead: {fileID: 2123457296321646535}
   health: 0
   cannonBarrels:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 4841950530581807199}
+  - {fileID: 4509621037952758550}
+  - {fileID: 8058570177556743288}
+  - {fileID: 7060114570632068702}
+  - {fileID: 9011888435071231633}
+  - {fileID: 51907671717392637}
   bullet: {fileID: 5053413113548928227, guid: 9775495c50eaa9442bcf323a0853604b, type: 3}
-  shootRate: 0
+  shootRate: 1.52
   scrapCost: 0
-  turretRotateSpeed: 0
+  turretRotateSpeed: 1
 --- !u!1 &2123457296321646535 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100002, guid: 36215181e56dda44b8bb066f0715cfd9, type: 3}
