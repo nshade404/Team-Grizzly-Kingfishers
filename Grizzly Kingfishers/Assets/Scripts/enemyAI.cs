@@ -53,7 +53,9 @@ public class EnemyAI : MonoBehaviour, IDamage {
         // Set our aggro collider to the radius defined.
         GetComponent<SphereCollider>().radius = aggroDist;
         originalStoppingDistance = agent.stoppingDistance;
-        startingPos = transform.position; 
+        startingPos = transform.position;
+
+        agent.SetDestination(gameManager.instance.playerBase.transform.position);
     }
 
     // Update is called once per frame
@@ -151,7 +153,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
     public void takeDamage(int amount)
     {
         health -= amount;
-        agent.SetDestination(gameManager.instance.player.transform.position);
+        //agent.SetDestination(gameManager.instance.player.transform.position);
         StartCoroutine(flashRed());
         if (health <= 0) {
             gameManager.instance.updateGameGoal(-1);

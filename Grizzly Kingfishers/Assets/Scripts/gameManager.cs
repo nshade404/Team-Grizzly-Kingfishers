@@ -26,6 +26,7 @@ public class gameManager : MonoBehaviour
 
     public GameObject player;
     public playerController playerScript;
+    public GameObject playerBase;
 
     public bool isPaused;
     public bool isSpawning;
@@ -48,6 +49,8 @@ public class gameManager : MonoBehaviour
         playerScript = player.GetComponent<playerController>();
         timeScaleOrig = Time.timeScale;
         StartCoroutine(SpawnEnemies());
+
+        playerBase = GameObject.FindWithTag("PlayerBase");
     }
 
     // Update is called once per frame

@@ -10,6 +10,8 @@ TagManager:
   - RocketPiece
   - Door
   - StartingRoom
+  - PlayerBase
+  - Enemy
   layers:
   - Default
   - TransparentFX

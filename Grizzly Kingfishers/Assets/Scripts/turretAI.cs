@@ -36,12 +36,11 @@ public class Turrets : MonoBehaviour, IDamage
             Vector3 targetDir = target.position - turretHead.transform.position;
             Quaternion rot = Quaternion.LookRotation(new Vector3(targetDir.x, transform.position.y, targetDir.z));
             turretHead.transform.rotation = Quaternion.Lerp(turretHead.transform.rotation, rot, Time.deltaTime * turretRotateSpeed);
-        }
 
-        if (!isShooting && target != null) {
-            //StartCoroutine(FireCannon());
+            if (!isShooting) {
+                StartCoroutine(FireCannon());
+            }
         }
-
     }
 
     IEnumerator FireCannon()
@@ -77,10 +76,19 @@ public class Turrets : MonoBehaviour, IDamage
         if (other.isTrigger) {
             return;
         }
-        target = other.GetComponent<Transform>();
+        Debug.Log(other.gameObject.name);
+
+        if (other.CompareTag("Enemy"))
+            target = other.GetComponent<Transform>();
+
+        //target = other.GetComponent<Transform>();
+
     }
 
     private void OnTriggerExit(Collider other) {
-        target = null;
+        //if (other.isTrigger) {
+        //    return;
+        //}
+        //target = null;
     }
 }
