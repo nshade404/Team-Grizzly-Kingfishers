@@ -211,6 +211,7 @@ public class playerController : MonoBehaviour, IDamage
             if (!hasRocketPiece)
             {
                 PickUpRocket(other.gameObject);
+               
             }
         }
         else if (other.CompareTag("StartingRoom")) 
@@ -220,6 +221,8 @@ public class playerController : MonoBehaviour, IDamage
             {
                 RemoveRocketPiece();
                 gameManager.instance.updateRocketPiecesUI();
+
+
             }
         }
     }
