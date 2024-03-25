@@ -144,7 +144,14 @@ public class gameManager : MonoBehaviour
         {
             Debug.Log("gameManager.rocketPiecesCollectedText not set!");
         }
+
+        if (rocketPiecesCollected == rocketPiecesRequired)
+        {
+            
+            updateGameGoal(-1);
+        }
     }
+
 
     IEnumerator SpawnEnemies()
     {
