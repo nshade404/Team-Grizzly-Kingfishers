@@ -7,6 +7,7 @@ public class playerController : MonoBehaviour, IDamage
 {
     [Header("----- Components -----")]
     [SerializeField] CharacterController controller;
+    [SerializeField] AudioSource aud;
 
     [Header("----- Player Stats -----")]
     [Range(0, 10)][SerializeField] int health;
@@ -33,10 +34,20 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] GameObject selectedTurret;
     [SerializeField] int turretPlacementDist;
 
+    [Header("----- Audio -----")]
+    [SerializeField] AudioClip[] audJump;
+    [Range(0, 1)][SerializeField] float audJumpVol;
+    [SerializeField] AudioClip[] audHurt;
+    [Range(0, 1)][SerializeField] float audHurtVol;
+    [SerializeField] AudioClip[] audSteps;
+    [Range(0, 1)][SerializeField] float audStepsVol;
+
     int jumpCount;
     Vector3 moveDir;
     Vector3 playerVel;
     bool isShooting;
+    bool playingSteps;
+    bool isSprinting;
 
     // Start is called before the first frame update
     void Start()
@@ -97,11 +108,17 @@ public class playerController : MonoBehaviour, IDamage
         {
             playerVel.y = jumpSpeed;
             jumpCount++;
+            aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
         }
 
         // Gravity
         playerVel.y += gravity * Time.deltaTime;
         controller.Move(playerVel * Time.deltaTime);
+
+        if (controller.isGrounded && moveDir.normalized.magnitude > 0.3f && !playingSteps)
+        {
+            StartCoroutine(playSteps());
+        }
     }
 
     void Sprint()
@@ -114,6 +131,22 @@ public class playerController : MonoBehaviour, IDamage
         {
             speed /= sprintMod;
         }
+    }
+
+    IEnumerator playSteps()
+    {
+        playingSteps = true;
+        aud.PlayOneShot(audSteps[Random.Range(0, audSteps.Length)], audStepsVol);
+
+        if (isSprinting)
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.3f);
+        }
+        playingSteps = false;
     }
 
     IEnumerator Shoot()
