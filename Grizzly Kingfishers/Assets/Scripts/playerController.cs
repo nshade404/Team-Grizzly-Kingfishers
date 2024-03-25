@@ -172,6 +172,7 @@ public class playerController : MonoBehaviour, IDamage
     public void takeDamage(int amount)
     {
         health -= amount;
+        aud.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
         StartCoroutine(flashDamageScreen());
         updatePlayerUI();
 
