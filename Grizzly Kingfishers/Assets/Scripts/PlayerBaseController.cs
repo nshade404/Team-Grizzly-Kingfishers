@@ -20,6 +20,7 @@ public class PlayerBaseController : MonoBehaviour, IDamage
         health -= amount;
         StartCoroutine(flashRed());
         if (health <= 0) {
+            gameManager.instance.youHaveLost();
             Destroy(gameObject);
         }
     }
