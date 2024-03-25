@@ -45,6 +45,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
     // Start is called before the first frame update
     void Start() {
         gameManager.instance.updateGameGoal(1);
+        target = null;
 
         if (model != null) { // capture initial material color.
             startColor = model.material.color;
@@ -87,23 +88,23 @@ public class EnemyAI : MonoBehaviour, IDamage {
         }
     }
 
-    IEnumerator Roam() {
-        if (agent.remainingDistance < 0.05f && !destinationChosen) {
+    //IEnumerator Roam() {
+    //    if (agent.remainingDistance < 0.05f && !destinationChosen) {
 
-            destinationChosen = true;
-            agent.stoppingDistance = 0;
+    //        destinationChosen = true;
+    //        agent.stoppingDistance = 0;
 
-            yield return new WaitForSeconds(roamPauseTime);
+    //        yield return new WaitForSeconds(roamPauseTime);
 
-            Vector3 randomPos = Random.insideUnitSphere * roamDist;
-            randomPos += startingPos;
-            NavMeshHit hit;
-            NavMesh.SamplePosition(randomPos, out hit, roamDist, 1);
-            agent.SetDestination(hit.position);
+    //        Vector3 randomPos = Random.insideUnitSphere * roamDist;
+    //        randomPos += startingPos;
+    //        NavMeshHit hit;
+    //        NavMesh.SamplePosition(randomPos, out hit, roamDist, 1);
+    //        agent.SetDestination(hit.position);
 
-            destinationChosen = false;
-        }
-    }
+    //        destinationChosen = false;
+    //    }
+    //}
 
     bool CanSeePlayer() {
         if(target == null)
@@ -117,8 +118,10 @@ public class EnemyAI : MonoBehaviour, IDamage {
         if (Physics.Raycast(headPos.position, playerDir, out hit)) {
             //Debug.Log(hit.collider.name);
 
-            if ((hit.collider.CompareTag("Player") || hit.collider.CompareTag("Turret")) && angleToPlayer <= viewCone) {
-                agent.stoppingDistance = originalStoppingDistance;
+            bool hitIsTargetable = hit.collider.CompareTag("Player") || hit.collider.CompareTag("Turret") || hit.collider.CompareTag("PlayerBase");
+
+            if (hitIsTargetable && angleToPlayer <= viewCone) {
+                //agent.stoppingDistance = originalStoppingDistance;
                 //agent.SetDestination(target.position);
 
                 if (!isShooting) {
@@ -132,7 +135,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
                 return true;
             }
         }
-        agent.stoppingDistance = 0;
+        //agent.stoppingDistance = 0;
         return false;
     }
 

@@ -91,19 +91,20 @@ public class gameManager : MonoBehaviour
             enemyCountText.text = enemyCount.ToString("F0");
         }
 
-        if (enemyCount <= 0 )
-        {
-            statePaused();
-            if (menuWin != null)
-            {
-                menuActive = menuWin;
-                menuActive.SetActive(true);
-            }
-            else
-            {
-                Debug.Log("gameManager.menuWin not set!");
-            }
-        }
+        // Commenting out so that killing enemies does not trigger a 'win' early
+        //if (enemyCount <= 0 )
+        //{
+        //    statePaused();
+        //    if (menuWin != null)
+        //    {
+        //        menuActive = menuWin;
+        //        menuActive.SetActive(true);
+        //    }
+        //    else
+        //    {
+        //        Debug.Log("gameManager.menuWin not set!");
+        //    }
+        //}
     }
     public void youHaveLost()
     {

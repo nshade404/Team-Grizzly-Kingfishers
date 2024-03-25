@@ -9,9 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1777684707340069761}
-  - component: {fileID: 1758552809501584481}
-  - component: {fileID: 5558016548338584220}
-  - component: {fileID: 5055185673188652119}
   m_Layer: 0
   m_Name: Bullet_1
   m_TagString: Untagged
@@ -27,84 +24,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 459407706318239803}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.199, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.961, z: 0.344}
   m_LocalScale: {x: 0.049219, y: 0.049219, z: 0.049219}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5466001246033922341}
+  m_Father: {fileID: 5466001246033922337}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &1758552809501584481
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 459407706318239803}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &5558016548338584220
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 459407706318239803}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5055185673188652119
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 459407706318239803}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &5466001246034318243
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -116,6 +42,10 @@ PrefabInstance:
     - target: {fileID: 100006, guid: 41606faa755d0f942b715592449052d3, type: 3}
       propertyPath: m_Name
       value: Turret6
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 41606faa755d0f942b715592449052d3, type: 3}
+      propertyPath: m_TagString
+      value: Turret
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 41606faa755d0f942b715592449052d3, type: 3}
       propertyPath: m_LocalScale.x
@@ -172,22 +102,28 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 400006, guid: 41606faa755d0f942b715592449052d3, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 400002, guid: 41606faa755d0f942b715592449052d3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1777684707340069761}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 100006, guid: 41606faa755d0f942b715592449052d3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6728382662590037668}
+    - targetCorrespondingSourceObject: {fileID: 100006, guid: 41606faa755d0f942b715592449052d3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7337638671312991040}
+    - targetCorrespondingSourceObject: {fileID: 100006, guid: 41606faa755d0f942b715592449052d3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8688760806915763807}
   m_SourcePrefab: {fileID: 100100000, guid: 41606faa755d0f942b715592449052d3, type: 3}
 --- !u!23 &5466001246032022465 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 2300002, guid: 41606faa755d0f942b715592449052d3, type: 3}
   m_PrefabInstance: {fileID: 5466001246034318243}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &5466001246033922341 stripped
+--- !u!4 &5466001246033922337 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 400006, guid: 41606faa755d0f942b715592449052d3, type: 3}
+  m_CorrespondingSourceObject: {fileID: 400002, guid: 41606faa755d0f942b715592449052d3, type: 3}
   m_PrefabInstance: {fileID: 5466001246034318243}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &5466001246034220289 stripped
@@ -214,10 +150,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 5466001246032022465}
   turretHead: {fileID: 5466001246034220289}
-  health: 0
+  health: 20
   cannonBarrels:
   - {fileID: 1777684707340069761}
   bullet: {fileID: 5024195528490519049, guid: a4d77c5b398bff84fae5d12f67c0705c, type: 3}
   shootRate: 0.14
   scrapCost: 0
-  turretRotateSpeed: 1
+  turretRotateSpeed: 4
+--- !u!65 &7337638671312991040
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5466001246034220293}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 1, z: 0.5}
+  m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!135 &8688760806915763807
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5466001246034220293}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 20
+  m_Center: {x: 0, y: 0, z: 0}
