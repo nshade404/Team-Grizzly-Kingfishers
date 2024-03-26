@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -31,7 +33,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] Transform shootPos;
 
     [Header("----- Turret Stats -----")]
-    [SerializeField] List<Turrets> turrets;
+    [SerializeField] List<GameObject> turrets;
     [SerializeField] GameObject selectedTurret;
     [SerializeField] int turretPlacementDist;
 
@@ -54,6 +56,7 @@ public class playerController : MonoBehaviour, IDamage
     void Start()
     {
         updatePlayerUI();
+        selectedTurret = turrets.First();
     }
 
     // Update is called once per frame
@@ -79,16 +82,10 @@ public class playerController : MonoBehaviour, IDamage
                 RaycastHit hit;
                 if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, turretPlacementDist))
                 {
-                    Instantiate(selectedTurret, hit.point, transform.rotation);
+                    Vector3 placeOnGround = new Vector3(hit.point.x, 0, hit.point.z);
+                    Instantiate(selectedTurret, placeOnGround, transform.rotation);
                 }
             }
-
-            if (Input.GetButtonDown("SpawnTest"))
-            {
-                EnemySpawner spawner = GameObject.FindWithTag("Spawner").GetComponent<EnemySpawner>();
-                spawner.StartSpawnEnemies(10);
-            }
-
         }
     }
 
@@ -157,16 +154,6 @@ public class playerController : MonoBehaviour, IDamage
 
         Instantiate(selectedBullet, shootPos.position, transform.rotation);
 
-        //RaycastHit hit;
-        //if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDist)) {
-        //    Debug.Log(hit.collider.name);
-
-        //    IDamage dmg = hit.collider.GetComponent<IDamage>();
-        //    if (hit.transform != transform && dmg != null) {
-        //        Debug.Log("Are we getting into the hit.takedamage");
-        //        dmg.takeDamage(shootDamage);
-        //    }
-        //}
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
@@ -224,8 +211,6 @@ public class playerController : MonoBehaviour, IDamage
             {
                 RemoveRocketPiece();
                 gameManager.instance.updateRocketPiecesUI();
-
-
             }
         }
     }
@@ -256,10 +241,7 @@ public class playerController : MonoBehaviour, IDamage
             health = maxHealth;
         }
 
-
         Destroy(healthPickup);
-
-
         updatePlayerUI();
     }
 
@@ -285,7 +267,7 @@ public class playerController : MonoBehaviour, IDamage
         float mouseWheelInput = Input.GetAxis("Mouse ScrollWheel");
         if (mouseWheelInput != 0)
         {
-            int currentIndex = turrets.IndexOf(selectedTurret.GetComponent<Turrets>());
+            int currentIndex = turrets.IndexOf(selectedTurret);
             currentIndex += (int)Mathf.Sign(mouseWheelInput);
             if (currentIndex < 0)
             {
@@ -295,7 +277,7 @@ public class playerController : MonoBehaviour, IDamage
             {
                 currentIndex = 0;
             }
-            selectedTurret = turrets[currentIndex].gameObject;
+            selectedTurret = turrets[currentIndex];
         }
     }
 }

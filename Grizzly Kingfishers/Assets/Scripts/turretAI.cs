@@ -27,6 +27,7 @@ public class Turrets : MonoBehaviour, IDamage
     {
         currentCannon = 0;
         startColor = model.material.color;
+        originalMaterial = model.material;
     }
 
     // Update is called once per frame
