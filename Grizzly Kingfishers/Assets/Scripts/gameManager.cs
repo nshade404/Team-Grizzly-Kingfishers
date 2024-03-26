@@ -15,6 +15,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuLose;
     [SerializeField] TMP_Text enemyCountText;
     [SerializeField] TMP_Text rocketPiecesCollectedText;
+    [SerializeField] TMP_Text scrapText;
 
     [SerializeField] GameObject enemySpawn;
     public float spawnTime;
@@ -40,6 +41,7 @@ public class gameManager : MonoBehaviour
     public int rocketPiecesCollected = 0;
     public int rocketPiecesRequired = 3;
 
+    public int scrapWallet = 0;
 
     // Start is called before the first frame update
     void Awake()
@@ -180,6 +182,30 @@ public class gameManager : MonoBehaviour
         else
         {
             yield return null;
+        }
+    }
+
+    public void AddScrap(int amount)
+    {
+        scrapWallet += amount;
+        UpdateScrapUI();
+    }
+
+    public void RemoveScrap(int amount)
+    {
+        scrapWallet -= amount;
+        UpdateScrapUI();
+    }
+
+    void UpdateScrapUI()
+    {
+        if (scrapText != null)
+        {
+            scrapText.text = "Scrap" + scrapWallet.ToString();
+        }
+        else
+        {
+            Debug.LogError("Scrap UI Text is not set!");
         }
     }
 }
