@@ -35,6 +35,10 @@ public class playerController : MonoBehaviour, IDamage
     [Header("----- Turret Stats -----")]
     [SerializeField] List<GameObject> turrets;
     public GameObject selectedTurret;
+<<<<<<< Updated upstream
+=======
+    [SerializeField] GameObject turretBuilder;
+>>>>>>> Stashed changes
     [SerializeField] int turretPlacementDist;
 
     [Header("----- Audio -----")]
@@ -83,7 +87,7 @@ public class playerController : MonoBehaviour, IDamage
                 if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, turretPlacementDist))
                 {
                     Vector3 placeOnGround = new Vector3(hit.point.x, 0, hit.point.z);
-                    Instantiate(selectedTurret, placeOnGround, transform.rotation);
+                    Instantiate(turretBuilder, placeOnGround, transform.rotation);
                 }
             }
         }

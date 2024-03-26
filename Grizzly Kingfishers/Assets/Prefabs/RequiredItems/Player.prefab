@@ -76,7 +76,8 @@ MonoBehaviour:
   - {fileID: 7941642292033421097, guid: dcff139332484aa4294c9ac8523a9f49, type: 3}
   - {fileID: 6881419524468426087, guid: a2ef6f0c17baf2b48872463aa8a09416, type: 3}
   - {fileID: 5466001246034220293, guid: d513a93c9bae91c49bb1de481ac60a03, type: 3}
-  selectedTurret: {fileID: 0}
+  selectedTurret: {fileID: 461171333311806069, guid: 718b6b7947b8a2241be79c10036c5405, type: 3}
+  turretBuilder: {fileID: 4835148788277619671, guid: df5add63e28dbe244a64c028de905532, type: 3}
   turretPlacementDist: 10
   audJump:
   - {fileID: 8300000, guid: 4e0553bab21926c41962e8cc1128e287, type: 3}
