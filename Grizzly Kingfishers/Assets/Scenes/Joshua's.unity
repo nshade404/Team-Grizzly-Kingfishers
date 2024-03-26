@@ -1377,17 +1377,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 317956681434971232, guid: 2221723ef585da24a92f246971b0acb0, type: 3}
   m_PrefabInstance: {fileID: 2101579413}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1435062537 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 96598345882497998, guid: e924cd30295ac304fb902e7211a404ed, type: 3}
-  m_PrefabInstance: {fileID: 1646346759}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c26db51e80c0d2a44b6631fd22cc4167, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1440193808 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 317956681434971232, guid: 2221723ef585da24a92f246971b0acb0, type: 3}
@@ -1586,14 +1575,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
-    - target: {fileID: 4048207028371085743, guid: e924cd30295ac304fb902e7211a404ed, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1435062537}
-    - target: {fileID: 4048207028371085743, guid: e924cd30295ac304fb902e7211a404ed, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: resume
-      objectReference: {fileID: 0}
     - target: {fileID: 5719024981494893151, guid: e924cd30295ac304fb902e7211a404ed, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1690,22 +1671,6 @@ PrefabInstance:
     - target: {fileID: 3299481509101877577, guid: aa5d1555f53c56d4e9392824b22825c7, type: 3}
       propertyPath: m_Name
       value: Wave Spawner
-      objectReference: {fileID: 0}
-    - target: {fileID: 3299481509101877577, guid: aa5d1555f53c56d4e9392824b22825c7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9002216946557013380, guid: aa5d1555f53c56d4e9392824b22825c7, type: 3}
-      propertyPath: enemyPrefab
-      value: 
-      objectReference: {fileID: 7851896920527410065, guid: 1e5e53e20fa967e4cb3a5e95be42a008, type: 3}
-    - target: {fileID: 9002216946557013380, guid: aa5d1555f53c56d4e9392824b22825c7, type: 3}
-      propertyPath: maxEnemyCount
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 9002216946557013380, guid: aa5d1555f53c56d4e9392824b22825c7, type: 3}
-      propertyPath: enemiesPerWave
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9100576184811892474, guid: aa5d1555f53c56d4e9392824b22825c7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2108,10 +2073,6 @@ PrefabInstance:
     - target: {fileID: 6506310894502256878, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8493498545602200069, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
-      propertyPath: audStepsVol
-      value: 0.01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

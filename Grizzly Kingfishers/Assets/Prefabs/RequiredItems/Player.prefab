@@ -102,7 +102,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4e653a9149af53d479371cdd855bbe12, type: 3}
   - {fileID: 8300000, guid: af8798da8d6fea34dbb9dc9c061b9f55, type: 3}
   - {fileID: 8300000, guid: 7f10e2e43495f63419f675ea8a817881, type: 3}
-  audStepsVol: 0.1
+  audStepsVol: 0.01
 --- !u!33 &4348775018340891747
 MeshFilter:
   m_ObjectHideFlags: 0
