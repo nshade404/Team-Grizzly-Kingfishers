@@ -209,8 +209,8 @@ MonoBehaviour:
   aggroDist: 20
   viewCone: 90
   faceTargetSpeed: 5
-  roamDist: 10
-  roamPauseTime: 3
+  minScrapDrop: 1
+  maxScrapDrop: 5
   disableEnemy: 0
   playerInRange: 0
   target: {fileID: 0}

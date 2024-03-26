@@ -23,9 +23,9 @@ public class EnemyAI : MonoBehaviour, IDamage {
     [SerializeField] int viewCone; // our field of view
     [SerializeField] int faceTargetSpeed; // Spped in which we face the player when not moving.
 
-    [Header("----- Wander Settings -----")]
-    [SerializeField] float roamDist; // How far from the starting position we will wander around.
-    [SerializeField] int roamPauseTime;
+    [Header("----- Drops -----")]
+    [SerializeField] int minScrapDrop;
+    [SerializeField] int maxScrapDrop;
 
     [Header("----- Debug Testing -----")]
     [SerializeField] bool disableEnemy;
@@ -81,30 +81,10 @@ public class EnemyAI : MonoBehaviour, IDamage {
         }
 
         if (playerInRange && !CanSeePlayer()) {
-            //StartCoroutine(Roam());
         }
         else if (!playerInRange) {
-            //StartCoroutine(Roam());
         }
     }
-
-    //IEnumerator Roam() {
-    //    if (agent.remainingDistance < 0.05f && !destinationChosen) {
-
-    //        destinationChosen = true;
-    //        agent.stoppingDistance = 0;
-
-    //        yield return new WaitForSeconds(roamPauseTime);
-
-    //        Vector3 randomPos = Random.insideUnitSphere * roamDist;
-    //        randomPos += startingPos;
-    //        NavMeshHit hit;
-    //        NavMesh.SamplePosition(randomPos, out hit, roamDist, 1);
-    //        agent.SetDestination(hit.position);
-
-    //        destinationChosen = false;
-    //    }
-    //}
 
     bool CanSeePlayer() {
         if(target == null)
@@ -166,6 +146,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
         StartCoroutine(flashRed());
         if (health <= 0) {
             gameManager.instance.updateGameGoal(-1);
+            gameManager.instance.AddScrap(Random.Range(minScrapDrop, maxScrapDrop));
             Destroy(gameObject);
         }
     }

@@ -35,17 +35,18 @@ public class KeyPickup : MonoBehaviour
 
     private void PickupItem(GameObject pickup)
     {
-        pickup.SetActive(false);
         pickupStates[pickup] = true;
 
         if (pickup.CompareTag("Key"))
         {
             playerController.keysCollected++; 
             hasKey = true;
+            pickup.SetActive(false);
         }
         else if (pickup.CompareTag("HealthPickup"))
         {
-            
+            pickup.SetActive(false);
+
         }
         else if (pickup.CompareTag("RocketPiece"))
         {

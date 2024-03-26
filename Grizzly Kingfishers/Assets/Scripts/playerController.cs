@@ -205,12 +205,13 @@ public class playerController : MonoBehaviour, IDamage
                
             }
         }
-        else if (other.CompareTag("StartingRoom")) 
+        else if (other.CompareTag("PlayerBase")) 
         {
             
             if (hasRocketPiece)
             {
                 RemoveRocketPiece();
+                gameManager.instance.rocketPiecesCollected++;
                 gameManager.instance.updateRocketPiecesUI();
             }
         }

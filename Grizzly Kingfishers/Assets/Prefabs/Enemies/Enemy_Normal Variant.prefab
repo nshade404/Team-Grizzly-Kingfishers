@@ -72,6 +72,14 @@ PrefabInstance:
       propertyPath: health
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8963620569247573537, guid: 7dda40ce5efef3143b0a763cf7888c68, type: 3}
+      propertyPath: maxScrapDrop
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8963620569247573537, guid: 7dda40ce5efef3143b0a763cf7888c68, type: 3}
+      propertyPath: minScrapDrop
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
