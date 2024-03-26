@@ -440,14 +440,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 8838238972778194771}
   turretHead: {fileID: 4427828513817704929}
-  turretBody: {fileID: 275485686843430715}
   health: 20
   cannonBarrels:
   - {fileID: 2067349161393027354}
   - {fileID: 1551019254103805320}
   bullet: {fileID: 5053413113548928227, guid: 9775495c50eaa9442bcf323a0853604b, type: 3}
   shootRate: 0.5
-  scrapCost: 0
+  scrapCost: 5
   turretRotateSpeed: 4
 --- !u!135 &3033498578205651953
 SphereCollider:

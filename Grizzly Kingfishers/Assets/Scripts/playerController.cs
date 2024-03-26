@@ -77,14 +77,18 @@ public class playerController : MonoBehaviour, IDamage
             {
                 StartCoroutine(Shoot());
             }
-
             if (Input.GetButtonDown("PlaceTurret"))
             {
-                RaycastHit hit;
-                if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, turretPlacementDist))
-                {
-                    Vector3 placeOnGround = new Vector3(hit.point.x, 0, hit.point.z);
-                    Instantiate(turretBuilder, placeOnGround, transform.rotation);
+                int turretCost = selectedTurret.GetComponent<Turrets>().GetTurretCost();
+                if(selectedTurret.GetComponent<Turrets>().GetTurretCost() <= gameManager.instance.scrapWallet) {
+                    RaycastHit hit;
+                    if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, turretPlacementDist)) {
+                        Vector3 placeOnGround = new Vector3(hit.point.x, 0, hit.point.z);
+                        Instantiate(turretBuilder, placeOnGround, transform.rotation);
+                        gameManager.instance.RemoveScrap(selectedTurret.GetComponent<Turrets>().GetTurretCost());
+                    }
+                } else {
+                    // gamemanager.instance.insufficentfunds call
                 }
             }
         }

@@ -121,7 +121,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  enemyPrefab: {fileID: 0}
+  enemyPrefabs:
+  - {fileID: 4610600221348096218, guid: b84ce644015732d4294880854e3dfe34, type: 3}
+  - {fileID: 4489925055224114226, guid: f3ac6ee4bc480e34ea8f49b51f19890a, type: 3}
+  - {fileID: 4774997423134702790, guid: 03e91b99192539c46b2751984926eecb, type: 3}
+  - {fileID: 4345650732119985878, guid: e9dfda19d2fc03c4985d3b98fe8f95f5, type: 3}
+  - {fileID: 1616186565637006302, guid: 1e5e53e20fa967e4cb3a5e95be42a008, type: 3}
+  - {fileID: 6905180175966159842, guid: b0435e2a3484dc84db152e40f505d235, type: 3}
+  - {fileID: 4607968395139301710, guid: 0282329487870504fbae761996d461dd, type: 3}
+  - {fileID: 1330183242215799504, guid: 9352b30ec6099814da2d977b54828903, type: 3}
   timeBetweenWaves: 5
   countDown: 2
   maxEnemyCount: 5

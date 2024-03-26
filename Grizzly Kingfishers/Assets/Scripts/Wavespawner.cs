@@ -12,14 +12,14 @@ public class Wavespawner : MonoBehaviour
 
     public SpawnState state = SpawnState.COUNTING;
 
-    public Transform enemyPrefab;
+    public GameObject[] enemyPrefabs;
     public float timeBetweenWaves = 5f;
     public float countDown = 2f;
     public int maxEnemyCount = 5;
     public int enemiesPerWave = 3; // Number of enemies to spawn per wave
     public Transform[] spawnPoints;
 
-    private List<Transform> enemies = new List<Transform>();
+    private List<GameObject> enemies = new List<GameObject>();
     private int waveIndex = 0;
 
     private void Start()
@@ -55,24 +55,28 @@ public class Wavespawner : MonoBehaviour
 
     private IEnumerator SpawnWave()
     {
-        waveIndex++;
-        for (int i = 0; i < enemiesPerWave; i++)
+        int numEnemiesToSpawn = enemiesPerWave + (Random.Range(1, enemiesPerWave + 1) * waveIndex);
+
+        for (int i = 0; i < numEnemiesToSpawn; i++)
         {
+            Transform randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+            SpawnEnemy(randomSpawnPoint);
+            yield return new WaitForSeconds(0.5f);
+
             if (enemies.Count < maxEnemyCount)
             {
-                Transform randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-                SpawnEnemy(randomSpawnPoint);
-                yield return new WaitForSeconds(0.5f);
+                
             }
             else
             {
                 yield return null;
             }
         }
+        waveIndex++;
     }
 
     private void SpawnEnemy(Transform spawnPoint)
     {
-        enemies.Add(Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation));
+        enemies.Add(Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], spawnPoint.position, spawnPoint.rotation));
     }
 }

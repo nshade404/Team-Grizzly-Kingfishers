@@ -13,7 +13,7 @@ public class Turrets : MonoBehaviour, IDamage
     [SerializeField] Transform[] cannonBarrels;
     [SerializeField] GameObject bullet;
     [Range(0, 5)][SerializeField] float shootRate;
-    [Range(1, 10)][SerializeField] int scrapCost;
+    [SerializeField] int scrapCost;
     [Range(0, 5)][SerializeField] int turretRotateSpeed;
 
     Color startColor = Color.white;
@@ -21,6 +21,10 @@ public class Turrets : MonoBehaviour, IDamage
     int currentCannon;
 
     Transform target;
+
+    public int GetTurretCost() {
+        return scrapCost;
+    }
 
     // Start is called before the first frame update
     void Start()

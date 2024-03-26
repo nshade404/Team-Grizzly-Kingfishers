@@ -155,7 +155,7 @@ MonoBehaviour:
   - {fileID: 7335863013412938697}
   bullet: {fileID: 879051302272060202, guid: 17d016eacb2ff3e46973ab697dd23aef, type: 3}
   shootRate: 0
-  scrapCost: 0
+  scrapCost: 15
   turretRotateSpeed: 4
 --- !u!65 &4678691833801865455
 BoxCollider:
