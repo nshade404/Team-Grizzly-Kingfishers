@@ -13,6 +13,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
+    [SerializeField] GameObject objectivePopup;
     [SerializeField] TMP_Text enemyCountText;
     [SerializeField] TMP_Text rocketPiecesCollectedText;
     [SerializeField] TMP_Text scrapText;
@@ -29,6 +30,7 @@ public class gameManager : MonoBehaviour
     public playerController playerScript;
     public GameObject playerBase;
 
+    public bool isStartOfGame;
     public bool isPaused;
     public bool isSpawning;
     float timeScaleOrig;
@@ -50,8 +52,7 @@ public class gameManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<playerController>();
         timeScaleOrig = Time.timeScale;
-        StartCoroutine(SpawnEnemies());
-
+        StartCoroutine(startingPopup());
         playerBase = GameObject.FindWithTag("PlayerBase");
     }
 
@@ -82,6 +83,13 @@ public class gameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         menuActive.SetActive(false);
         menuActive = null;
+    }
+
+    IEnumerator startingPopup()
+    {
+        objectivePopup.SetActive(true);
+        yield return new WaitForSeconds(7.5f);
+        objectivePopup.SetActive(false);
     }
 
     public void updateGameGoal(int amount)
@@ -163,28 +171,6 @@ public class gameManager : MonoBehaviour
         }
     }
 
-
-    IEnumerator SpawnEnemies()
-    {
-        yield return new WaitForSeconds(spawnDelay);
-
-        if (enemyCount < maxEnemies)
-        {
-            enemiesPerWave = enemyWaveCount * 3;
-            for (int i = 0; i < enemiesPerWave; i++)
-            {
-                Instantiate(enemySpawn, enemySpawnPoint.position, enemySpawnPoint.rotation);
-                yield return new WaitForSeconds(spawnTime);
-            }
-            enemyWaveCount++;
-            yield return new WaitForSeconds(spawnDelay);
-        }
-        else
-        {
-            yield return null;
-        }
-    }
-
     public void AddScrap(int amount)
     {
         scrapWallet += amount;
@@ -201,7 +187,7 @@ public class gameManager : MonoBehaviour
     {
         if (scrapText != null)
         {
-            scrapText.text = "Scrap" + scrapWallet.ToString();
+            scrapText.text = scrapWallet.ToString();
         }
     }
 }
