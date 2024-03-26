@@ -203,9 +203,5 @@ public class gameManager : MonoBehaviour
         {
             scrapText.text = "Scrap" + scrapWallet.ToString();
         }
-        else
-        {
-            Debug.LogError("Scrap UI Text is not set!");
-        }
     }
 }
