@@ -118,6 +118,14 @@ public class gameManager : MonoBehaviour
         }
     }
 
+    public void youHaveWon() {
+        statePaused();
+        if (menuWin != null) {
+            menuActive = menuWin;
+            menuActive.SetActive(true);
+        }
+    }
+
     public void flashPlayerDamage(bool isWidgetActive) {
         if(playerDamageFlash != null) {
             playerDamageFlash.SetActive(isWidgetActive);
@@ -148,8 +156,8 @@ public class gameManager : MonoBehaviour
 
         if (rocketPiecesCollected == rocketPiecesRequired)
         {
-            
-            updateGameGoal(-1);
+            youHaveWon();
+            //updateGameGoal(-1);
         }
     }
 

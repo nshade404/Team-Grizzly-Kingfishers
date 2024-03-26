@@ -34,7 +34,7 @@ public class playerController : MonoBehaviour, IDamage
 
     [Header("----- Turret Stats -----")]
     [SerializeField] List<GameObject> turrets;
-    [SerializeField] GameObject selectedTurret;
+    public GameObject selectedTurret;
     [SerializeField] int turretPlacementDist;
 
     [Header("----- Audio -----")]
