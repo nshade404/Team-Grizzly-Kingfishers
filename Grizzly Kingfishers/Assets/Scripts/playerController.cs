@@ -35,10 +35,7 @@ public class playerController : MonoBehaviour, IDamage
     [Header("----- Turret Stats -----")]
     [SerializeField] List<GameObject> turrets;
     public GameObject selectedTurret;
-<<<<<<< Updated upstream
-=======
     [SerializeField] GameObject turretBuilder;
->>>>>>> Stashed changes
     [SerializeField] int turretPlacementDist;
 
     [Header("----- Audio -----")]
