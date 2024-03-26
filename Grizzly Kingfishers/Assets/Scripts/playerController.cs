@@ -31,6 +31,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] Transform shootPos;
 
     [Header("----- Turret Stats -----")]
+    [SerializeField] List<Turrets> turrets;
     [SerializeField] GameObject selectedTurret;
     [SerializeField] int turretPlacementDist;
 
@@ -66,6 +67,7 @@ public class playerController : MonoBehaviour, IDamage
 
             Sprint();
             Movement();
+            selectTurret();
 
             if (Input.GetButton("Shoot") && !isShooting)
             {
@@ -278,7 +280,24 @@ public class playerController : MonoBehaviour, IDamage
         return rocketPiecesCollected > 0;
     }
 
-    
+    public void selectTurret()
+    {
+        float mouseWheelInput = Input.GetAxis("Mouse ScrollWheel");
+        if (mouseWheelInput != 0)
+        {
+            int currentIndex = turrets.IndexOf(selectedTurret.GetComponent<Turrets>());
+            currentIndex += (int)Mathf.Sign(mouseWheelInput);
+            if (currentIndex < 0)
+            {
+                currentIndex = turrets.Count - 1;
+            }
+            else if (currentIndex >= turrets.Count)
+            {
+                currentIndex = 0;
+            }
+            selectedTurret = turrets[currentIndex].gameObject;
+        }
+    }
 }
 
 

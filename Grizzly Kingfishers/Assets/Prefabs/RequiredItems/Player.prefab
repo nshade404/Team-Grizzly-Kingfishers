@@ -69,7 +69,14 @@ MonoBehaviour:
   shootRate: 0.25
   selectedBullet: {fileID: 5053413113548928227, guid: 9775495c50eaa9442bcf323a0853604b, type: 3}
   shootPos: {fileID: 4823807244903345058}
-  selectedTurret: {fileID: 6321060550718320091, guid: 1fb5cc4a8b54fb54ab4ec3d7bc16f5e4, type: 3}
+  turrets:
+  - {fileID: 1593909813666895529, guid: 1fb5cc4a8b54fb54ab4ec3d7bc16f5e4, type: 3}
+  - {fileID: 1825482815497160584, guid: 0bbd2740362b111499b04a85373cb746, type: 3}
+  - {fileID: 4563802276797566091, guid: 046f3e99e53a6794bac1183237cab6fe, type: 3}
+  - {fileID: -8804785931183825932, guid: dcff139332484aa4294c9ac8523a9f49, type: 3}
+  - {fileID: 1493485204780244932, guid: a2ef6f0c17baf2b48872463aa8a09416, type: 3}
+  - {fileID: 6728382662590037668, guid: d513a93c9bae91c49bb1de481ac60a03, type: 3}
+  selectedTurret: {fileID: 0}
   turretPlacementDist: 10
   audJump:
   - {fileID: 8300000, guid: 4e0553bab21926c41962e8cc1128e287, type: 3}
