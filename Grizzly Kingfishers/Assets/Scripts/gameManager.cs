@@ -87,9 +87,11 @@ public class gameManager : MonoBehaviour
 
     IEnumerator startingPopup()
     {
-        objectivePopup.SetActive(true);
+        menuActive = objectivePopup;
+        menuActive.SetActive(true);
         yield return new WaitForSeconds(7.5f);
-        objectivePopup.SetActive(false);
+        menuActive.SetActive(false);
+        menuActive = null;
     }
 
     public void updateGameGoal(int amount)
