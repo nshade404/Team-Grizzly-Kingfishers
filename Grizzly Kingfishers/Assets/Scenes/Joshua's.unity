@@ -1672,6 +1672,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wave Spawner
       objectReference: {fileID: 0}
+    - target: {fileID: 3299481509101877577, guid: aa5d1555f53c56d4e9392824b22825c7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9100576184811892474, guid: aa5d1555f53c56d4e9392824b22825c7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.06908226

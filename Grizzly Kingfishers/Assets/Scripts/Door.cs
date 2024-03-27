@@ -11,10 +11,12 @@ public class Door : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (playerController != null && playerController.HasKey())
+            //if (playerController != null && playerController.HasKey())
+            if (gameManager.instance.playerScript.HasKey())
             {
                 OpenDoor();
                 RemoveKey();
+                gameManager.instance.playerScript.keysCollected--;
             }
             else
             {

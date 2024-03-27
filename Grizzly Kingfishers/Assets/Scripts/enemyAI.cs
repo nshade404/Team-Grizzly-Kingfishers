@@ -30,6 +30,10 @@ public class EnemyAI : MonoBehaviour, IDamage {
     [SerializeField] GameObject healthDrop;
     [Range(0,100)][SerializeField] int healthDropChance;
 
+    [Header("----- Drops -----")]
+    [SerializeField] AudioClip[] audInsult;
+    [Range(0, 1)][SerializeField] float audInsultVol;
+
     [Header("----- Debug Testing -----")]
     [SerializeField] bool disableEnemy;
 
