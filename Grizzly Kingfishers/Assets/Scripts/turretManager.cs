@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 
 public class turretManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class turretManager : MonoBehaviour
     [SerializeField] Image progress;
     
     public bool isBuilding;
+    float currentTime = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -21,12 +23,9 @@ public class turretManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float currentTime = 0;
-        while (currentTime < timer)
-        {
-            currentTime += Time.deltaTime;
-            progress.fillAmount = currentTime / timer;
-        }
+        currentTime += Time.deltaTime;
+        progress.fillAmount = currentTime / timer;
+
         StartCoroutine(Building());
     }
 
