@@ -21,19 +21,19 @@ public class turretManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float currentTime = 0;
+        while (currentTime < timer)
+        {
+            currentTime += Time.deltaTime;
+            progress.fillAmount = currentTime / timer;
+        }
         StartCoroutine(Building());
     }
 
     IEnumerator Building()
     {
         isBuilding = true;
-        float currentTime = 0;
-        while(currentTime < timer)
-        {
-            currentTime += Time.deltaTime;
-            progress.fillAmount = currentTime/timer;
-        }
-        yield return new WaitForSeconds(timer);
+        yield return new WaitForSeconds(currentTime);
         Instantiate(selectedTurret, gameObject.transform.position, transform.rotation);
         Destroy(gameObject);
         isBuilding = false;
