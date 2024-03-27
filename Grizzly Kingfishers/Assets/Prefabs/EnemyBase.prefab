@@ -211,6 +211,8 @@ MonoBehaviour:
   faceTargetSpeed: 5
   minScrapDrop: 1
   maxScrapDrop: 5
+  healthDrop: {fileID: 5766254608244252584, guid: d2acd61f3f3a052479763f8860bc9294, type: 3}
+  healthDropChance: 10
   disableEnemy: 0
   playerInRange: 0
   target: {fileID: 0}

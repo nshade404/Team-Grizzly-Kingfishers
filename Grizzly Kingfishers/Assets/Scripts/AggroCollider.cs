@@ -13,6 +13,11 @@ public class AggroCollider : MonoBehaviour
             if(GetComponentInParent<EnemyAI>()) {
                 GetComponentInParent<EnemyAI>().playerInRange = true;
                 GetComponentInParent<EnemyAI>().target = other.GetComponent<Transform>();
+                if (GetComponentInParent<EnemyAI>().target == null) // If no target currently, go ahead and set target to this enemy.
+                    GetComponentInParent<EnemyAI>().target = other.GetComponent<Transform>();
+
+                // Add to our targets list.
+                GetComponentInParent<EnemyAI>().targets.Add(other.GetComponent<Transform>());
             }
         }
     }
@@ -21,7 +26,9 @@ public class AggroCollider : MonoBehaviour
         if (other.CompareTag("Player") || other.CompareTag("Turret") || other.CompareTag("PlayerBase")) {
             if (GetComponentInParent<EnemyAI>()) {
                 GetComponentInParent<EnemyAI>().playerInRange = false;
-                GetComponentInParent<EnemyAI>().target = null;
+                if (GetComponentInParent<EnemyAI>().targets.Contains(other.GetComponent<Transform>())) { // if it is check if its in our list
+                    GetComponentInParent<EnemyAI>().targets.Remove(other.GetComponent<Transform>()); // if so, remove it from our target list as its now out of range.
+                }
             }
         }
     }

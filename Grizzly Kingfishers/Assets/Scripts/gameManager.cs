@@ -200,7 +200,7 @@ public class gameManager : MonoBehaviour
     {
        if (turretCostText != null)
         {
-            turretCostText.text = turretName + " " + amount;
+            turretCostText.text = turretName + "\n" + amount;
         }
     }
 }

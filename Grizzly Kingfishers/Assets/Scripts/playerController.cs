@@ -58,6 +58,7 @@ public class playerController : MonoBehaviour, IDamage
     {
         updatePlayerUI();
         selectedTurret = turrets.First();
+        gameManager.instance.costOfTurret(selectedTurret.name, selectedTurret.GetComponent<Turrets>().GetTurretCost()); // Update selected turret on startup.
     }
 
     // Update is called once per frame

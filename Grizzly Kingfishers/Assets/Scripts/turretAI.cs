@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Turrets : MonoBehaviour, IDamage
@@ -21,6 +22,7 @@ public class Turrets : MonoBehaviour, IDamage
     int currentCannon;
 
     Transform target;
+    List<Transform> targets = new List<Transform>(); // Holds our list of targets that came into our attack range.
 
     public int GetTurretCost() {
         return scrapCost;
@@ -36,13 +38,26 @@ public class Turrets : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        if(target != null) {
+        if(target != null) { // If we have a valid target, go ahead and start shooting at it.
             Vector3 targetDir = target.position - turretHead.transform.position;
             Quaternion rot = Quaternion.LookRotation(new Vector3(targetDir.x, transform.position.y, targetDir.z));
             turretHead.transform.rotation = Quaternion.Lerp(turretHead.transform.rotation, rot, Time.deltaTime * turretRotateSpeed);
 
             if (!isShooting) {
                 StartCoroutine(FireCannon());
+            }
+        }
+        else { // Otherwise check if we have more targets that came into range and switch to them
+            if(targets.Count > 0) {
+                if(targets.First() == null) {
+                    targets.RemoveAt(0);
+                }
+                if (targets.Count > 0) { // We still have targets to select from
+                    target = targets.First();
+                }
+                else { // Otherwise just empty target for now.
+                    target = null;
+                }
             }
         }
     }
@@ -79,19 +94,23 @@ public class Turrets : MonoBehaviour, IDamage
         if (other.isTrigger) {
             return;
         }
-        //Debug.Log(other.gameObject.name);
+        if (other.CompareTag("Enemy")) {
+            if(target == null) // If no target currently, go ahead and set target to this enemy.
+                target = other.GetComponent<Transform>();
 
-        if (other.CompareTag("Enemy"))
-            target = other.GetComponent<Transform>();
-
-        //target = other.GetComponent<Transform>();
-
+            // Add to our targets list.
+            targets.Add(other.GetComponent<Transform>());
+        }
     }
 
     private void OnTriggerExit(Collider other) {
-        //if (other.isTrigger) {
-        //    return;
-        //}
-        //target = null;
+        if (other.isTrigger) {
+            return;
+        }
+        if (other.CompareTag("Enemy")) { // check if this entity is an enemy,
+            if (targets.Contains(other.GetComponent<Transform>())) { // if it is check if its in our list
+                targets.Remove(other.GetComponent<Transform>()); // if so, remove it from our target list as its now out of range.
+            }
+        }
     }
 }

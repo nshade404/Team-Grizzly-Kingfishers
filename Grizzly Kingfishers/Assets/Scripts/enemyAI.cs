@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -26,6 +27,8 @@ public class EnemyAI : MonoBehaviour, IDamage {
     [Header("----- Drops -----")]
     [SerializeField] int minScrapDrop;
     [SerializeField] int maxScrapDrop;
+    [SerializeField] GameObject healthDrop;
+    [Range(0,100)][SerializeField] int healthDropChance;
 
     [Header("----- Debug Testing -----")]
     [SerializeField] bool disableEnemy;
@@ -41,6 +44,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
     public bool playerInRange; // Tracks whether or not we are actively tracking the player for aggro.
 
     public Transform target;
+    public List<Transform> targets = new List<Transform>(); // Holds our list of targets that came into our attack range.
 
     // Start is called before the first frame update
     void Start() {
@@ -87,32 +91,44 @@ public class EnemyAI : MonoBehaviour, IDamage {
     }
 
     bool CanSeePlayer() {
-        if(target == null)
-            return false;
-
-        playerDir = target.position - headPos.position;
-        angleToPlayer = Vector3.Angle(playerDir, transform.forward);
-        //Debug.Log(angleToPlayer);
-        Debug.DrawRay(shootPos.position, playerDir);
-        RaycastHit hit;
-        if (Physics.Raycast(headPos.position, playerDir, out hit)) {
-            //Debug.Log(hit.collider.name);
-
-            bool hitIsTargetable = hit.collider.CompareTag("Player") || hit.collider.CompareTag("Turret") || hit.collider.CompareTag("PlayerBase");
-
-            if (hitIsTargetable && angleToPlayer <= viewCone) {
-                //agent.stoppingDistance = originalStoppingDistance;
-                //agent.SetDestination(target.position);
-
-                if (!isShooting) {
-                    StartCoroutine(Shoot());
+        if(target == null) {
+            if (targets.Count > 0) {
+                if (targets.First() == null) {
+                    targets.RemoveAt(0);
                 }
-
-                if (agent.remainingDistance <= agent.stoppingDistance) {
-                    FaceTarget();
+                if (targets.Count > 0) { // We still have targets to select from
+                    target = targets.First();
                 }
+                else { // Otherwise just empty target for now. and mark as can't see.
+                    target = null;
+                }
+            } 
+        }
+        else {
+            playerDir = target.position - headPos.position;
+            angleToPlayer = Vector3.Angle(playerDir, transform.forward);
+            //Debug.Log(angleToPlayer);
+            Debug.DrawRay(shootPos.position, playerDir);
+            RaycastHit hit;
+            if (Physics.Raycast(headPos.position, playerDir, out hit)) {
+                //Debug.Log(hit.collider.name);
 
-                return true;
+                bool hitIsTargetable = hit.collider.CompareTag("Player") || hit.collider.CompareTag("Turret") || hit.collider.CompareTag("PlayerBase");
+
+                if (hitIsTargetable && angleToPlayer <= viewCone) {
+                    //agent.stoppingDistance = originalStoppingDistance;
+                    //agent.SetDestination(target.position);
+
+                    if (!isShooting) {
+                        StartCoroutine(Shoot());
+                    }
+
+                    if (agent.remainingDistance <= agent.stoppingDistance) {
+                        FaceTarget();
+                    }
+
+                    return true;
+                }
             }
         }
         //agent.stoppingDistance = 0;
@@ -147,6 +163,11 @@ public class EnemyAI : MonoBehaviour, IDamage {
         if (health <= 0) {
             gameManager.instance.updateGameGoal(-1);
             gameManager.instance.AddScrap(Random.Range(minScrapDrop, maxScrapDrop));
+            int chance = Random.Range(0, 101);
+            if(chance <= healthDropChance) {
+                Instantiate(healthDrop, transform.position, transform.rotation);
+            }
+
             Destroy(gameObject);
         }
     }
@@ -196,7 +217,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
     //private void OnTriggerExit(Collider other) {
     //    if (other.CompareTag("Player") || other.CompareTag("Turret")) {
     //        playerInRange = false;
-    //        //agent.stoppingDistance = 0;
+    //        agent.stoppingDistance = 0;
     //    }
     //}
 }
