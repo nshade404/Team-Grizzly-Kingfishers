@@ -284,6 +284,9 @@ public class playerController : MonoBehaviour, IDamage
                 currentIndex = 0;
             }
             selectedTurret = turrets[currentIndex];
+
+            int turretCost = selectedTurret.GetComponent<Turrets>().GetTurretCost();
+            gameManager.instance.costOfTurret(selectedTurret.name, turretCost);
         }
     }
 }

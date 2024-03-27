@@ -33,7 +33,7 @@ public class turretManager : MonoBehaviour
     IEnumerator Building()
     {
         isBuilding = true;
-        yield return new WaitForSeconds(currentTime);
+        yield return new WaitForSeconds(timer);
         Instantiate(selectedTurret, gameObject.transform.position, transform.rotation);
         Destroy(gameObject);
         isBuilding = false;

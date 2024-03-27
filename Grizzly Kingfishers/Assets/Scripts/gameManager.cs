@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using JetBrains.Annotations;
+using UnityEditor;
 
 public class gameManager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] TMP_Text enemyCountText;
     [SerializeField] TMP_Text rocketPiecesCollectedText;
     [SerializeField] TMP_Text scrapText;
+    [SerializeField] TMP_Text turretCostText;
 
     [SerializeField] GameObject enemySpawn;
     public float spawnTime;
@@ -44,6 +46,7 @@ public class gameManager : MonoBehaviour
     public int rocketPiecesRequired = 3;
 
     public int scrapWallet = 0;
+    public int turretCostAmount;
 
     // Start is called before the first frame update
     void Awake()
@@ -190,6 +193,14 @@ public class gameManager : MonoBehaviour
         if (scrapText != null)
         {
             scrapText.text = scrapWallet.ToString();
+        }
+    }
+
+    public void costOfTurret (string turretName , int amount)
+    {
+       if (turretCostText != null)
+        {
+            turretCostText.text = turretName + " " + amount;
         }
     }
 }
