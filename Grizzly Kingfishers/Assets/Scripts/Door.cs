@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public playerController playerController; // Reference to the PlayerController script
     public GameObject keyPickup; // Reference to the key pickup GameObject
 
     private void OnTriggerEnter(Collider other)

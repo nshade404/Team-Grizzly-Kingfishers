@@ -9,7 +9,6 @@ public class KeyPickup : MonoBehaviour
     private Dictionary<GameObject, bool> pickupStates = new Dictionary<GameObject, bool>();
     private bool hasKey = false;
     private bool hasRocketPiece = false;
-    public playerController playerController;
 
     private void Start()
     {
@@ -39,7 +38,7 @@ public class KeyPickup : MonoBehaviour
 
         if (pickup.CompareTag("Key"))
         {
-            playerController.keysCollected++; 
+            gameManager.instance.playerScript.keysCollected++; 
             hasKey = true;
             pickup.SetActive(false);
         }
