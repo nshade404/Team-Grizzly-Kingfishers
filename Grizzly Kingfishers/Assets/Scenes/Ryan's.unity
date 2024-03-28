@@ -27926,6 +27926,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 2749188180279465057}
+  aud: {fileID: 0}
   health: 10
   maxHealth: 10
   speed: 4
@@ -27942,8 +27943,16 @@ MonoBehaviour:
   shootRate: 0.25
   selectedBullet: {fileID: 5053413113548928227, guid: 9775495c50eaa9442bcf323a0853604b, type: 3}
   shootPos: {fileID: 4823807244629693666}
+  turrets: []
   selectedTurret: {fileID: 3609307614998996605, guid: b89449145d9d5014f90c754420f7a542, type: 3}
+  turretBuilder: {fileID: 0}
   turretPlacementDist: 10
+  audJump: []
+  audJumpVol: 0
+  audHurt: []
+  audHurtVol: 0
+  audSteps: []
+  audStepsVol: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

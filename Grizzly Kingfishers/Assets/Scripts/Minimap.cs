@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Minimap : MonoBehaviour
 {
-    private gameManager gameManagerInstance; // Reference to the GameManager
+    private gameManager gameManagerInstance; 
 
     private void Awake()
     {
-        gameManagerInstance = gameManager.instance; // Get the instance of the GameManager
+        gameManagerInstance = gameManager.instance; 
     }
 
     private void LateUpdate()
