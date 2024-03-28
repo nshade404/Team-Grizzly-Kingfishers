@@ -6892,6 +6892,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1275605060279891966, guid: d03be1923aacc9d4eb3dad846203ffb3, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 1185349626}
     - target: {fileID: 4241727897445295199, guid: d03be1923aacc9d4eb3dad846203ffb3, type: 3}
       propertyPath: m_Name
       value: Key  (1)
@@ -27517,6 +27521,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1275605060279891966, guid: d03be1923aacc9d4eb3dad846203ffb3, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 1185349626}
     - target: {fileID: 4241727897445295199, guid: d03be1923aacc9d4eb3dad846203ffb3, type: 3}
       propertyPath: m_Name
       value: Key  (2)
