@@ -10,7 +10,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
     [SerializeField] NavMeshAgent agent;
 
     [Header("----- Enemy Stats -----")]
-    [Range(0, 10)][SerializeField] int health;
+    [Range(0, 10)][SerializeField] float health;
     [Range(0, 5)][SerializeField] int speed;
 
     [Header("----- Weapon Stats -----")]
@@ -159,7 +159,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
         isShooting = false;
     }
 
-    public void takeDamage(int amount)
+    public void takeDamage(float amount)
     {
         health -= amount;
         //agent.SetDestination(gameManager.instance.player.transform.position);

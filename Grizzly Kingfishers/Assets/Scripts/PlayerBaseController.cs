@@ -8,7 +8,7 @@ public class PlayerBaseController : MonoBehaviour, IDamage
     [SerializeField] Renderer model;
 
     [Header("----- Turret Stats -----")]
-    [Range(0, 50)][SerializeField] int health;
+    [Range(0, 50)][SerializeField] float health;
 
     Color startColor = Color.white;
 
@@ -16,7 +16,7 @@ public class PlayerBaseController : MonoBehaviour, IDamage
         startColor = model.material.color;
     }
 
-    public void takeDamage(int amount) {
+    public void takeDamage(float amount) {
         health -= amount;
         StartCoroutine(flashRed());
         if (health <= 0) { 
