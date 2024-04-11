@@ -12,7 +12,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] AudioSource aud;
 
     [Header("----- Player Stats -----")]
-    [Range(0, 10)][SerializeField] int health;
+    [Range(0, 10)][SerializeField] float health;
     [Range(1, 10)][SerializeField] int maxHealth;
     [Range(1, 5)][SerializeField] float speed;
     [Range(1, 4)][SerializeField] float sprintMod;
@@ -164,7 +164,7 @@ public class playerController : MonoBehaviour, IDamage
         isShooting = false;
     }
 
-    public void takeDamage(int amount)
+    public void takeDamage(float amount)
     {
         health -= amount;
         aud.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
