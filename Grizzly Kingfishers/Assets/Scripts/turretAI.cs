@@ -10,7 +10,7 @@ public class Turrets : MonoBehaviour, IDamage
     [SerializeField] GameObject turretHead;
 
     [Header("----- Turret Stats -----")]
-    [Range(0, 50)][SerializeField] int health;
+    [Range(0, 50)][SerializeField] float health;
     [SerializeField] Transform[] cannonBarrels;
     [SerializeField] GameObject bullet;
     [Range(0, 5)][SerializeField] float shootRate;
@@ -76,7 +76,7 @@ public class Turrets : MonoBehaviour, IDamage
         isShooting = false;
     }
 
-    public void takeDamage(int amount) {
+    public void takeDamage(float amount) {
         health -= amount;
         StartCoroutine(flashRed());
         if (health <= 0) {
