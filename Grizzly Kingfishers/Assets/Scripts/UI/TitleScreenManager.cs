@@ -19,7 +19,7 @@ public class TitleScreenManager : MonoBehaviour
         Debug.Log("OnPlayClicked!");
     }
 
-    public void ReturnToTitle() {
+    public void ReturnToTitle(bool fromOptions = false) {
         HideAllScreens();
         TitleScreen.SetActive(true);
     }
