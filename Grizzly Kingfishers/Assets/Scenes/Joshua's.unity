@@ -764,85 +764,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f78ca8d1b56b5ba4fa059b8b0b1dde22, type: 3}
---- !u!1 &767569606 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3725882325504470215, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
-  m_PrefabInstance: {fileID: 6152249077613618085}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &767569607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 767569606}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 9ba4545d0fbe9c4429c6f42034969766, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 767569615}
-        m_TargetAssemblyTypeName: PlayerInputFunctions, Assembly-CSharp
-        m_MethodName: Jump
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 357b3f89-413e-4511-9b35-7f664fbbf736
-    m_ActionName: Player/Jump[/Keyboard/space]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 767569615}
-        m_TargetAssemblyTypeName: PlayerInputFunctions, Assembly-CSharp
-        m_MethodName: Sprint
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: f7f65c69-e6ee-4250-a596-e97fb5dbfe9c
-    m_ActionName: Player/Sprint[/Keyboard/leftShift]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
---- !u!114 &767569615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 767569606}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcb8b7b1be1f638489b687643a73f756, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &775558279
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1700,13 +1621,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3725882325504470215, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 767569607}
-    - targetCorrespondingSourceObject: {fileID: 3725882325504470215, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 767569615}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
 --- !u!1001 &8210346886631119370
 PrefabInstance:
