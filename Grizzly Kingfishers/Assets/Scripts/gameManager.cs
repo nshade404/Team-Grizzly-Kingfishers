@@ -39,7 +39,9 @@ public class gameManager : MonoBehaviour
     int enemyCount;
     public int enemyWaveCount;
     public int maxEnemies = 50;
-    
+
+    public GameObject optionScreen;
+
     [SerializeField] Transform enemySpawnPoint;
 
     public int rocketPiecesCollected = 0;

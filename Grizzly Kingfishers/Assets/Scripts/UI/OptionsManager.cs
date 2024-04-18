@@ -136,7 +136,7 @@ public class OptionsManager : MonoBehaviour
             titleScreenManager.ReturnToTitle();
         }
         else { // otherwise we are in game, return to game...
-
+            gameObject.SetActive(false);
         }
     }
 }

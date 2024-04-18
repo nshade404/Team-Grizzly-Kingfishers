@@ -25,6 +25,8 @@ public class buttonFunctions : MonoBehaviour
         #endif
     }
 
-    
+    public void showOptions() {
+        gameManager.instance.optionScreen.SetActive(true);
+    }
     
 }
