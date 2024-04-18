@@ -5,7 +5,7 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     public GameObject keyPickup; // Reference to the key pickup GameObject
-
+    [SerializeField] AudioSource aud;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

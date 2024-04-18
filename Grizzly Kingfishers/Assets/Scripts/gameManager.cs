@@ -40,9 +40,7 @@ public class gameManager : MonoBehaviour
     int enemyCount;
     public int enemyWaveCount;
     public int maxEnemies = 50;
-
-    public GameObject optionScreen;
-
+    
     [SerializeField] Transform enemySpawnPoint;
 
     public int rocketPiecesCollected = 0;
@@ -51,16 +49,7 @@ public class gameManager : MonoBehaviour
     public int scrapWallet = 0;
     public int turretCostAmount;
     [Header("Audio")]
-    [SerializeField] AudioClip[] deathSound;
-    [Range(0f, 1f)][SerializeField] float deathVol;
-    [SerializeField] AudioClip[] stepSound;
-    [Range(0f, 1f)][SerializeField] float stepVol;
-    [SerializeField] AudioClip[] jumpSound;
-    [Range(0f, 1f)][SerializeField] float jumpVol;
-    [SerializeField] AudioClip[] shootSound;
-    [Range(0f, 1f)][SerializeField] float shootVol;
-    [SerializeField] AudioClip[] hurtSound;
-    [Range(0f, 1f)][SerializeField] float hurtVol;
+    
     // Start is called before the first frame update
     void Awake()
     {

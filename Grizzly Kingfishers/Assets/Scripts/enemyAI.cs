@@ -8,6 +8,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
     [Header("----- Components -----")]
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] AudioSource aud;
 
     [Header("----- Enemy Stats -----")]
     [Range(0, 10)][SerializeField] float health;
