@@ -10,6 +10,7 @@ public class playerController : MonoBehaviour, IDamage
     [Header("----- Components -----")]
     [SerializeField] CharacterController controller;
     [SerializeField] AudioSource aud;
+    [SerializeField] AudioSource gunshots;
 
     [Header("----- Player Stats -----")]
     [Range(0, 10)][SerializeField] float health;
@@ -45,7 +46,11 @@ public class playerController : MonoBehaviour, IDamage
     [Range(0, 1)][SerializeField] float audHurtVol;
     [SerializeField] AudioClip[] audSteps;
     [Range(0, 1)][SerializeField] float audStepsVol;
-
+    [SerializeField] AudioClip deathSound;
+    [Range(0f, 1f)][SerializeField] float deathVol;
+    [SerializeField] AudioClip[] shootSounds;
+    [Range(0f, 1f)][SerializeField] float shootVol;
+    
     int jumpCount;
     Vector3 moveDir;
     Vector3 playerVel;
@@ -159,7 +164,7 @@ public class playerController : MonoBehaviour, IDamage
         isShooting = true;
 
         Instantiate(selectedBullet, shootPos.position, transform.rotation);
-
+        gunshots.PlayOneShot(deathSound, deathVol);
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
@@ -173,6 +178,7 @@ public class playerController : MonoBehaviour, IDamage
 
         if (health <= 0)
         {
+            aud.PlayOneShot(deathSound, deathVol);
             gameManager.instance.youHaveLost();
         }
     }
