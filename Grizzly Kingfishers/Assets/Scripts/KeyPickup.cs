@@ -52,6 +52,12 @@ public class KeyPickup : MonoBehaviour
             Debug.Log("Player picked up a rocket piece!");
             hasRocketPiece = true;
         }
+
+        else if (pickup.CompareTag("AmmoPickup")) 
+        {
+            pickup.SetActive(false);
+            
+        }
     }
 
     public bool HasKey()
