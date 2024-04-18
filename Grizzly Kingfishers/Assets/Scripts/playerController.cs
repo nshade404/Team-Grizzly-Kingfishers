@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.AI.Navigation;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class playerController : MonoBehaviour, IDamage
 {
@@ -56,7 +56,20 @@ public class playerController : MonoBehaviour, IDamage
     Vector3 playerVel;
     bool isShooting;
     bool playingSteps;
-    bool isSprinting;
+
+    public bool IsJumping {
+        get; set;
+    }
+
+    public bool IsSprinting {
+        get; set;
+    }
+
+    public float Speed {
+        get { return speed; }
+        set { speed = value; }
+    }
+    public float GetSprintMod { get { return sprintMod; } }
 
     // Start is called before the first frame update
     void Start()
@@ -64,6 +77,7 @@ public class playerController : MonoBehaviour, IDamage
         updatePlayerUI();
         selectedTurret = turrets.First();
         gameManager.instance.costOfTurret(selectedTurret.name, selectedTurret.GetComponent<Turrets>().GetTurretCost()); // Update selected turret on startup.
+
     }
 
     // Update is called once per frame
@@ -75,7 +89,6 @@ public class playerController : MonoBehaviour, IDamage
             Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDist, Color.blue);
 #endif
 
-            Sprint();
             Movement();
             selectTurret();
 
@@ -114,7 +127,8 @@ public class playerController : MonoBehaviour, IDamage
 
         controller.Move(moveDir * speed * Time.deltaTime);
 
-        if (Input.GetButtonDown("Jump") && jumpCount < jumps)
+        if (IsJumping && jumpCount < jumps)
+        //if (Input.GetButtonDown("Jump") && jumpCount < jumps)
         {
             playerVel.y = jumpSpeed;
             jumpCount++;
@@ -131,24 +145,12 @@ public class playerController : MonoBehaviour, IDamage
         }
     }
 
-    void Sprint()
-    {
-        if (Input.GetButtonDown("Sprint"))
-        {
-            speed *= sprintMod;
-        }
-        else if (Input.GetButtonUp("Sprint"))
-        {
-            speed /= sprintMod;
-        }
-    }
-
     IEnumerator playSteps()
     {
         playingSteps = true;
         aud.PlayOneShot(audSteps[Random.Range(0, audSteps.Length)], audStepsVol);
 
-        if (isSprinting)
+        if (IsSprinting)
         {
             yield return new WaitForSeconds(0.5f);
         }
