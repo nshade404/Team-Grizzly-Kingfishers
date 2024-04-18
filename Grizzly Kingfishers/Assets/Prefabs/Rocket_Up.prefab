@@ -50,7 +50,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickups:
   - {fileID: 3780540243016931611}
-  playerController: {fileID: 0}
 --- !u!33 &292504684175969069
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -79,7 +78,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e0f662564462ce74dafe9b3aa4c7a111, type: 2}
+  - {fileID: 951029886044803264, guid: 4fb1a0ccf8c8571438b503faefc080ed, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
