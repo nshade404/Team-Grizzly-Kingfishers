@@ -20,14 +20,14 @@ public class playerController : MonoBehaviour, IDamage
     [Range(5, 25)][SerializeField] int jumpSpeed;
     [Range(-15, -35)][SerializeField] int gravity;
     [SerializeField] int currentAmmo = 0;
-    [SerializeField] int maxAmmo = 20;
+    [SerializeField] int maxAmmo = 30;
     bool isImmune = false;
     float immunityDuration = 2.0f;
     public List<GameObject> collectedItems = new List<GameObject>();
     public int healthPickupAmount = 10;
     public int keysCollected = 0;
     public int rocketPiecesCollected = 0;
-    public int ammoPickupAmount = 20;
+    public int ammoPickupAmount = 30;
 
 
     [Header("----- Gun Stats -----")]
@@ -175,17 +175,17 @@ public class playerController : MonoBehaviour, IDamage
 
     IEnumerator Shoot()
     {
-        if (currentAmmo > 0) // Check if the player has ammo
+        if (currentAmmo > 0) 
         {
             isShooting = true;
             Instantiate(selectedBullet, shootPos.position, transform.rotation);
-            currentAmmo--; // Decrease ammo count after shooting
+            currentAmmo--; 
             yield return new WaitForSeconds(shootRate);
             isShooting = false;
         }
         else
         {
-            // Play a sound or provide feedback to indicate that the player is out of ammo
+            
             Debug.Log("Out of ammo!");
         }
     }
