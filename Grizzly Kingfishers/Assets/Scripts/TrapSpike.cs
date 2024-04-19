@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TrapSpike : MonoBehaviour
 {
+    // just base damage but we can balance later on
     public float damageAmount = 5f; 
     public float extendSpeed = 5f; 
     public float retractSpeed = 2f;
@@ -49,7 +50,7 @@ public class TrapSpike : MonoBehaviour
             }
         }
     }
-
+    // both enter and exit check if the player is in the list so it knows to do damage and also extend and retract
     private void OnTriggerExit(Collider other)
     {
         playerController player = other.gameObject.GetComponent<playerController>();
@@ -96,7 +97,7 @@ public class TrapSpike : MonoBehaviour
         }
         extending = true;
     }
-
+    // was having trouble getting this to trigger along with damaging the player
     
    private void DamagePlayer(playerController player)
     {
