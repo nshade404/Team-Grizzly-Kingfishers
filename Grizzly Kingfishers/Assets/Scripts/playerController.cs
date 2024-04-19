@@ -59,10 +59,12 @@ public class playerController : MonoBehaviour, IDamage
     [Range(0, 1)][SerializeField] float audStepsVol;
 
     int jumpCount;
-    Vector3 moveDir;
+    //Vector3 moveDir;
     Vector3 playerVel;
     bool isShooting;
     bool playingSteps;
+
+    public Vector3 MoveDir { get; set; } = Vector3.zero;
 
     public bool IsJumping
     {
@@ -138,8 +140,12 @@ public class playerController : MonoBehaviour, IDamage
         }
 
         // 1st person camera controls
-        moveDir = Input.GetAxis("Horizontal") * transform.right
-                + Input.GetAxis("Vertical") * transform.forward;
+        Vector3 moveDir;
+        //moveDir = new Vector3(MoveDir.x * transform.right, 0, MoveDir.z * transform.forward);
+        //moveDir = Input.GetAxis("Horizontal") * transform.right
+        //        + Input.GetAxis("Vertical") * transform.forward;
+        moveDir = MoveDir.x * transform.right
+                + MoveDir.z * transform.forward;
 
         controller.Move(moveDir * speed * Time.deltaTime);
 

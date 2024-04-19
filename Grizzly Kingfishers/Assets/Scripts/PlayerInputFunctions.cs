@@ -9,7 +9,9 @@ public class PlayerInputFunctions : MonoBehaviour
 
     private void Awake() {
 
-        playerInputActions = new PlayerInputActions();
+        if(playerInputActions == null) {
+            playerInputActions = new PlayerInputActions();
+        }
         playerInputActions.Player.Enable();
         // Jump
         playerInputActions.Player.Jump.started += Jump;
@@ -17,8 +19,6 @@ public class PlayerInputFunctions : MonoBehaviour
         // Sprint
         playerInputActions.Player.Sprint.started += Sprint;
         playerInputActions.Player.Sprint.canceled += Sprint;
-        // Movement
-        //playerInputActions.Player.Movement.performed += Move;
     }
 
     private void Update() {
@@ -26,7 +26,7 @@ public class PlayerInputFunctions : MonoBehaviour
     }
 
     private void Move(Vector2 inVector) {
-        //moveDir = new(Vector3(inVector.x, 0, inVector.y); // pass this to player controller
+        gameManager.instance.playerScript.MoveDir = new Vector3(inVector.x, 0, inVector.y); // pass this to player controller
     }
 
     // Start is called before the first frame update

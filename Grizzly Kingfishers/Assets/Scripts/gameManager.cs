@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using TMPro;
 using JetBrains.Annotations;
 using UnityEditor;
+using UnityEngine.Rendering;
+using UnityEngine.InputSystem;
 
 public class gameManager : MonoBehaviour
 {
@@ -59,6 +61,10 @@ public class gameManager : MonoBehaviour
         timeScaleOrig = Time.timeScale;
         StartCoroutine(startingPopup());
         playerBase = GameObject.FindWithTag("PlayerBase");
+
+        //PlayerInputActions pia = new PlayerInputActions();
+        //string rebounds = PlayerPrefs.GetString(OptionsManager.PLAYER_SAVED_REBOUND_KEYBINDS, PlayerPrefs.GetString(OptionsManager.PLAYER_DEFAULT_KEYBINDS));
+        //pia.LoadBindingOverridesFromJson(rebounds);
     }
 
     // Update is called once per frame

@@ -8,6 +8,7 @@ public class KeybindItem : MonoBehaviour
 {
     public string bindingName;
     public TMP_Text boundText;
+    public int bindingIndex;
 
     // Start is called before the first frame update
     void Start()

@@ -22,6 +22,9 @@ public class OptionsManager : MonoBehaviour
     [SerializeField] private List<OptionBtn> optionBtns;
     [SerializeField] TitleScreenManager titleScreenManager;
     [SerializeField] Button applyButton;
+    [SerializeField] GameObject BackClickedWindow;
+    [SerializeField] GameObject IsKeybindingWindow;
+    [SerializeField] GameObject ResetBindingsWindow;
     private OptionBtn selectedBtn;
     public Sprite btnIdle;
     public Sprite btnHover;
@@ -49,10 +52,12 @@ public class OptionsManager : MonoBehaviour
         sfxSlider.value = (int)(PlayerPrefs.GetFloat(SFX_VALUE, 1) * VOLUME_MAX);
 
         pia = new PlayerInputActions();
-        PlayerPrefs.SetString(PLAYER_DEFAULT_KEYBINDS, pia.SaveBindingOverridesAsJson());
+        if (!PlayerPrefs.HasKey(PLAYER_DEFAULT_KEYBINDS)) {
+            PlayerPrefs.SetString(PLAYER_DEFAULT_KEYBINDS, pia.SaveBindingOverridesAsJson());
+        }
         // Check if we have any saved rebindigns.... if not, load the defaults.
-        string rebounds = PlayerPrefs.GetString(PLAYER_SAVED_REBOUND_KEYBINDS, PlayerPrefs.GetString(PLAYER_DEFAULT_KEYBINDS));
-        pia.LoadBindingOverridesFromJson(rebounds);
+        string reboundKeybinds = PlayerPrefs.GetString(PLAYER_SAVED_REBOUND_KEYBINDS, PlayerPrefs.GetString(PLAYER_DEFAULT_KEYBINDS));
+        pia.LoadBindingOverridesFromJson(reboundKeybinds);
 
         DisplayAllKeybinds();
     }
@@ -134,27 +139,36 @@ public class OptionsManager : MonoBehaviour
         PlayerPrefs.SetFloat(SFX_VALUE, sfxSlider.normalizedValue);
 
         PlayerPrefs.SetString(PLAYER_SAVED_REBOUND_KEYBINDS, pia.SaveBindingOverridesAsJson());
+        //pia.LoadBindingOverridesFromJson(PlayerPrefs.GetString(PLAYER_SAVED_REBOUND_KEYBINDS));
 
         applyButton.interactable = false;
         optionPendingChange = false;
+        BackClickedWindow.SetActive(false);
     }
 
     public void BackButtonClicked() {
         // Check if any pending options need to be saved...
         if (optionPendingChange) {
             // if so, show pop up asking if they want to save or discard changes
-            Debug.Log("Attempted to back out with pending changes!");
-            
+            BackClickedWindow.SetActive(true);
         } else {
             CloseOptionsScreen();
+            pia.Player.Enable();
         }
+    }
+
+    public void BackButtonYesClicked() {
+        ApplyChanges();
+        CloseOptionsScreen();
     }
 
     private void CloseOptionsScreen() {
         if (titleScreenManager != null) { // if we are on title screen, this will be set, use this funcitonality...
             titleScreenManager.ReturnToTitle();
+
         }
         else { // otherwise we are in game, return to game...
+            BackClickedWindow.SetActive(false);
             gameObject.SetActive(false);
         }
     }
@@ -164,99 +178,53 @@ public class OptionsManager : MonoBehaviour
     private void DisplayAllKeybinds() {
 
         for (int i = 0; i < keybinds.Length; i++) {
-            string boundKey = "";
-
-            if (keybinds[i].bindingName == "Up") { // Movement forward
-                boundKey = pia.FindAction("Movement")?.GetBindingDisplayString(1);
-            }
-            else if(keybinds[i].bindingName == "Down") { // Movement backwards
-                boundKey = pia.FindAction("Movement")?.GetBindingDisplayString(2);
-            }
-            else if (keybinds[i].bindingName == "Left") { // Movement left
-                boundKey = pia.FindAction("Movement")?.GetBindingDisplayString(3);
-            }
-            else if (keybinds[i].bindingName == "Right") { // Movement right
-                boundKey = pia.FindAction("Movement")?.GetBindingDisplayString(4);
-            }
-            else { // everything else which we currently only expec one bind on...
-                boundKey = pia.FindAction(keybinds[i].bindingName)?.GetBindingDisplayString(0);
-            }
-
+            InputAction action = pia.FindAction(keybinds[i].bindingName);
+            string boundKey = action.GetBindingDisplayString(keybinds[i].bindingIndex);
             keybinds[i].boundText.text = boundKey;
             Debug.Log(keybinds[i].bindingName + " has " + boundKey);
         }
     }
 
-    public void RebindKey(KeybindItem keybindItem) {
-
+    public void InteractiveRebinding(KeybindItem keybindItem) {
         // Verify this is actually disabled.
         pia.Player.Disable();
 
-        string itemName = keybindItem.bindingName;
-        switch (itemName) {
-            case "Jump":
-                pia.Player.Jump.PerformInteractiveRebinding()
-                    .WithControlsExcluding("Mouse")
-                    .OnComplete(callback => {
-                        Debug.Log(callback);
-                        keybindItem.boundText.text = pia.Player.Jump.GetBindingDisplayString(0);
-                        callback.Dispose();
-                        
-                    }).Start();
-                break;
-            case "Up":
-                pia.Player.Movement.PerformInteractiveRebinding()
-                    .WithControlsExcluding("Mouse")
-                    .OnComplete(callback => {
-                        Debug.Log(callback);
-                        keybindItem.boundText.text = pia.Player.Movement.GetBindingDisplayString(1);
-                        Debug.Log("Up " + pia.Player.Movement.GetBindingDisplayString(1));
-                        callback.Dispose();
-                    }).Start();
-                break;
-            case "Down":
-                pia.Player.Movement.PerformInteractiveRebinding()
-                    .WithControlsExcluding("Mouse")
-                    .OnComplete(callback => {
-                        Debug.Log(callback);
-                        keybindItem.boundText.text = pia.Player.Movement.GetBindingDisplayString(2);
-                        Debug.Log("Down " + pia.Player.Movement.GetBindingDisplayString(2));
-                        callback.Dispose();
-                    }).Start();
-                break;
-            case "Left":
-                pia.Player.Movement.PerformInteractiveRebinding()
-                    .WithControlsExcluding("Mouse")
-                    .OnComplete(callback => {
-                        Debug.Log(callback);
-                        keybindItem.boundText.text = pia.Player.Movement.GetBindingDisplayString(3);
-                        Debug.Log("Left " + pia.Player.Movement.GetBindingDisplayString(3));
-                        callback.Dispose();
-                    }).Start();
-                break;
-            case "Right":
-                pia.Player.Movement.PerformInteractiveRebinding()
-                    .WithControlsExcluding("Mouse")
-                    .OnComplete(callback => {
-                        Debug.Log(callback);
-                        keybindItem.boundText.text = pia.Player.Movement.GetBindingDisplayString(4);
-                        Debug.Log("Right " + pia.Player.Movement.GetBindingDisplayString(4));
-                        callback.Dispose();
-                    }).Start();
-                break;
-            case "Sprint":
-                pia.Player.Sprint.PerformInteractiveRebinding()
-                    .WithControlsExcluding("Mouse")
-                    .OnComplete(callback => {
-                        Debug.Log(callback);
-                        keybindItem.boundText.text = pia.Player.Sprint.GetBindingDisplayString(0);
-                        callback.Dispose();
-
-                    }).Start();
-                break;
+        InputAction action = pia.FindAction(keybindItem.bindingName);
+        if(action != null) {
+            action.PerformInteractiveRebinding(keybindItem.bindingIndex)
+                .WithCancelingThrough("<Keyboard>/escape")
+                .OnCancel(
+                    operation => {
+                        IsKeybindingWindow.SetActive(false);
+                    })
+                .OnComplete(callback => {
+                    keybindItem.boundText.text = action.GetBindingDisplayString(keybindItem.bindingIndex);
+                    Debug.Log(keybindItem.bindingName + " " + keybindItem.bindingIndex + " " + action.GetBindingDisplayString(keybindItem.bindingIndex));
+                    Debug.Log(action.bindings[keybindItem.bindingIndex].overridePath);
+                    //action.ApplyBindingOverride(keybindItem.bindingIndex, action.bindings[keybindItem.bindingIndex].overridePath);
+                    IsKeybindingWindow.SetActive(false);
+                    applyButton.interactable = true;
+                    optionPendingChange = true;
+                    callback.Dispose();
+                }).Start();
+            IsKeybindingWindow.SetActive(true);
         }
+    }
 
-        applyButton.interactable = true;
+    public void InitiateResetBindings() {
+        ResetBindingsWindow.SetActive(true);
+    }
+
+    public void CancelResetBindings() {
+        ResetBindingsWindow.SetActive(false);
+    }
+
+    public void ResetBindingsToDefault() {
+        string rebounds = PlayerPrefs.GetString(PLAYER_DEFAULT_KEYBINDS);
+        PlayerPrefs.SetString(PLAYER_SAVED_REBOUND_KEYBINDS, rebounds);
+        pia.LoadBindingOverridesFromJson(rebounds);
+        ResetBindingsWindow.SetActive(false);
+        DisplayAllKeybinds();
     }
 
     #endregion
