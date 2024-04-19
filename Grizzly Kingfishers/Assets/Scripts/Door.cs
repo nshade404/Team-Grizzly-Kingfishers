@@ -20,7 +20,7 @@ public class Door : MonoBehaviour
             else
             {
                 Debug.Log("Player does not have a key!");
-                // Optionally, you can add code here to inform the player that they need a key to open the door
+               
             }
         }
     }
@@ -39,7 +39,6 @@ public class Door : MonoBehaviour
         }
         
 
-        // Alternatively, you might want to destroy the key pickup GameObject if you don't need it anymore
-        // Destroy(keyPickup);
+      
     }
 }

@@ -165,7 +165,7 @@ public class playerController : MonoBehaviour, IDamage
             }
         }
 
-        // Gravity
+        
         playerVel.y += gravity * Time.deltaTime;
         controller.Move(playerVel * Time.deltaTime);
 
