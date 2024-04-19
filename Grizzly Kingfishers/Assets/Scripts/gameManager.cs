@@ -62,9 +62,7 @@ public class gameManager : MonoBehaviour
         StartCoroutine(startingPopup());
         playerBase = GameObject.FindWithTag("PlayerBase");
 
-        //PlayerInputActions pia = new PlayerInputActions();
-        //string rebounds = PlayerPrefs.GetString(OptionsManager.PLAYER_SAVED_REBOUND_KEYBINDS, PlayerPrefs.GetString(OptionsManager.PLAYER_DEFAULT_KEYBINDS));
-        //pia.LoadBindingOverridesFromJson(rebounds);
+        
     }
 
     // Update is called once per frame

@@ -141,6 +141,9 @@ public class OptionsManager : MonoBehaviour
         PlayerPrefs.SetString(PLAYER_SAVED_REBOUND_KEYBINDS, pia.SaveBindingOverridesAsJson());
         //pia.LoadBindingOverridesFromJson(PlayerPrefs.GetString(PLAYER_SAVED_REBOUND_KEYBINDS));
 
+        // Load any new bindings that are setup.
+        gameManager.instance.player.GetComponent<PlayerInputFunctions>()?.LoadSavedBindings();
+
         applyButton.interactable = false;
         optionPendingChange = false;
         BackClickedWindow.SetActive(false);
@@ -220,10 +223,10 @@ public class OptionsManager : MonoBehaviour
     }
 
     public void ResetBindingsToDefault() {
-        string rebounds = PlayerPrefs.GetString(PLAYER_DEFAULT_KEYBINDS);
-        PlayerPrefs.SetString(PLAYER_SAVED_REBOUND_KEYBINDS, rebounds);
-        pia.LoadBindingOverridesFromJson(rebounds);
+        PlayerPrefs.DeleteKey(PLAYER_SAVED_REBOUND_KEYBINDS);
+        gameManager.instance.player.GetComponent<PlayerInputFunctions>()?.LoadSavedBindings();
         ResetBindingsWindow.SetActive(false);
+        
         DisplayAllKeybinds();
     }
 

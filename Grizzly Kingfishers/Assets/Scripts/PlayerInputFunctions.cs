@@ -11,6 +11,7 @@ public class PlayerInputFunctions : MonoBehaviour
 
         if(playerInputActions == null) {
             playerInputActions = new PlayerInputActions();
+            LoadSavedBindings();
         }
         playerInputActions.Player.Enable();
         // Jump
@@ -19,6 +20,11 @@ public class PlayerInputFunctions : MonoBehaviour
         // Sprint
         playerInputActions.Player.Sprint.started += Sprint;
         playerInputActions.Player.Sprint.canceled += Sprint;
+    }
+
+    public void LoadSavedBindings() {
+        string rebounds = PlayerPrefs.GetString(OptionsManager.PLAYER_SAVED_REBOUND_KEYBINDS, PlayerPrefs.GetString(OptionsManager.PLAYER_DEFAULT_KEYBINDS));
+        playerInputActions.LoadBindingOverridesFromJson(rebounds);
     }
 
     private void Update() {
