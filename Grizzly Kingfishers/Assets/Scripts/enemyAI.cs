@@ -8,7 +8,8 @@ public class EnemyAI : MonoBehaviour, IDamage {
     [Header("----- Components -----")]
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] AudioSource aud;
+    [SerializeField] AudioSource audShoot;
+    //[SerializeField] AudioSource audSteps;
 
     [Header("----- Enemy Stats -----")]
     [Range(0, 10)][SerializeField] float health;
@@ -37,6 +38,12 @@ public class EnemyAI : MonoBehaviour, IDamage {
 
     [Header("----- Debug Testing -----")]
     [SerializeField] bool disableEnemy;
+
+    [Header("----- Audio -----")]
+    [SerializeField] AudioClip shootSound;
+    [Range(0, 1)][SerializeField] float volShoot;
+    [SerializeField] AudioClip audBeeping;
+    [Range(0, 1)][SerializeField] float volBeeping;
 
     Color startColor = Color.white;
     bool isShooting;
@@ -154,6 +161,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
             } else { 
                 Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.z));
                 Instantiate(bullet, shootPos.position, rot);
+                audShoot.PlayOneShot(shootSound, volShoot);
             }
         }
         yield return new WaitForSeconds(shootRate);

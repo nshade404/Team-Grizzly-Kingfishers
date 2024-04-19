@@ -48,7 +48,7 @@ public class playerController : MonoBehaviour, IDamage
     [Range(0, 1)][SerializeField] float audStepsVol;
     [SerializeField] AudioClip deathSound;
     [Range(0f, 1f)][SerializeField] float deathVol;
-    [SerializeField] AudioClip[] shootSounds;
+    [SerializeField] AudioClip shootSound;
     [Range(0f, 1f)][SerializeField] float shootVol;
     
     int jumpCount;
@@ -166,7 +166,7 @@ public class playerController : MonoBehaviour, IDamage
         isShooting = true;
 
         Instantiate(selectedBullet, shootPos.position, transform.rotation);
-        gunshots.PlayOneShot(deathSound, deathVol);
+        gunshots.PlayOneShot(shootSound, shootVol);
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }

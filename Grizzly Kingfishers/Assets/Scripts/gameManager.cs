@@ -49,7 +49,9 @@ public class gameManager : MonoBehaviour
     public int scrapWallet = 0;
     public int turretCostAmount;
     [Header("Audio")]
-    
+    [SerializeField] AudioClip Sound;
+    [Range(0f, 1f)][SerializeField] float Vol;
+
     // Start is called before the first frame update
     void Awake()
     {
