@@ -38819,7 +38819,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8130707442414259727, guid: 562fc518877d1e34f92e58d1187aaa13, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.14
+      value: -0.011
       objectReference: {fileID: 0}
     - target: {fileID: 8130707442414259727, guid: 562fc518877d1e34f92e58d1187aaa13, type: 3}
       propertyPath: m_LocalPosition.z
@@ -59546,6 +59546,10 @@ PrefabInstance:
     - target: {fileID: 8493498545602200069, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
       propertyPath: jumpForce
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8493498545602200069, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
+      propertyPath: sprintMod
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8493498545602200069, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
       propertyPath: currentAmmo
