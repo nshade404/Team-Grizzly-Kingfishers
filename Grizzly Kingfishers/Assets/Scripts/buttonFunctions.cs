@@ -18,11 +18,13 @@ public class buttonFunctions : MonoBehaviour
 
     public void quit()
     {
-        #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-        #else
-        Application.Quit();
-        #endif
+        gameManager.instance.loadingScreen.SetActive(true);
+        SceneManager.LoadScene(0);
+        //#if UNITY_EDITOR
+        //UnityEditor.EditorApplication.isPlaying = false;
+        //#else
+        //Application.Quit();
+        //#endif
     }
 
     public void showOptions() {

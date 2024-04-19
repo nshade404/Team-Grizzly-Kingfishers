@@ -43,6 +43,7 @@ public class gameManager : MonoBehaviour
     public int maxEnemies = 50;
 
     public GameObject optionScreen;
+    public GameObject loadingScreen;
 
     [SerializeField] Transform enemySpawnPoint;
 
