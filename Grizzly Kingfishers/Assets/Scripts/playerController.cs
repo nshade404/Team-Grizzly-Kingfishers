@@ -28,6 +28,12 @@ public class playerController : MonoBehaviour, IDamage
     public int keysCollected = 0;
     public int rocketPiecesCollected = 0;
     public int ammoPickupAmount = 30;
+    public float jumpForce = 5f;
+    public float maxJumpForce = 10f;
+    public float minJumpForce = 5f;
+    public float jumpTime = 0.5f;
+    private bool isJumping = false;
+    private float jumpTimeCounter = 0f;
 
 
     [Header("----- Gun Stats -----")]
@@ -137,12 +143,26 @@ public class playerController : MonoBehaviour, IDamage
 
         controller.Move(moveDir * speed * Time.deltaTime);
 
-        if (IsJumping && jumpCount < jumps)
-        //if (Input.GetButtonDown("Jump") && jumpCount < jumps)
+        if (Input.GetKeyDown(KeyCode.Space) && jumpCount < jumps)
         {
-            playerVel.y = jumpSpeed;
+            isJumping = true;
+            jumpTimeCounter = 0f;
             jumpCount++;
             aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
+        }
+
+        if (isJumping)
+        {
+            if (Input.GetKey(KeyCode.Space) && jumpTimeCounter < jumpTime)
+            {
+                float currentJumpForce = Mathf.Lerp(minJumpForce, maxJumpForce, jumpTimeCounter / jumpTime);
+                playerVel.y = currentJumpForce;
+                jumpTimeCounter += Time.deltaTime;
+            }
+            else
+            {
+                isJumping = false;
+            }
         }
 
         // Gravity
