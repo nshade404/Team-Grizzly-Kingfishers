@@ -7,9 +7,9 @@ using JetBrains.Annotations;
 using UnityEditor;
 using UnityEngine.Rendering;
 using UnityEngine.InputSystem;
+using Unity.VisualScripting;
 
-public class gameManager : MonoBehaviour
-{
+public class gameManager : MonoBehaviour {
     public static gameManager instance;
 
     [SerializeField] GameObject menuActive;
@@ -20,15 +20,16 @@ public class gameManager : MonoBehaviour
     [SerializeField] TMP_Text enemyCountText;
     [SerializeField] TMP_Text rocketPiecesCollectedText;
     [SerializeField] TMP_Text scrapText;
-    [SerializeField] TMP_Text turretCostText;
-
     [SerializeField] GameObject enemySpawn;
     public float spawnTime;
     public float spawnDelay;
     public int enemiesPerWave;
-    
-    public Image playerHPBar;
-    public GameObject playerDamageFlash;
+
+
+    [Header("----- Healthbar UI Items -----")]
+    [SerializeField] Image playerHPBar;
+    [SerializeField] Image rocketHPBar;
+    [SerializeField] GameObject playerDamageFlash;
 
     public GameObject player;
     public playerController playerScript;
@@ -53,40 +54,42 @@ public class gameManager : MonoBehaviour
     public int scrapWallet = 0;
     public int turretCostAmount;
 
+    [Header("----- Turret UI Items -----")]
+    [SerializeField] List<TurretButton> turretButtons;
+    [SerializeField] Sprite turretBtnIconIdle;
+    [SerializeField] Sprite turretBtnIconSelected;
+
     // Start is called before the first frame update
-    void Awake()
-    {
+    void Awake() {
         instance = this;
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<playerController>();
         timeScaleOrig = Time.timeScale;
         StartCoroutine(startingPopup());
         playerBase = GameObject.FindWithTag("PlayerBase");
+    }
 
-        
+    private void Start() {
+        InitializeTurretUI();
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetButtonDown("Cancel") && menuActive == null)
-        {
+    void Update() {
+        if (Input.GetButtonDown("Cancel") && menuActive == null) {
             statePaused();
             menuActive = menuPause;
             menuActive.SetActive(isPaused);
         }
     }
 
-    public void statePaused()
-    {
+    public void statePaused() {
         isPaused = !isPaused;
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
     }
 
-    public void stateUnpaused()
-    {
+    public void stateUnpaused() {
         isPaused = !isPaused;
         Time.timeScale = timeScaleOrig;
         Cursor.visible = false;
@@ -95,8 +98,7 @@ public class gameManager : MonoBehaviour
         menuActive = null;
     }
 
-    IEnumerator startingPopup()
-    {
+    IEnumerator startingPopup() {
         menuActive = objectivePopup;
         menuActive.SetActive(true);
         yield return new WaitForSeconds(7.5f);
@@ -104,34 +106,16 @@ public class gameManager : MonoBehaviour
         menuActive = null;
     }
 
-    public void updateGameGoal(int amount)
-    {
+    public void updateGameGoal(int amount) {
         enemyCount += amount;
 
-        if (enemyCountText != null)
-        {
+        if (enemyCountText != null) {
             enemyCountText.text = enemyCount.ToString("F0");
         }
-
-        // Commenting out so that killing enemies does not trigger a 'win' early
-        //if (enemyCount <= 0 )
-        //{
-        //    statePaused();
-        //    if (menuWin != null)
-        //    {
-        //        menuActive = menuWin;
-        //        menuActive.SetActive(true);
-        //    }
-        //    else
-        //    {
-        //        Debug.Log("gameManager.menuWin not set!");
-        //    }
-        //}
     }
-    public void youHaveLost()
-    {
+    public void youHaveLost() {
         statePaused();
-        if(menuLose != null) {
+        if (menuLose != null) {
             menuActive = menuLose;
             menuActive.SetActive(true);
         }
@@ -148,16 +132,18 @@ public class gameManager : MonoBehaviour
         }
     }
 
+    #region Health Bar and Damage Updates
     public void flashPlayerDamage(bool isWidgetActive) {
-        if(playerDamageFlash != null) {
+        if (playerDamageFlash != null) {
             playerDamageFlash.SetActive(isWidgetActive);
-        } else {
+        }
+        else {
             Debug.Log("gameManager.playerDamageFlash is null!");
         }
     }
 
     public void updatePlayerHealthBar(float amount) {
-        if(playerHPBar != null) {
+        if (playerHPBar != null) {
             playerHPBar.fillAmount = amount;
         }
         else {
@@ -165,49 +151,69 @@ public class gameManager : MonoBehaviour
         }
     }
 
-    public void updateRocketPiecesUI() 
-    {
-        if (rocketPiecesCollectedText != null)
-        {
+    public void updateRocketHealthBar(float amount) {
+        if (rocketHPBar != null) {
+            rocketHPBar.fillAmount = amount;
+        }
+        else {
+            Debug.Log("gameManager.rocketHPBar not set!");
+        }
+    }
+    #endregion
+
+    public void updateRocketPiecesUI() {
+        if (rocketPiecesCollectedText != null) {
             rocketPiecesCollectedText.text = rocketPiecesCollected + " / " + rocketPiecesRequired;
         }
-        else
-        {
+        else {
             Debug.Log("gameManager.rocketPiecesCollectedText not set!");
         }
 
-        if (rocketPiecesCollected == rocketPiecesRequired)
-        {
+        if (rocketPiecesCollected == rocketPiecesRequired) {
             youHaveWon();
             //updateGameGoal(-1);
         }
     }
 
-    public void AddScrap(int amount)
-    {
+    public void AddScrap(int amount) {
         scrapWallet += amount;
         UpdateScrapUI();
     }
 
-    public void RemoveScrap(int amount)
-    {
+    public void RemoveScrap(int amount) {
         scrapWallet -= amount;
         UpdateScrapUI();
     }
 
-    void UpdateScrapUI()
-    {
-        if (scrapText != null)
-        {
+    void UpdateScrapUI() {
+        if (scrapText != null) {
             scrapText.text = scrapWallet.ToString();
         }
     }
 
-    public void costOfTurret (string turretName , int amount)
-    {
-       if (turretCostText != null)
-        {
-            turretCostText.text = turretName + "\n" + amount;
+    #region Turret Selection and Display
+
+    public void SetSelectedTurretUI(Turrets turret, int index) {
+        DeselectAllTurrets();
+        turretButtons[index].btnBackground.sprite = turretBtnIconSelected;
+    }
+
+    private void InitializeTurretUI() {
+        for(int i = 0; i < playerScript.turrets.Count; i++) {
+            // Safety check in case some reason player has more turrets in list
+            if(i >= turretButtons.Count) { break; }
+
+            turretButtons[i].btnBackground.sprite = turretBtnIconIdle;
+            turretButtons[i].icon.sprite = playerScript.turrets[i].GetComponent<Turrets>().turretIcon;
+            turretButtons[i].cost.text = playerScript.turrets[i].GetComponent<Turrets>().GetTurretCost().ToString();
         }
     }
+
+    private void DeselectAllTurrets() {
+        foreach(TurretButton btn in turretButtons) {
+            btn.btnBackground.sprite = turretBtnIconIdle;
+        }
+    }
+
+    #endregion
 }
