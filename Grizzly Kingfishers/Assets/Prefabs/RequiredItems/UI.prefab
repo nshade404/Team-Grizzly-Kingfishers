@@ -460,7 +460,6 @@ MonoBehaviour:
   enemyCountText: {fileID: 4373825120730708158}
   rocketPiecesCollectedText: {fileID: 4554035360592458678}
   scrapText: {fileID: 8303810646056109003}
-  turretCostText: {fileID: 0}
   enemySpawn: {fileID: 0}
   spawnTime: 0
   spawnDelay: 0
@@ -481,7 +480,7 @@ MonoBehaviour:
   enemySpawnPoint: {fileID: 0}
   rocketPiecesCollected: 0
   rocketPiecesRequired: 3
-  scrapWallet: 0
+  scrapWallet: 10
   turretCostAmount: 0
   turretButtons:
   - {fileID: 2954241024208250861}
