@@ -152,6 +152,7 @@ MonoBehaviour:
   shootRate: 0
   scrapCost: 15
   turretRotateSpeed: 4
+  turretIcon: {fileID: 21300000, guid: debcd5565baef7f4eb957c2f8e075caa, type: 3}
 --- !u!65 &8318511081054802505
 BoxCollider:
   m_ObjectHideFlags: 0

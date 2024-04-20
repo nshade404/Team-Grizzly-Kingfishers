@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Turrets : MonoBehaviour, IDamage
 {
@@ -16,6 +17,7 @@ public class Turrets : MonoBehaviour, IDamage
     [Range(0, 5)][SerializeField] float shootRate;
     [SerializeField] int scrapCost;
     [Range(0, 5)][SerializeField] int turretRotateSpeed;
+    [SerializeField] Sprite turretIcon;
 
     Color startColor = Color.white;
     bool isShooting;
