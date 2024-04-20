@@ -27,7 +27,6 @@ public class Bullet : MonoBehaviour {
     [SerializeField] float slowPerc;
     [SerializeField] bool blind;
 
-
     public DamageType GetDamageType() {
         return type;
     }

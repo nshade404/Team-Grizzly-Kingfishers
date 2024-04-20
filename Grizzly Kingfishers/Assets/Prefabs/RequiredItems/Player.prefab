@@ -62,7 +62,7 @@ MonoBehaviour:
   jumps: 1
   jumpSpeed: 9
   gravity: -25
-  currentAmmo: 0
+  currentAmmo: 30
   maxAmmo: 30
   collectedItems: []
   healthPickupAmount: 10

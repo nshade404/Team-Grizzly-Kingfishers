@@ -53,6 +53,78 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ScrollSelectTurret"",
+                    ""type"": ""Value"",
+                    ""id"": ""0013c33c-551b-43ee-a14a-9129e9a71240"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""SelectTurret1"",
+                    ""type"": ""Button"",
+                    ""id"": ""1a1ed0f9-35d8-4cb3-abcf-7f25c439a933"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectTurret2"",
+                    ""type"": ""Button"",
+                    ""id"": ""834701c2-556a-4fbf-92d0-fbaa092a6b5e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectTurret3"",
+                    ""type"": ""Button"",
+                    ""id"": ""1bfbc2e7-eb68-4f8d-947f-a726738602f6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectTurret4"",
+                    ""type"": ""Button"",
+                    ""id"": ""822fd177-e2da-4833-ad3d-bacac50a9b29"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectTurret5"",
+                    ""type"": ""Button"",
+                    ""id"": ""28d00561-941e-4942-b0c2-37a57c5cfc29"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectTurret6"",
+                    ""type"": ""Button"",
+                    ""id"": ""76b99884-151f-4035-abdd-8548b1b707a0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PlaceTurret"",
+                    ""type"": ""Button"",
+                    ""id"": ""1a316cb7-411e-46e5-9d97-f0822cf2c576"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -132,6 +204,94 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""909c408c-4c5e-4574-95bd-55e6c372e6ad"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ScrollSelectTurret"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""be7742e5-e004-467a-a416-9ca3028a20c1"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectTurret1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b6b11101-8728-48be-8e0d-6f5c968f5f32"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectTurret2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4275f4af-c592-4199-9699-1d9b1dd27f6a"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectTurret3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7ed1be12-2a45-48a0-a57b-52401e22b759"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectTurret4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1fe53a5a-ab22-4183-98af-67868250051b"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectTurret5"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3cd291dc-ac62-4c3a-8d2d-dc5f1b03cd5a"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectTurret6"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9a5c626b-aedf-44f9-bcdb-13f8d4f9d44c"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlaceTurret"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -143,6 +303,14 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
+        m_Player_ScrollSelectTurret = m_Player.FindAction("ScrollSelectTurret", throwIfNotFound: true);
+        m_Player_SelectTurret1 = m_Player.FindAction("SelectTurret1", throwIfNotFound: true);
+        m_Player_SelectTurret2 = m_Player.FindAction("SelectTurret2", throwIfNotFound: true);
+        m_Player_SelectTurret3 = m_Player.FindAction("SelectTurret3", throwIfNotFound: true);
+        m_Player_SelectTurret4 = m_Player.FindAction("SelectTurret4", throwIfNotFound: true);
+        m_Player_SelectTurret5 = m_Player.FindAction("SelectTurret5", throwIfNotFound: true);
+        m_Player_SelectTurret6 = m_Player.FindAction("SelectTurret6", throwIfNotFound: true);
+        m_Player_PlaceTurret = m_Player.FindAction("PlaceTurret", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -207,6 +375,14 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Movement;
+    private readonly InputAction m_Player_ScrollSelectTurret;
+    private readonly InputAction m_Player_SelectTurret1;
+    private readonly InputAction m_Player_SelectTurret2;
+    private readonly InputAction m_Player_SelectTurret3;
+    private readonly InputAction m_Player_SelectTurret4;
+    private readonly InputAction m_Player_SelectTurret5;
+    private readonly InputAction m_Player_SelectTurret6;
+    private readonly InputAction m_Player_PlaceTurret;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -214,6 +390,14 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
+        public InputAction @ScrollSelectTurret => m_Wrapper.m_Player_ScrollSelectTurret;
+        public InputAction @SelectTurret1 => m_Wrapper.m_Player_SelectTurret1;
+        public InputAction @SelectTurret2 => m_Wrapper.m_Player_SelectTurret2;
+        public InputAction @SelectTurret3 => m_Wrapper.m_Player_SelectTurret3;
+        public InputAction @SelectTurret4 => m_Wrapper.m_Player_SelectTurret4;
+        public InputAction @SelectTurret5 => m_Wrapper.m_Player_SelectTurret5;
+        public InputAction @SelectTurret6 => m_Wrapper.m_Player_SelectTurret6;
+        public InputAction @PlaceTurret => m_Wrapper.m_Player_PlaceTurret;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -232,6 +416,30 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
+            @ScrollSelectTurret.started += instance.OnScrollSelectTurret;
+            @ScrollSelectTurret.performed += instance.OnScrollSelectTurret;
+            @ScrollSelectTurret.canceled += instance.OnScrollSelectTurret;
+            @SelectTurret1.started += instance.OnSelectTurret1;
+            @SelectTurret1.performed += instance.OnSelectTurret1;
+            @SelectTurret1.canceled += instance.OnSelectTurret1;
+            @SelectTurret2.started += instance.OnSelectTurret2;
+            @SelectTurret2.performed += instance.OnSelectTurret2;
+            @SelectTurret2.canceled += instance.OnSelectTurret2;
+            @SelectTurret3.started += instance.OnSelectTurret3;
+            @SelectTurret3.performed += instance.OnSelectTurret3;
+            @SelectTurret3.canceled += instance.OnSelectTurret3;
+            @SelectTurret4.started += instance.OnSelectTurret4;
+            @SelectTurret4.performed += instance.OnSelectTurret4;
+            @SelectTurret4.canceled += instance.OnSelectTurret4;
+            @SelectTurret5.started += instance.OnSelectTurret5;
+            @SelectTurret5.performed += instance.OnSelectTurret5;
+            @SelectTurret5.canceled += instance.OnSelectTurret5;
+            @SelectTurret6.started += instance.OnSelectTurret6;
+            @SelectTurret6.performed += instance.OnSelectTurret6;
+            @SelectTurret6.canceled += instance.OnSelectTurret6;
+            @PlaceTurret.started += instance.OnPlaceTurret;
+            @PlaceTurret.performed += instance.OnPlaceTurret;
+            @PlaceTurret.canceled += instance.OnPlaceTurret;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -245,6 +453,30 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
+            @ScrollSelectTurret.started -= instance.OnScrollSelectTurret;
+            @ScrollSelectTurret.performed -= instance.OnScrollSelectTurret;
+            @ScrollSelectTurret.canceled -= instance.OnScrollSelectTurret;
+            @SelectTurret1.started -= instance.OnSelectTurret1;
+            @SelectTurret1.performed -= instance.OnSelectTurret1;
+            @SelectTurret1.canceled -= instance.OnSelectTurret1;
+            @SelectTurret2.started -= instance.OnSelectTurret2;
+            @SelectTurret2.performed -= instance.OnSelectTurret2;
+            @SelectTurret2.canceled -= instance.OnSelectTurret2;
+            @SelectTurret3.started -= instance.OnSelectTurret3;
+            @SelectTurret3.performed -= instance.OnSelectTurret3;
+            @SelectTurret3.canceled -= instance.OnSelectTurret3;
+            @SelectTurret4.started -= instance.OnSelectTurret4;
+            @SelectTurret4.performed -= instance.OnSelectTurret4;
+            @SelectTurret4.canceled -= instance.OnSelectTurret4;
+            @SelectTurret5.started -= instance.OnSelectTurret5;
+            @SelectTurret5.performed -= instance.OnSelectTurret5;
+            @SelectTurret5.canceled -= instance.OnSelectTurret5;
+            @SelectTurret6.started -= instance.OnSelectTurret6;
+            @SelectTurret6.performed -= instance.OnSelectTurret6;
+            @SelectTurret6.canceled -= instance.OnSelectTurret6;
+            @PlaceTurret.started -= instance.OnPlaceTurret;
+            @PlaceTurret.performed -= instance.OnPlaceTurret;
+            @PlaceTurret.canceled -= instance.OnPlaceTurret;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -267,5 +499,13 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
+        void OnScrollSelectTurret(InputAction.CallbackContext context);
+        void OnSelectTurret1(InputAction.CallbackContext context);
+        void OnSelectTurret2(InputAction.CallbackContext context);
+        void OnSelectTurret3(InputAction.CallbackContext context);
+        void OnSelectTurret4(InputAction.CallbackContext context);
+        void OnSelectTurret5(InputAction.CallbackContext context);
+        void OnSelectTurret6(InputAction.CallbackContext context);
+        void OnPlaceTurret(InputAction.CallbackContext context);
     }
 }

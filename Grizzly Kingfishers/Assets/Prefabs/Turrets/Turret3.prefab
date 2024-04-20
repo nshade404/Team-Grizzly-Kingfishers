@@ -135,6 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 143405731565175140}
   turretHead: {fileID: 143405731562921892}
+  displayName: Fire Tower
   health: 20
   cannonBarrels:
   - {fileID: 2604118097884681658}
@@ -142,6 +143,7 @@ MonoBehaviour:
   shootRate: 0
   scrapCost: 10
   turretRotateSpeed: 4
+  turretIcon: {fileID: 21300000, guid: 303ee7b5bcfb2bf4182ae877795f5826, type: 3}
 --- !u!65 &1622466734661441409
 BoxCollider:
   m_ObjectHideFlags: 0
