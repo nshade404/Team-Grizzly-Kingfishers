@@ -45,7 +45,7 @@ public class playerController : MonoBehaviour, IDamage
 
 
     [Header("----- Turret Stats -----")]
-    [SerializeField] List<GameObject> turrets;
+    public List<GameObject> turrets;
     public GameObject selectedTurret;
     [SerializeField] GameObject turretBuilder;
     [SerializeField] int turretPlacementDist;
@@ -90,7 +90,8 @@ public class playerController : MonoBehaviour, IDamage
     {
         updatePlayerUI();
         selectedTurret = turrets.First();
-        gameManager.instance.costOfTurret(selectedTurret.name, selectedTurret.GetComponent<Turrets>().GetTurretCost()); // Update selected turret on startup.
+        gameManager.instance.SetSelectedTurretUI(selectedTurret.GetComponent<Turrets>(), 0);
+        //gameManager.instance.costOfTurret(selectedTurret.name, selectedTurret.GetComponent<Turrets>().GetTurretCost()); // Update selected turret on startup.
 
     }
 
@@ -369,8 +370,10 @@ public class playerController : MonoBehaviour, IDamage
             }
             selectedTurret = turrets[currentIndex];
 
-            int turretCost = selectedTurret.GetComponent<Turrets>().GetTurretCost();
-            gameManager.instance.costOfTurret(selectedTurret.name, turretCost);
+            gameManager.instance.SetSelectedTurretUI(selectedTurret.GetComponent<Turrets>(), currentIndex);
+            
+            //int turretCost = selectedTurret.GetComponent<Turrets>().GetTurretCost();
+            //gameManager.instance.costOfTurret(selectedTurret.name, turretCost);
         }
     }
 

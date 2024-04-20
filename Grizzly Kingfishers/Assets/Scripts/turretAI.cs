@@ -17,7 +17,7 @@ public class Turrets : MonoBehaviour, IDamage
     [Range(0, 5)][SerializeField] float shootRate;
     [SerializeField] int scrapCost;
     [Range(0, 5)][SerializeField] int turretRotateSpeed;
-    [SerializeField] Sprite turretIcon;
+    public Sprite turretIcon;
 
     Color startColor = Color.white;
     bool isShooting;
