@@ -145,6 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 6881419524466432931}
   turretHead: {fileID: 6881419524468426083}
+  displayName: Sand Blast
   health: 20
   cannonBarrels:
   - {fileID: 8743998630236826607}

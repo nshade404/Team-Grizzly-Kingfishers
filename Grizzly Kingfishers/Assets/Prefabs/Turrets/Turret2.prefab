@@ -315,6 +315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 2123457296319385863}
   turretHead: {fileID: 2123457296321646535}
+  displayName: Big Boi
   health: 20
   cannonBarrels:
   - {fileID: 4841950530581807199}

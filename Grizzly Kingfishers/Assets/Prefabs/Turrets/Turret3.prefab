@@ -135,6 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 143405731565175140}
   turretHead: {fileID: 143405731562921892}
+  displayName: Fire Tower
   health: 20
   cannonBarrels:
   - {fileID: 2604118097884681658}

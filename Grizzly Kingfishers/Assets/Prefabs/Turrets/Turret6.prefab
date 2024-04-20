@@ -150,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 5466001246032022465}
   turretHead: {fileID: 5466001246034220289}
+  displayName: Tesla
   health: 20
   cannonBarrels:
   - {fileID: 1777684707340069761}

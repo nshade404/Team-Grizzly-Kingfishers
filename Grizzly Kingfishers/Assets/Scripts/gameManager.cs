@@ -21,6 +21,7 @@ public class gameManager : MonoBehaviour {
     [SerializeField] TMP_Text heldRocketPiecesText;
     [SerializeField] TMP_Text scrapText;
     [SerializeField] GameObject enemySpawn;
+    [SerializeField] TurretDetailsUI selectedTurretDetailsUI;
     public float spawnTime;
     public float spawnDelay;
     public int enemiesPerWave;
@@ -70,6 +71,7 @@ public class gameManager : MonoBehaviour {
 
         updateRocketPiecesUI();
         UpdateRepairKitsHeld();
+        UpdateScrapUI();
     }
 
     private void Start() {
@@ -205,6 +207,11 @@ public class gameManager : MonoBehaviour {
     public void SetSelectedTurretUI(Turrets turret, int index) {
         DeselectAllTurrets();
         turretButtons[index].btnBackground.sprite = turretBtnIconSelected;
+        selectedTurretDetailsUI.displayName.text = turret.GetDisplayName();
+        selectedTurretDetailsUI.ammoType.text = turret.GetBulletType()?.GetDamageType().ToString();
+        selectedTurretDetailsUI.shootRate.text = turret.GetShootRate().ToString("F2");
+        selectedTurretDetailsUI.rotSpeed.text = turret.GetRotationSpeed().ToString();
+        selectedTurretDetailsUI.cost.text = turret.GetTurretCost().ToString();
     }
 
     private void InitializeTurretUI() {

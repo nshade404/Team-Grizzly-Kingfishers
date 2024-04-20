@@ -440,6 +440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 8838238972778194771}
   turretHead: {fileID: 4427828513817704929}
+  displayName: Basic Boi
   health: 20
   cannonBarrels:
   - {fileID: 2067349161393027354}

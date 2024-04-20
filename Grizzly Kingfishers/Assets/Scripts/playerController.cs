@@ -145,10 +145,6 @@ public class playerController : MonoBehaviour, IDamage
 
         if (IsJumping)
         {
-            //float currentJumpForce = Mathf.Lerp(minJumpForce, maxJumpForce, jumpTimeCounter / jumpTime);
-            //playerVel.y = currentJumpForce;
-            //jumpTimeCounter += Time.deltaTime;
-
             if (jumpTimeCounter < jumpTime) {
                 float currentJumpForce = Mathf.Lerp(minJumpForce, maxJumpForce, jumpTimeCounter / jumpTime);
                 playerVel.y = currentJumpForce;

@@ -150,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 7941642292035346915}
   turretHead: {fileID: 7941642292033421093}
+  displayName: Freezy
   health: 20
   cannonBarrels:
   - {fileID: 7335863013412938697}
