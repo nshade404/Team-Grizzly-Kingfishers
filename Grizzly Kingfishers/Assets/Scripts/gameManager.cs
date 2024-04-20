@@ -17,8 +17,8 @@ public class gameManager : MonoBehaviour {
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject objectivePopup;
-    [SerializeField] TMP_Text enemyCountText;
     [SerializeField] TMP_Text rocketPiecesCollectedText;
+    [SerializeField] TMP_Text heldRocketPiecesText;
     [SerializeField] TMP_Text scrapText;
     [SerializeField] GameObject enemySpawn;
     public float spawnTime;
@@ -67,6 +67,9 @@ public class gameManager : MonoBehaviour {
         timeScaleOrig = Time.timeScale;
         StartCoroutine(startingPopup());
         playerBase = GameObject.FindWithTag("PlayerBase");
+
+        updateRocketPiecesUI();
+        UpdateRepairKitsHeld();
     }
 
     private void Start() {
@@ -108,10 +111,6 @@ public class gameManager : MonoBehaviour {
 
     public void updateGameGoal(int amount) {
         enemyCount += amount;
-
-        if (enemyCountText != null) {
-            enemyCountText.text = enemyCount.ToString("F0");
-        }
     }
     public void youHaveLost() {
         statePaused();
@@ -163,15 +162,25 @@ public class gameManager : MonoBehaviour {
 
     public void updateRocketPiecesUI() {
         if (rocketPiecesCollectedText != null) {
-            rocketPiecesCollectedText.text = rocketPiecesCollected + " / " + rocketPiecesRequired;
+            rocketPiecesCollectedText.text = string.Format("[{0}/{1}]", rocketPiecesCollected, rocketPiecesRequired);
         }
         else {
             Debug.Log("gameManager.rocketPiecesCollectedText not set!");
         }
 
         if (rocketPiecesCollected == rocketPiecesRequired) {
+            // Update this to trigger the 'final' wave when we get to setting that up...
             youHaveWon();
             //updateGameGoal(-1);
+        }
+    }
+
+    public void UpdateRepairKitsHeld(bool hasPiece = false) {
+        if (hasPiece) {
+            heldRocketPiecesText.text = "1/1";
+        }
+        else {
+            heldRocketPiecesText.text = "0/1";
         }
     }
 

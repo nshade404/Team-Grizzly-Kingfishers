@@ -136,35 +136,33 @@ public class playerController : MonoBehaviour, IDamage
 
         controller.Move(moveDir * speed * Time.deltaTime);
 
-        
-
-        if (IsJumping)
-        {
-            float currentJumpForce = Mathf.Lerp(minJumpForce, maxJumpForce, jumpTimeCounter / jumpTime);
-            playerVel.y = currentJumpForce;
-            jumpTimeCounter += Time.deltaTime;
-
-            //if (Input.GetKey(KeyCode.Space) && jumpTimeCounter < jumpTime)
-            //{
-            //    float currentJumpForce = Mathf.Lerp(minJumpForce, maxJumpForce, jumpTimeCounter / jumpTime);
-            //    playerVel.y = currentJumpForce;
-            //    jumpTimeCounter += Time.deltaTime;
-            //}
-            //else
-            //{
-            //    isJumping = false;
-            //}
-        }
-        else {
-            isJumping = false;
-        }
-
         if (IsJumping && !isJumping && jumpCount < jumps) {
             isJumping = true;
             jumpTimeCounter = 0f;
             jumpCount++;
             aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
         }
+
+        if (IsJumping)
+        {
+            //float currentJumpForce = Mathf.Lerp(minJumpForce, maxJumpForce, jumpTimeCounter / jumpTime);
+            //playerVel.y = currentJumpForce;
+            //jumpTimeCounter += Time.deltaTime;
+
+            if (jumpTimeCounter < jumpTime) {
+                float currentJumpForce = Mathf.Lerp(minJumpForce, maxJumpForce, jumpTimeCounter / jumpTime);
+                playerVel.y = currentJumpForce;
+                jumpTimeCounter += Time.deltaTime;
+            }
+            else {
+                isJumping = false;
+            }
+        }
+        else {
+            isJumping = false;
+        }
+
+        
 
         playerVel.y += gravity * Time.deltaTime;
         controller.Move(playerVel * Time.deltaTime);
@@ -281,6 +279,7 @@ public class playerController : MonoBehaviour, IDamage
                 RemoveRocketPiece();
                 gameManager.instance.rocketPiecesCollected++;
                 gameManager.instance.updateRocketPiecesUI();
+                gameManager.instance.UpdateRepairKitsHeld();
             }
         }
     }
@@ -292,6 +291,7 @@ public class playerController : MonoBehaviour, IDamage
         hasRocketPiece = true;
         rocketPiecesCollected++;
         gameManager.instance.updateRocketPiecesUI();
+        gameManager.instance.UpdateRepairKitsHeld(true);
         Destroy(rocket);
     }
 
@@ -300,8 +300,6 @@ public class playerController : MonoBehaviour, IDamage
         hasRocketPiece = false;
 
         rocketPiecesCollected--;
-
-        gameManager.instance.updateGameGoal(-1);
     }
 
     void PickUpHealth(GameObject healthPickup)
