@@ -17,15 +17,15 @@ public class Bullet : MonoBehaviour {
 
     [SerializeField] Rigidbody rb;
 
-    [SerializeField] float damage;
-    [SerializeField] float speed;
+    public float damage;
+    public float speed;
     [SerializeField] int destroyTime;
     [SerializeField] DamageType type;
 
     [Header("----- Bullet Effects -----")]
-    [SerializeField] float effTime;
-    [SerializeField] float slowPerc;
-    [SerializeField] bool blind;
+    public float effTime;
+    public float slowPerc;
+    public bool blind;
 
     public DamageType GetDamageType() {
         return type;
@@ -46,6 +46,49 @@ public class Bullet : MonoBehaviour {
         if (dmg != null) {
             dmg.takeDamage(damage);
         }
+        type = GetDamageType();
+
+        switch ((int)type)
+        {
+            case 0:
+                effTime = 0; 
+                slowPerc = 0;
+                blind = false;
+                break;
+            case 1:
+                effTime = 2;
+                slowPerc = 0.1f;
+                blind = false;
+                break;
+            case 2: 
+                effTime = 5;
+                slowPerc = 0;
+                blind = false;
+                break;
+            case 3:
+                effTime = 2;
+                slowPerc += .1f;
+                blind = false; 
+                break;
+            case 4:
+                effTime = 1;
+                slowPerc = 1;
+                blind = true;
+                break;
+            case 5:
+                effTime = 1;
+                slowPerc = 1;
+                blind = true;
+                break;
+            case 6:
+                effTime = 3;
+                slowPerc = .2f;
+                blind = true;
+                break;
+
+
+        }
+
 
         Destroy(gameObject);
     }
