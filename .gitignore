@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Grizzly Kingfishers/Assets/Scripts/playerController.txt.meta
+/Grizzly Kingfishers/Assets/Scripts/gameManager.txt
+/Grizzly Kingfishers/Assets/Scripts/gameManager.txt.meta
+/Grizzly Kingfishers/Assets/Scripts/playerController.txt
