@@ -1507,6 +1507,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6066750838674240242, guid: e924cd30295ac304fb902e7211a404ed, type: 3}
+      propertyPath: scrapWallet
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7062455361389064167, guid: e924cd30295ac304fb902e7211a404ed, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

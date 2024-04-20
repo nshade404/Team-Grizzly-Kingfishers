@@ -34,6 +34,7 @@ public class TitleScreenManager : MonoBehaviour
 
     public void OnOptionsClicked() {
         HideAllScreens();
+        OptionScreen.GetComponent<OptionsManager>().OpenOptions();
         OptionScreen.SetActive(true);
     }
 

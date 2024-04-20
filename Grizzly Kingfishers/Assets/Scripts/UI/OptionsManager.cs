@@ -55,11 +55,14 @@ public class OptionsManager : MonoBehaviour
         if (!PlayerPrefs.HasKey(PLAYER_DEFAULT_KEYBINDS)) {
             PlayerPrefs.SetString(PLAYER_DEFAULT_KEYBINDS, pia.SaveBindingOverridesAsJson());
         }
-        // Check if we have any saved rebindigns.... if not, load the defaults.
+        OpenOptions();
+    }
+
+    public void OpenOptions() {
         string reboundKeybinds = PlayerPrefs.GetString(PLAYER_SAVED_REBOUND_KEYBINDS, PlayerPrefs.GetString(PLAYER_DEFAULT_KEYBINDS));
         pia.LoadBindingOverridesFromJson(reboundKeybinds);
-
         DisplayAllKeybinds();
+        optionPendingChange = false;
     }
 
     /// <summary>
@@ -142,7 +145,9 @@ public class OptionsManager : MonoBehaviour
         //pia.LoadBindingOverridesFromJson(PlayerPrefs.GetString(PLAYER_SAVED_REBOUND_KEYBINDS));
 
         // Load any new bindings that are setup.
-        gameManager.instance.player.GetComponent<PlayerInputFunctions>()?.LoadSavedBindings();
+        if(gameManager.instance != null) {
+            gameManager.instance.player.GetComponent<PlayerInputFunctions>().LoadSavedBindings();
+        }
 
         applyButton.interactable = false;
         optionPendingChange = false;
@@ -162,6 +167,11 @@ public class OptionsManager : MonoBehaviour
 
     public void BackButtonYesClicked() {
         ApplyChanges();
+        CloseOptionsScreen();
+    }
+
+    public void BackButtonNoClicked() {
+        BackClickedWindow.SetActive(false);
         CloseOptionsScreen();
     }
 
