@@ -213,9 +213,12 @@ MonoBehaviour:
   maxScrapDrop: 5
   healthDrop: {fileID: 5766254608244252584, guid: d2acd61f3f3a052479763f8860bc9294, type: 3}
   healthDropChance: 10
+  audInsult: []
+  audInsultVol: 0
   disableEnemy: 0
   playerInRange: 0
   target: {fileID: 0}
+  targets: []
 --- !u!33 &7909054126210701571
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -244,7 +247,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1cf3cfed14637cd42a0ad3f801ebdb71, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
