@@ -113,6 +113,8 @@ public class EnemyAI : MonoBehaviour, IDamage {
             } 
         }
         else {
+            if(isAlive == false) { return false; }
+
             playerDir = target.position - headPos.position;
             angleToPlayer = Vector3.Angle(playerDir, transform.forward);
             //Debug.Log(angleToPlayer);
@@ -172,12 +174,13 @@ public class EnemyAI : MonoBehaviour, IDamage {
         {
             StartCoroutine(damageAnimation());
         }
-        else if (health <= 0) 
+        else if (health <= 0 && isAlive) 
         {
+            isAlive = false; // set to false so we no longer run this if gets hit again
+
             agent.speed = 0;
             isShooting = false;
             StartCoroutine(deathAnimation());
-            isAlive = false;
             gameManager.instance.updateGameGoal(-1);
             gameManager.instance.AddScrap(Random.Range(minScrapDrop, maxScrapDrop));
             int chance = Random.Range(0, 101);
@@ -209,6 +212,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
     IEnumerator deathAnimation()
     {
         anim.SetTrigger("Death");
+        agent.speed = 0;
         yield return new WaitForSeconds(5);
         Destroy(gameObject);
     }
