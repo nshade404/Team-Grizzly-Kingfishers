@@ -38,7 +38,7 @@ public class playerController : MonoBehaviour, IDamage
 
 
     [Header("----- Gun Stats -----")]
-    [Range(0, 5)][SerializeField] int shootDamage;
+    [Range(0, 5)][SerializeField] int shootDamage = 0;
     [Range(0, 100)][SerializeField] int shootDist;
     [Range(0, 1)][SerializeField] float shootRate;
     [SerializeField] GameObject selectedBullet;

@@ -35,4 +35,9 @@ public class BaseEffect : ScriptableObject
     {
         return originalFireRate;
     }
+
+    public virtual float Effect_DOT(float originalDMG)
+    {
+        return originalDMG;
+    }
 }

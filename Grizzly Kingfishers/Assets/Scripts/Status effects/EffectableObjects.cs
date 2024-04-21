@@ -78,4 +78,18 @@ public class EffectableObjects : MonoBehaviour
         }
         return workingFireRate;
     }
+
+    public float Effect_DOT(float originalDMG)
+    {
+        float workingDOT = originalDMG;
+        for (int i = 0; i < activeEffects.Count; i++)
+        {
+            if (!activeEffects[i].isActive)
+            {
+                continue;
+            }
+            workingDOT = activeEffects[i].Effect_DOT(workingDOT);
+        }
+        return workingDOT;
+    }
 }
