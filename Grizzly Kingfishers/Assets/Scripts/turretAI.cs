@@ -9,6 +9,8 @@ public class Turrets : MonoBehaviour, IDamage
     [Header("----- Components -----")]
     [SerializeField] Renderer model;
     [SerializeField] GameObject turretHead;
+    [SerializeField] AudioSource audShoot;
+    //[SerializeField] AudioSource audTurn;
 
     [Header("----- Turret Stats -----")]
     [SerializeField] string displayName;
@@ -22,7 +24,12 @@ public class Turrets : MonoBehaviour, IDamage
 
     Color startColor = Color.white;
     bool isShooting;
+    bool isTurning;
     int currentCannon;
+    [SerializeField] AudioClip shootSound;
+    [Range(0f, 1f)][SerializeField] float shootVol;
+//    [SerializeField] AudioClip turnSound;
+  //  [Range(0f, 1f)][SerializeField] float turnVol;
 
     Transform target;
     List<Transform> targets = new List<Transform>(); // Holds our list of targets that came into our attack range.
@@ -62,9 +69,12 @@ public class Turrets : MonoBehaviour, IDamage
             Quaternion rot = Quaternion.LookRotation(new Vector3(targetDir.x, transform.position.y, targetDir.z));
             turretHead.transform.rotation = Quaternion.Lerp(turretHead.transform.rotation, rot, Time.deltaTime * turretRotateSpeed);
 
-            if (!isShooting) {
+            if (!isShooting)
+            {
                 StartCoroutine(FireCannon());
             }
+        //    else
+        //        StartCoroutine(turnSound()); //I started to add an audio for when the turret turns and make it sound like a robot arm turning, but I am putting that off for now.
         }
         else { // Otherwise check if we have more targets that came into range and switch to them
             if(targets.Count > 0) {
@@ -80,12 +90,12 @@ public class Turrets : MonoBehaviour, IDamage
             }
         }
     }
-
+    
     IEnumerator FireCannon()
     {
         isShooting = true;
         Instantiate(bullet, cannonBarrels[currentCannon].position, turretHead.transform.rotation);
-
+        audShoot.PlayOneShot(shootSound, shootVol);
         currentCannon++; // increment to next barrel for next shot,
         if (currentCannon == cannonBarrels.Length) { // If we are at num barrels.length, cycle back to 0
             currentCannon = 0;
