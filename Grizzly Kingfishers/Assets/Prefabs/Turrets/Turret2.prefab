@@ -315,6 +315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 2123457296319385863}
   turretHead: {fileID: 2123457296321646535}
+  displayName: Big Boi
   health: 20
   cannonBarrels:
   - {fileID: 4841950530581807199}
@@ -327,6 +328,7 @@ MonoBehaviour:
   shootRate: 1.52
   scrapCost: 10
   turretRotateSpeed: 4
+  turretIcon: {fileID: 21300000, guid: acdbd91632ebec94697a463fee080f52, type: 3}
 --- !u!135 &2393893275730207788
 SphereCollider:
   m_ObjectHideFlags: 0

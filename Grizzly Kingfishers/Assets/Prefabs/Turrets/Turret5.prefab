@@ -145,6 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 6881419524466432931}
   turretHead: {fileID: 6881419524468426083}
+  displayName: Sand Blast
   health: 20
   cannonBarrels:
   - {fileID: 8743998630236826607}
@@ -152,6 +153,7 @@ MonoBehaviour:
   shootRate: 0
   scrapCost: 15
   turretRotateSpeed: 4
+  turretIcon: {fileID: 21300000, guid: debcd5565baef7f4eb957c2f8e075caa, type: 3}
 --- !u!65 &8318511081054802505
 BoxCollider:
   m_ObjectHideFlags: 0

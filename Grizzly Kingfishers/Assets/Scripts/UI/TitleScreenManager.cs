@@ -7,6 +7,9 @@ public class TitleScreenManager : MonoBehaviour
     [SerializeField] GameObject TitleScreen;
     [SerializeField] GameObject OptionScreen;
     [SerializeField] GameObject CreditScreen;
+    [SerializeField] GameObject LoadingScreen;
+
+    [SerializeField] int secondsForLoadingScreen;
 
     private void Start() {
         ReturnToTitle();
@@ -16,8 +19,13 @@ public class TitleScreenManager : MonoBehaviour
     /// close this level and load the game up.
     /// </summary>
     public void OnPlayClicked() {
-        Debug.Log("OnPlayClicked!");
+        LoadingScreen.SetActive(true);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
     }
+
+    //IEnumerator RunLoadScreen() {
+
+    //}
 
     public void ReturnToTitle(bool fromOptions = false) {
         HideAllScreens();
@@ -26,6 +34,7 @@ public class TitleScreenManager : MonoBehaviour
 
     public void OnOptionsClicked() {
         HideAllScreens();
+        OptionScreen.GetComponent<OptionsManager>().OpenOptions();
         OptionScreen.SetActive(true);
     }
 

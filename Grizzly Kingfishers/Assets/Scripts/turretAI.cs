@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Turrets : MonoBehaviour, IDamage
 {
@@ -12,12 +13,14 @@ public class Turrets : MonoBehaviour, IDamage
     //[SerializeField] AudioSource audTurn;
 
     [Header("----- Turret Stats -----")]
+    [SerializeField] string displayName;
     [Range(0, 50)][SerializeField] float health;
     [SerializeField] Transform[] cannonBarrels;
     [SerializeField] GameObject bullet;
     [Range(0, 5)][SerializeField] float shootRate;
     [SerializeField] int scrapCost;
     [Range(0, 5)][SerializeField] int turretRotateSpeed;
+    public Sprite turretIcon;
 
     Color startColor = Color.white;
     bool isShooting;
@@ -30,6 +33,22 @@ public class Turrets : MonoBehaviour, IDamage
 
     Transform target;
     List<Transform> targets = new List<Transform>(); // Holds our list of targets that came into our attack range.
+
+    public string GetDisplayName() {
+        return displayName;
+    }
+
+    public Bullet GetBulletType() {
+        return bullet.GetComponent<Bullet>();
+    }
+
+    public float GetShootRate() {
+        return shootRate;
+    }
+
+    public int GetRotationSpeed() {
+        return turretRotateSpeed;
+    }
 
     public int GetTurretCost() {
         return scrapCost;

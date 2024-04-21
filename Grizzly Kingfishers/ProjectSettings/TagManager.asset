@@ -13,6 +13,7 @@ TagManager:
   - PlayerBase
   - Enemy
   - Turret
+  - AmmoPickup
   layers:
   - Default
   - TransparentFX
