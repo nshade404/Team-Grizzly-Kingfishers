@@ -33,7 +33,7 @@ public class EffectableObjects : MonoBehaviour
         var newEffect = ScriptableObject.Instantiate(effectTemplate);
 
         //activate effect
-        newEffect.EneableEffect();
+        newEffect.EnableEffect();
         activeEffects.Add(newEffect);
     }
 

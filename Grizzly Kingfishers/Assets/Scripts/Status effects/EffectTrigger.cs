@@ -17,10 +17,10 @@ public class EffectTrigger : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
 
-        var effectable = other.collider.gameObject.GetComponent<EffectableObjects>();
+        var effectable = other.gameObject.GetComponent<EffectableObjects>();
         if (effectable != null)
         {
             effectable.ApplyEffect(Effect);
