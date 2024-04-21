@@ -12,7 +12,6 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] AudioSource aud;
     [SerializeField] AudioSource gunshots;
     [SerializeField] EffectableObjects Effectable;
-
     [Header("----- Player Stats -----")]
     [Range(0, 10)][SerializeField] float health;
     [Range(1, 10)][SerializeField] int maxHealth;
@@ -21,11 +20,22 @@ public class playerController : MonoBehaviour, IDamage
     [Range(1, 3)][SerializeField] int jumps;
     [Range(5, 25)][SerializeField] int jumpSpeed;
     [Range(-15, -35)][SerializeField] int gravity;
+    [SerializeField] int currentAmmo = 0;
+    [SerializeField] int maxAmmo = 30;
+    bool isImmune = false;
+    float immunityDuration = 2.0f;
     public List<GameObject> collectedItems = new List<GameObject>();
     public int healthPickupAmount = 10;
     public int keysCollected = 0;
     public int rocketPiecesCollected = 0;
-    
+    public int ammoPickupAmount = 30;
+    public float jumpForce = 5f;
+    public float maxJumpForce = 10f;
+    public float minJumpForce = 5f;
+    public float jumpTime = 0.5f;
+    private bool isJumping = false;
+    private float jumpTimeCounter = 0f;
+
 
     [Header("----- Gun Stats -----")]
     [Range(0, 5)][SerializeField] int shootDamage;
@@ -34,8 +44,9 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] GameObject selectedBullet;
     [SerializeField] Transform shootPos;
 
+
     [Header("----- Turret Stats -----")]
-    [SerializeField] List<GameObject> turrets;
+    public List<GameObject> turrets;
     public GameObject selectedTurret;
     [SerializeField] GameObject turretBuilder;
     [SerializeField] int turretPlacementDist;
@@ -51,33 +62,43 @@ public class playerController : MonoBehaviour, IDamage
     [Range(0f, 1f)][SerializeField] float deathVol;
     [SerializeField] AudioClip shootSound;
     [Range(0f, 1f)][SerializeField] float shootVol;
-    
+
+
     int jumpCount;
-    Vector3 moveDir;
+    //Vector3 moveDir;
     Vector3 playerVel;
     bool isShooting;
     bool playingSteps;
 
-    public bool IsJumping {
+    public Vector3 MoveDir { get; set; } = Vector3.zero;
+
+    public bool IsJumping
+    {
         get; set;
     }
 
-    public bool IsSprinting {
+    public bool IsSprinting
+    {
         get; set;
     }
 
-    public float Speed {
+    public float Speed
+    {
         get { return speed; }
         set { speed = value; }
     }
     public float GetSprintMod { get { return sprintMod; } }
+
+
 
     // Start is called before the first frame update
     void Start()
     {
         updatePlayerUI();
         selectedTurret = turrets.First();
-        gameManager.instance.costOfTurret(selectedTurret.name, selectedTurret.GetComponent<Turrets>().GetTurretCost()); // Update selected turret on startup.
+        controller = GetComponent<CharacterController>();
+        gameManager.instance.SetSelectedTurretUI(selectedTurret.GetComponent<Turrets>(), 0);
+        //gameManager.instance.costOfTurret(selectedTurret.name, selectedTurret.GetComponent<Turrets>().GetTurretCost()); // Update selected turret on startup.
 
     }
 
@@ -91,26 +112,16 @@ public class playerController : MonoBehaviour, IDamage
 #endif
 
             Movement();
-            selectTurret();
+            //selectTurret();
 
             if (Input.GetButton("Shoot") && !isShooting)
             {
                 StartCoroutine(Shoot());
             }
-            if (Input.GetButtonDown("PlaceTurret"))
-            {
-                int turretCost = selectedTurret.GetComponent<Turrets>().GetTurretCost();
-                if(selectedTurret.GetComponent<Turrets>().GetTurretCost() <= gameManager.instance.scrapWallet) {
-                    RaycastHit hit;
-                    if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, turretPlacementDist)) {
-                        Vector3 placeOnGround = new Vector3(hit.point.x, 0, hit.point.z);
-                        Instantiate(turretBuilder, placeOnGround, transform.rotation);
-                        gameManager.instance.RemoveScrap(selectedTurret.GetComponent<Turrets>().GetTurretCost());
-                    }
-                } else {
-                    // gamemanager.instance.insufficentfunds call
-                }
-            }
+            //if (Input.GetButtonDown("PlaceTurret"))
+            //{
+            //    PlaceTurret();
+            //}
         }
     }
 
@@ -123,20 +134,44 @@ public class playerController : MonoBehaviour, IDamage
         }
 
         // 1st person camera controls
-        moveDir = Input.GetAxis("Horizontal") * transform.right
-                + Input.GetAxis("Vertical") * transform.forward;
+        Vector3 moveDir;
+        //moveDir = new Vector3(MoveDir.x * transform.right, 0, MoveDir.z * transform.forward);
+        //moveDir = Input.GetAxis("Horizontal") * transform.right
+        //        + Input.GetAxis("Vertical") * transform.forward;
+        moveDir = MoveDir.x * transform.right
+                + MoveDir.z * transform.forward;
 
-        controller.Move(moveDir * Effectable.Effect_Speed(speed) * Time.deltaTime);
+        if(Effectable != null) {
+            controller.Move(moveDir * Effectable.Effect_Speed(speed) * Time.deltaTime);
+        }
+        else {
+            controller.Move(moveDir * speed * Time.deltaTime);
+        }
 
-        if (IsJumping && jumpCount < jumps)
-        //if (Input.GetButtonDown("Jump") && jumpCount < jumps)
-        {
-            playerVel.y = jumpSpeed;
+        if (IsJumping && !isJumping && jumpCount < jumps) {
+            isJumping = true;
+            jumpTimeCounter = 0f;
             jumpCount++;
             aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
         }
 
-        // Gravity
+        if (IsJumping)
+        {
+            if (jumpTimeCounter < jumpTime) {
+                float currentJumpForce = Mathf.Lerp(minJumpForce, maxJumpForce, jumpTimeCounter / jumpTime);
+                playerVel.y = currentJumpForce;
+                jumpTimeCounter += Time.deltaTime;
+            }
+            else {
+                isJumping = false;
+            }
+        }
+        else {
+            isJumping = false;
+        }
+
+        
+
         playerVel.y += gravity * Time.deltaTime;
         controller.Move(playerVel * Time.deltaTime);
 
@@ -145,6 +180,8 @@ public class playerController : MonoBehaviour, IDamage
             StartCoroutine(playSteps());
         }
     }
+
+
 
     IEnumerator playSteps()
     {
@@ -168,22 +205,52 @@ public class playerController : MonoBehaviour, IDamage
 
         Instantiate(selectedBullet, shootPos.position, transform.rotation);
         gunshots.PlayOneShot(shootSound, shootVol);
-        yield return new WaitForSeconds(Effectable.Effect_Blind(shootRate));
+        if(Effectable != null) {
+            yield return new WaitForSeconds(Effectable.Effect_Blind(shootRate));
+        }
+        else {
+            yield return new WaitForSeconds(shootRate);
+        }
+        
         isShooting = false;
+
+        if (currentAmmo > 0) 
+        {
+            isShooting = true;
+            Instantiate(selectedBullet, shootPos.position, transform.rotation);
+            currentAmmo--; 
+            yield return new WaitForSeconds(shootRate);
+            isShooting = false;
+        }
+        else
+        {
+            
+            Debug.Log("Out of ammo!");
+        }
     }
 
     public void takeDamage(float amount)
     {
-        health -= amount;
-        aud.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
-        StartCoroutine(flashDamageScreen());
-        updatePlayerUI();
-
-        if (health <= 0)
+        if (!isImmune)
         {
-            aud.PlayOneShot(deathSound, deathVol);
-            gameManager.instance.youHaveLost();
+            health -= amount;
+            aud.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
+            StartCoroutine(flashDamageScreen());
+            updatePlayerUI();
+
+            if (health <= 0)
+            {
+                gameManager.instance.youHaveLost();
+            }
+
+            StartCoroutine(ApplyImmunity());
         }
+    }
+    IEnumerator ApplyImmunity()
+    {
+        isImmune = true;
+        yield return new WaitForSeconds(immunityDuration);
+        isImmune = false;
     }
 
     IEnumerator flashDamageScreen()
@@ -206,46 +273,54 @@ public class playerController : MonoBehaviour, IDamage
         {
             PickUpHealth(other.gameObject);
         }
+        
+        else if (other.CompareTag("AmmoPickup"))
+        {
+            PickupAmmo(other.gameObject);
+        }
+
         else if (other.CompareTag("Key"))
         {
             PickUpKey(other.gameObject);
         }
         else if (other.CompareTag("RocketPiece"))
         {
-            
+
             if (!hasRocketPiece)
             {
                 PickUpRocket(other.gameObject);
-               
+
             }
         }
-        else if (other.CompareTag("PlayerBase")) 
+        else if (other.CompareTag("PlayerBase"))
         {
-            
+
             if (hasRocketPiece)
             {
                 RemoveRocketPiece();
                 gameManager.instance.rocketPiecesCollected++;
                 gameManager.instance.updateRocketPiecesUI();
+                gameManager.instance.UpdateRepairKitsHeld();
             }
         }
     }
 
+
+
     void PickUpRocket(GameObject rocket)
     {
-        hasRocketPiece = true; 
+        hasRocketPiece = true;
         rocketPiecesCollected++;
         gameManager.instance.updateRocketPiecesUI();
+        gameManager.instance.UpdateRepairKitsHeld(true);
         Destroy(rocket);
     }
 
     void RemoveRocketPiece()
     {
-        hasRocketPiece = false; 
-       
+        hasRocketPiece = false;
+
         rocketPiecesCollected--;
-       
-        gameManager.instance.updateGameGoal(-1);
     }
 
     void PickUpHealth(GameObject healthPickup)
@@ -261,6 +336,16 @@ public class playerController : MonoBehaviour, IDamage
         updatePlayerUI();
     }
 
+    void PickupAmmo(GameObject ammo)
+    {
+        currentAmmo += ammoPickupAmount;
+        if ( currentAmmo > maxAmmo)
+        {
+            currentAmmo = maxAmmo;
+        }
+        Destroy(ammo);
+    }
+
     void PickUpKey(GameObject keyPickup)
     {
         keysCollected++;
@@ -269,36 +354,52 @@ public class playerController : MonoBehaviour, IDamage
     }
 
     public bool HasKey()
-    {  return keysCollected > 0; }
+    { return keysCollected > 0; }
 
-    
+
 
     public bool HasRocketPiece()
-    { 
+    {
         return rocketPiecesCollected > 0;
     }
 
-    public void selectTurret()
+
+
+    public void selectTurret(int direction)
     {
-        float mouseWheelInput = Input.GetAxis("Mouse ScrollWheel");
-        if (mouseWheelInput != 0)
-        {
+        if(direction != 0) {
             int currentIndex = turrets.IndexOf(selectedTurret);
-            currentIndex += (int)Mathf.Sign(mouseWheelInput);
-            if (currentIndex < 0)
-            {
+            currentIndex += (int)Mathf.Sign(direction);
+            if (currentIndex < 0) {
                 currentIndex = turrets.Count - 1;
             }
-            else if (currentIndex >= turrets.Count)
-            {
+            else if (currentIndex >= turrets.Count) {
                 currentIndex = 0;
             }
-            selectedTurret = turrets[currentIndex];
-
-            int turretCost = selectedTurret.GetComponent<Turrets>().GetTurretCost();
-            gameManager.instance.costOfTurret(selectedTurret.name, turretCost);
+            SetSelectedTurret(currentIndex);
         }
     }
+
+    public void SetSelectedTurret(int index) {
+        selectedTurret = turrets[index];
+        gameManager.instance.SetSelectedTurretUI(selectedTurret.GetComponent<Turrets>(), index);
+    }
+
+    public void PlaceTurret() {
+        int turretCost = selectedTurret.GetComponent<Turrets>().GetTurretCost();
+        if (selectedTurret.GetComponent<Turrets>().GetTurretCost() <= gameManager.instance.scrapWallet) {
+            RaycastHit hit;
+            if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, turretPlacementDist)) {
+                Vector3 placeOnGround = new Vector3(hit.point.x, 0, hit.point.z);
+                Instantiate(turretBuilder, placeOnGround, transform.rotation);
+                gameManager.instance.RemoveScrap(selectedTurret.GetComponent<Turrets>().GetTurretCost());
+            }
+        }
+        else {
+            // gamemanager.instance.insufficentfunds call
+        }
+    }
+
 }
 
 

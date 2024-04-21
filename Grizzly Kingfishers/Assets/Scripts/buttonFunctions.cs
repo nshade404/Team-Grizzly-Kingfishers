@@ -28,6 +28,7 @@ public class buttonFunctions : MonoBehaviour
     }
 
     public void showOptions() {
+        gameManager.instance.optionScreen.GetComponent<OptionsManager>().OpenOptions();
         gameManager.instance.optionScreen.SetActive(true);
     }
     
