@@ -42110,7 +42110,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8493498545602200069, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
   m_PrefabInstance: {fileID: 1684735002}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1285483455}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ccdf225df6a07f42af76391061cb362, type: 3}
@@ -46123,6 +46123,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: df2a0aea3cdc2bb49a0c359b09b0abdd, type: 3}
   m_PrefabInstance: {fileID: 1284782839}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1285483455 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3725882325504470215, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
+  m_PrefabInstance: {fileID: 1684735002}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1285483463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285483455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08475e97bc50a2648863de0dec62d451, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1286431436
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -59648,6 +59665,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8493498545602200069, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
+      propertyPath: Effectable
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8493498545602200069, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
       propertyPath: currentAmmo
       value: 30
       objectReference: {fileID: 0}
@@ -59666,7 +59687,7 @@ PrefabInstance:
     - target: {fileID: 8493498545602200069, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
       propertyPath: selectedBullet
       value: 
-      objectReference: {fileID: 9120100399803384341, guid: c393090a1ac6323478c2c8b02119a980, type: 3}
+      objectReference: {fileID: 5678973518723492023, guid: 1429b356f1b2ec342ada9039efffd663, type: 3}
     - target: {fileID: 8493498545602200069, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
       propertyPath: ammoPickupAmount
       value: 30
@@ -59674,7 +59695,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3725882325504470215, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 1285483463}
   m_SourcePrefab: {fileID: 100100000, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
 --- !u!1 &1685428237 stripped
 GameObject:

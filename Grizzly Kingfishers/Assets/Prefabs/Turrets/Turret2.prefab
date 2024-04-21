@@ -281,6 +281,9 @@ PrefabInstance:
       addedObject: {fileID: 1825482815497160584}
     - targetCorrespondingSourceObject: {fileID: 100006, guid: 36215181e56dda44b8bb066f0715cfd9, type: 3}
       insertIndex: -1
+      addedObject: {fileID: -1740669720012267555}
+    - targetCorrespondingSourceObject: {fileID: 100006, guid: 36215181e56dda44b8bb066f0715cfd9, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 2393893275730207788}
     - targetCorrespondingSourceObject: {fileID: 100006, guid: 36215181e56dda44b8bb066f0715cfd9, type: 3}
       insertIndex: -1
@@ -329,6 +332,18 @@ MonoBehaviour:
   scrapCost: 10
   turretRotateSpeed: 4
   turretIcon: {fileID: 21300000, guid: acdbd91632ebec94697a463fee080f52, type: 3}
+--- !u!114 &-1740669720012267555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2123457296321646531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08475e97bc50a2648863de0dec62d451, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &2393893275730207788
 SphereCollider:
   m_ObjectHideFlags: 0
