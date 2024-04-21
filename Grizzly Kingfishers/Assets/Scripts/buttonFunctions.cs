@@ -18,6 +18,9 @@ public class buttonFunctions : MonoBehaviour
 
     public void quit()
     {
+        gameManager.instance.stateUnpaused();
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
         gameManager.instance.loadingScreen.SetActive(true);
         SceneManager.LoadScene(0);
         //#if UNITY_EDITOR

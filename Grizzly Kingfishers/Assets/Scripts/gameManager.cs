@@ -68,7 +68,7 @@ public class gameManager : MonoBehaviour {
         timeScaleOrig = Time.timeScale;
         StartCoroutine(startingPopup());
         playerBase = GameObject.FindWithTag("PlayerBase");
-
+        //stateUnpaused();
         updateRocketPiecesUI();
         UpdateRepairKitsHeld();
         UpdateScrapUI();
