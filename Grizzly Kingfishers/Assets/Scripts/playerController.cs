@@ -11,6 +11,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] CharacterController controller;
     [SerializeField] AudioSource aud;
     [SerializeField] AudioSource gunshots;
+    [SerializeField] EffectableObjects Effectable;
 
     [Header("----- Player Stats -----")]
     [Range(0, 10)][SerializeField] float health;
@@ -125,7 +126,7 @@ public class playerController : MonoBehaviour, IDamage
         moveDir = Input.GetAxis("Horizontal") * transform.right
                 + Input.GetAxis("Vertical") * transform.forward;
 
-        controller.Move(moveDir * speed * Time.deltaTime);
+        controller.Move(moveDir * Effectable.Effect_Speed(speed) * Time.deltaTime);
 
         if (IsJumping && jumpCount < jumps)
         //if (Input.GetButtonDown("Jump") && jumpCount < jumps)
@@ -167,7 +168,7 @@ public class playerController : MonoBehaviour, IDamage
 
         Instantiate(selectedBullet, shootPos.position, transform.rotation);
         gunshots.PlayOneShot(shootSound, shootVol);
-        yield return new WaitForSeconds(shootRate);
+        yield return new WaitForSeconds(Effectable.Effect_Blind(shootRate));
         isShooting = false;
     }
 

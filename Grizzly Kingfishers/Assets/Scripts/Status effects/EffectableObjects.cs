@@ -26,7 +26,7 @@ public class EffectableObjects : MonoBehaviour
         return originalJumps;
     }
 
-    float Effect_Blind(float originalFireRate)
+    public float Effect_Blind(float originalFireRate)
     {
         return originalFireRate;
     }
