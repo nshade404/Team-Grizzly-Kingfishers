@@ -60,7 +60,7 @@ public class EffectableObjects : MonoBehaviour
             {
                 continue;
             }
-            workingJumps = activeEffects[i].Effect_Speed(workingJumps);
+            workingJumps = activeEffects[i].Effect_Jumps(workingJumps);
         }
         return workingJumps;
     }
@@ -74,7 +74,7 @@ public class EffectableObjects : MonoBehaviour
             {
                 continue;
             }
-            workingFireRate = activeEffects[i].Effect_Speed(workingFireRate);
+            workingFireRate = activeEffects[i].Effect_Blind(workingFireRate);
         }
         return workingFireRate;
     }

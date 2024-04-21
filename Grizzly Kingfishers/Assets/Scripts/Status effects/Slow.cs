@@ -5,19 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Effects/Slow", fileName = "Slow")]
 public class Slow : BaseEffect
 {
-    
+    [SerializeField] float modifiedSpeed = 0.8f;
     public override float Effect_Speed(float originalSpeed)
     {
-        return originalSpeed;
-    }
-
-    public override float Effect_Jumps(float originalJumps)
-    {
-        return originalJumps;
-    }
-
-    public override float Effect_Blind(float originalFireRate)
-    {
-        return originalFireRate;
+        return originalSpeed * modifiedSpeed;
     }
 }

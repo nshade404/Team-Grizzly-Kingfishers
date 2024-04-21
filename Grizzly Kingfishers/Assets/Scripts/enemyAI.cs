@@ -8,6 +8,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
     [Header("----- Components -----")]
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] EffectableObjects Effectable;
 
     [Header("----- Enemy Stats -----")]
     [Range(0, 10)][SerializeField] float health;
@@ -155,7 +156,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
                 Instantiate(bullet, shootPos.position, rot);
             }
         }
-        yield return new WaitForSeconds(shootRate);
+        yield return new WaitForSeconds(Effectable.Effect_Blind(shootRate));
         isShooting = false;
     }
 
