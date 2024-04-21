@@ -56,6 +56,10 @@ PrefabInstance:
       propertyPath: speed
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 1477631816035320912, guid: e668838dd27c01f43bbf3227e71d1bde, type: 3}
+      propertyPath: damage
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3158101410210616644, guid: e668838dd27c01f43bbf3227e71d1bde, type: 3}
       propertyPath: m_Name
       value: Bullet_Fire Variant
@@ -67,5 +71,26 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3158101410210616644, guid: e668838dd27c01f43bbf3227e71d1bde, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 1798757137158836036}
   m_SourcePrefab: {fileID: 100100000, guid: e668838dd27c01f43bbf3227e71d1bde, type: 3}
+--- !u!1 &2100543313708685010 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3158101410210616644, guid: e668838dd27c01f43bbf3227e71d1bde, type: 3}
+  m_PrefabInstance: {fileID: 3960200656344449942}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1798757137158836036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100543313708685010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a11120e805b0df745b8e46378f387d5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Effect: {fileID: 11400000, guid: c3cb4ce56d967ae43be7a2ef645c8457, type: 2}

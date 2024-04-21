@@ -8,8 +8,9 @@ public class BaseEffect : ScriptableObject
     float DurationRemaining = 0f;
     bool hasDOT = false;
     public bool isActive => DurationRemaining > 0f;
+    private float dotTimer = 1f;
 
-    public virtual void EneableEffect()
+    public virtual void EnableEffect()
     {
         DurationRemaining = Duration;
     }
@@ -19,10 +20,10 @@ public class BaseEffect : ScriptableObject
         if (DurationRemaining > 0f) 
         {
             DurationRemaining -= Time.deltaTime;
-            if (hasDOT)
-            {
+        }
+        if(hasDOT) 
+        {
 
-            }
         }
     }
 

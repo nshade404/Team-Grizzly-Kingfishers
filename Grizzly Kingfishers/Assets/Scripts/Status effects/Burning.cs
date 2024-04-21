@@ -5,24 +5,22 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Effects/Burning", fileName = "Burning")]
 public class Burning : BaseEffect
 {
-
-    public override float Effect_Speed(float originalSpeed)
-    {
-        return originalSpeed;
-    }
-
-    public override float Effect_Jumps(float originalJumps)
-    {
-        return originalJumps;
-    }
-
-    public override float Effect_Blind(float originalFireRate)
-    {
-        return originalFireRate;
-    }
+    [SerializeField] float modifiedDOT;
+    [SerializeField] bool isDOT = true;
+    float dotTimer = 1f;
 
     public override float Effect_DOT(float originalDMG)
     {
-        return originalDMG;
+        if (isDOT)
+        {
+            dotTimer -= Time.deltaTime;
+            if (dotTimer <= 0f)
+            {
+
+                modifiedDOT = originalDMG / Duration;
+                dotTimer = 1f; // Reset timer for next DOT application
+            }
+        }
+        return modifiedDOT;
     }
 }
