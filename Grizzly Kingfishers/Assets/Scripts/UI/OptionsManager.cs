@@ -181,6 +181,7 @@ public class OptionsManager : MonoBehaviour
 
     public void BackButtonYesClicked() {
         ApplyChanges();
+        pia.Player.Enable();
         CloseOptionsScreen();
     }
 

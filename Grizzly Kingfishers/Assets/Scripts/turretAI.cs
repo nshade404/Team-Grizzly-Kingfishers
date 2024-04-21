@@ -52,6 +52,7 @@ public class Turrets : MonoBehaviour, IDamage
     {
         currentCannon = 0;
         startColor = model.material.color;
+        Effectable = GetComponent<EffectableObjects>();
     }
 
     // Update is called once per frame
@@ -92,6 +93,7 @@ public class Turrets : MonoBehaviour, IDamage
         }
 
         yield return new WaitForSeconds(Effectable.Effect_Blind(shootRate));
+        //yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
 
