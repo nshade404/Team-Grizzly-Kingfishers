@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Effects/Poison", fileName = "Poison")]
 public class Poison : BaseEffect
 {
+    [SerializeField] float modifiedDOT = .33f;
 
     public override float Effect_Speed(float originalSpeed)
     {

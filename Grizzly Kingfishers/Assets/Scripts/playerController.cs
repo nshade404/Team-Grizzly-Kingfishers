@@ -125,6 +125,11 @@ public class playerController : MonoBehaviour, IDamage
         }
     }
 
+    void Awake()
+    {
+        Effectable = GetComponent<EffectableObjects>();
+    }
+
     void Movement()
     {
         if (controller.isGrounded)

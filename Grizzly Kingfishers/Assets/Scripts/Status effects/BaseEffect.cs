@@ -6,6 +6,7 @@ public class BaseEffect : ScriptableObject
 {
     [SerializeField] protected float Duration = 0f;
     float DurationRemaining = 0f;
+    bool hasDOT = false;
     public bool isActive => DurationRemaining > 0f;
 
     public virtual void EneableEffect()
@@ -18,13 +19,13 @@ public class BaseEffect : ScriptableObject
         if (DurationRemaining > 0f) 
         {
             DurationRemaining -= Time.deltaTime;
+            if (hasDOT)
+            {
+
+            }
         }
     }
 
-    public virtual void TickDOT()
-    {
-
-    }
 
     public virtual float Effect_Speed(float originalSpeed)
     {
