@@ -9,6 +9,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] EffectableObjects Effectable;
+    [SerializeField] Animator anim;
 
     [Header("----- Enemy Stats -----")]
     [Range(0, 10)][SerializeField] float health;
@@ -165,6 +166,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
         health -= amount;
         //agent.SetDestination(gameManager.instance.player.transform.position);
         StartCoroutine(flashRed());
+        anim.SetTrigger("Damage");
         if (health <= 0) {
             gameManager.instance.updateGameGoal(-1);
             gameManager.instance.AddScrap(Random.Range(minScrapDrop, maxScrapDrop));
