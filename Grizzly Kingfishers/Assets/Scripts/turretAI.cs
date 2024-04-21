@@ -92,8 +92,8 @@ public class Turrets : MonoBehaviour, IDamage
             currentCannon = 0;
         }
 
-        yield return new WaitForSeconds(Effectable.Effect_Blind(shootRate));
-        //yield return new WaitForSeconds(shootRate);
+        //yield return new WaitForSeconds(Effectable.Effect_Blind(shootRate));
+        yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
 
