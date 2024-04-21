@@ -166,15 +166,19 @@ public class EnemyAI : MonoBehaviour, IDamage {
         health -= amount;
         //agent.SetDestination(gameManager.instance.player.transform.position);
         StartCoroutine(flashRed());
-        StartCoroutine(damageAnimation());
-        
-        if (health <= 0) {
+        if (health > 0)
+        {
+            StartCoroutine(damageAnimation());
+        }
+        else if (health <= 0) 
+        {
             isShooting = false;
             agent.speed = 0;
             gameManager.instance.updateGameGoal(-1);
             gameManager.instance.AddScrap(Random.Range(minScrapDrop, maxScrapDrop));
             int chance = Random.Range(0, 101);
-            if(chance <= healthDropChance) {
+            if(chance <= healthDropChance)
+            {
                 Instantiate(healthDrop, transform.position, transform.rotation);
             }
             StartCoroutine(deathAnimation());
