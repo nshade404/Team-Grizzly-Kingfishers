@@ -203,8 +203,8 @@ public class playerController : MonoBehaviour, IDamage
     {
         isShooting = true;
 
-        Instantiate(selectedBullet, shootPos.position, transform.rotation);
-        gunshots.PlayOneShot(shootSound, shootVol);
+        //Instantiate(selectedBullet, shootPos.position, transform.rotation);
+        //gunshots.PlayOneShot(shootSound, shootVol);
         if(Effectable != null) {
             yield return new WaitForSeconds(Effectable.Effect_Blind(shootRate));
         }

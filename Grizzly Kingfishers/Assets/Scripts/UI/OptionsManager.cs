@@ -51,16 +51,30 @@ public class OptionsManager : MonoBehaviour
         bgmSlider.value = (int)(PlayerPrefs.GetFloat(BGM_VALUE, 1) * VOLUME_MAX);
         sfxSlider.value = (int)(PlayerPrefs.GetFloat(SFX_VALUE, 1) * VOLUME_MAX);
 
-        pia = new PlayerInputActions();
-        if (!PlayerPrefs.HasKey(PLAYER_DEFAULT_KEYBINDS)) {
-            PlayerPrefs.SetString(PLAYER_DEFAULT_KEYBINDS, pia.SaveBindingOverridesAsJson());
-        }
+        //pia = new PlayerInputActions();
+        //if (!PlayerPrefs.HasKey(PLAYER_DEFAULT_KEYBINDS)) {
+        //    PlayerPrefs.SetString(PLAYER_DEFAULT_KEYBINDS, pia.SaveBindingOverridesAsJson());
+        //}
         OpenOptions();
     }
 
     public void OpenOptions() {
+        //string reboundKeybinds = PlayerPrefs.GetString(PLAYER_SAVED_REBOUND_KEYBINDS, PlayerPrefs.GetString(PLAYER_DEFAULT_KEYBINDS));
+        //pia.LoadBindingOverridesFromJson(reboundKeybinds);
+
+        if(pia == null) {
+            pia = new PlayerInputActions();
+        }
         string reboundKeybinds = PlayerPrefs.GetString(PLAYER_SAVED_REBOUND_KEYBINDS, PlayerPrefs.GetString(PLAYER_DEFAULT_KEYBINDS));
         pia.LoadBindingOverridesFromJson(reboundKeybinds);
+
+        //if (gameManager.instance != null) {
+        //    gameManager.instance.player.GetComponent<PlayerInputFunctions>().LoadSavedBindings();
+        //}
+        //else {
+            
+        //}
+
         DisplayAllKeybinds();
         optionPendingChange = false;
     }
