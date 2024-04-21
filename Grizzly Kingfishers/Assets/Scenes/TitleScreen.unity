@@ -1013,7 +1013,7 @@ MonoBehaviour:
       - m_Target: {fileID: 2051045863}
         m_TargetAssemblyTypeName: TitleScreenManager, Assembly-CSharp
         m_MethodName: ReturnToTitle
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2366,7 +2366,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4327309034841410868, guid: 884019ffa83f3e44ab291ef1aa5dd794, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 124.999664
+      value: 125.000015
       objectReference: {fileID: 0}
     - target: {fileID: 6012838445507806403, guid: 884019ffa83f3e44ab291ef1aa5dd794, type: 3}
       propertyPath: m_Pivot.x
