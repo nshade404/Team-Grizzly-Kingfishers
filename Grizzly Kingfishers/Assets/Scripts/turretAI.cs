@@ -9,7 +9,7 @@ public class Turrets : MonoBehaviour, IDamage
     [Header("----- Components -----")]
     [SerializeField] Renderer model;
     [SerializeField] GameObject turretHead;
-
+    [SerializeField] EffectableObjects Effectable;
     [Header("----- Turret Stats -----")]
     [SerializeField] string displayName;
     [Range(0, 50)][SerializeField] float health;
@@ -91,7 +91,7 @@ public class Turrets : MonoBehaviour, IDamage
             currentCannon = 0;
         }
 
-        yield return new WaitForSeconds(shootRate);
+        yield return new WaitForSeconds(Effectable.Effect_Blind(shootRate));
         isShooting = false;
     }
 

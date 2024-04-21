@@ -21,6 +21,11 @@ public class BaseEffect : ScriptableObject
         }
     }
 
+    public virtual void TickDOT()
+    {
+
+    }
+
     public virtual float Effect_Speed(float originalSpeed)
     {
         return originalSpeed;
