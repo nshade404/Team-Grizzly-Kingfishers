@@ -76,6 +76,7 @@ GameObject:
   - component: {fileID: 7868265011649633409}
   - component: {fileID: 1708670849906851377}
   - component: {fileID: -3563734931954008179}
+  - component: {fileID: 5603207018323567512}
   m_Layer: 0
   m_Name: EnemyBase
   m_TagString: Enemy
@@ -116,7 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 8517611945298008168}
   agent: {fileID: 7868265011649633409}
-  Effectable: {fileID: 0}
+  Effectable: {fileID: 5603207018323567512}
   anim: {fileID: -3563734931954008179}
   health: 3
   speed: 3
@@ -230,6 +231,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5603207018323567512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7421984340597790670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08475e97bc50a2648863de0dec62d451, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7491663051255774310
 GameObject:
   m_ObjectHideFlags: 0

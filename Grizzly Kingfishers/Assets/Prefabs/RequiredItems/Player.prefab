@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6506310894502256878}
   - component: {fileID: 8493498545602200069}
+  - component: {fileID: 5148887818904458957}
   - component: {fileID: 4348775018340891747}
   - component: {fileID: 2463141448153731826}
   - component: {fileID: 4254229773635392086}
@@ -56,11 +57,11 @@ MonoBehaviour:
   controller: {fileID: 0}
   aud: {fileID: 5451696468100691940}
   gunshots: {fileID: 0}
-  Effectable: {fileID: 0}
+  Effectable: {fileID: 5148887818904458957}
   health: 10
   maxHealth: 10
   speed: 4
-  sprintMod: 2
+  sprintMod: 3
   jumps: 1
   jumpSpeed: 9
   gravity: -25
@@ -71,11 +72,11 @@ MonoBehaviour:
   keysCollected: 0
   rocketPiecesCollected: 0
   ammoPickupAmount: 30
-  jumpForce: 5
-  maxJumpForce: 10
+  jumpForce: 10
+  maxJumpForce: 6
   minJumpForce: 5
   jumpTime: 0.5
-  shootDamage: 1
+  shootDamage: 0
   shootDist: 50
   shootRate: 0.25
   selectedBullet: {fileID: 5053413113548928227, guid: 9775495c50eaa9442bcf323a0853604b, type: 3}
@@ -118,6 +119,18 @@ MonoBehaviour:
   deathVol: 0
   shootSound: {fileID: 0}
   shootVol: 0
+--- !u!114 &5148887818904458957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3725882325504470215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08475e97bc50a2648863de0dec62d451, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!33 &4348775018340891747
 MeshFilter:
   m_ObjectHideFlags: 0
