@@ -166,16 +166,18 @@ public class EnemyAI : MonoBehaviour, IDamage {
         health -= amount;
         //agent.SetDestination(gameManager.instance.player.transform.position);
         StartCoroutine(flashRed());
-        anim.SetTrigger("Damage");
+        StartCoroutine(damageAnimation());
+        
         if (health <= 0) {
+            isShooting = false;
+            agent.speed = 0;
             gameManager.instance.updateGameGoal(-1);
             gameManager.instance.AddScrap(Random.Range(minScrapDrop, maxScrapDrop));
             int chance = Random.Range(0, 101);
             if(chance <= healthDropChance) {
                 Instantiate(healthDrop, transform.position, transform.rotation);
             }
-
-            Destroy(gameObject);
+            StartCoroutine(deathAnimation());
         }
     }
 
@@ -186,6 +188,23 @@ public class EnemyAI : MonoBehaviour, IDamage {
         model.material.color = startColor;
     }
 
+    IEnumerator damageAnimation()
+    {
+
+        agent.speed = speed;
+        int speedSave = speed;
+        agent.speed = 0;
+        anim.SetTrigger("Damage");
+        yield return new WaitForSeconds(1);
+        agent.speed = speedSave;
+    }
+
+    IEnumerator deathAnimation()
+    {
+        anim.SetTrigger("Death");
+        yield return new WaitForSeconds(5);
+        Destroy(gameObject);
+    }
     /// <summary>
     /// I realize this is not the most efficient way, but we are having fun with this....
     /// please dont judge.... -Josh
