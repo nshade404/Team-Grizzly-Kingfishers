@@ -41,6 +41,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
 
     Color startColor = Color.white;
     bool isShooting;
+    bool isAlive;
     bool destinationChosen; // Tracks if we are in wander mode or not.
     float originalStoppingDistance; // used to capture our defined stopping distance on nav mesh agent.
     Vector3 startingPos; // captures our starting position for our wandering functionality.
@@ -69,6 +70,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
         startingPos = transform.position;
 
         agent.SetDestination(gameManager.instance.playerBase.transform.position);
+        isAlive = true;
     }
 
     // Update is called once per frame
@@ -148,7 +150,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
 
     IEnumerator Shoot() {
         isShooting = true;
-        if(bullet != null) {
+       if(bullet != null) {
             Bullet.DamageType type = bullet.GetComponent<Bullet>().GetDamageType();
             if (bullet.GetComponent<Bullet>().GetDamageType() == Bullet.DamageType.visciousMockery) {
                 FireInsult();
@@ -157,7 +159,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
                 Instantiate(bullet, shootPos.position, rot);
             }
         }
-        yield return new WaitForSeconds(Effectable.Effect_Blind(shootRate));
+        yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
 
@@ -172,8 +174,10 @@ public class EnemyAI : MonoBehaviour, IDamage {
         }
         else if (health <= 0) 
         {
-            isShooting = false;
             agent.speed = 0;
+            isShooting = false;
+            StartCoroutine(deathAnimation());
+            isAlive = false;
             gameManager.instance.updateGameGoal(-1);
             gameManager.instance.AddScrap(Random.Range(minScrapDrop, maxScrapDrop));
             int chance = Random.Range(0, 101);
@@ -181,7 +185,6 @@ public class EnemyAI : MonoBehaviour, IDamage {
             {
                 Instantiate(healthDrop, transform.position, transform.rotation);
             }
-            StartCoroutine(deathAnimation());
         }
     }
 
