@@ -159,9 +159,9 @@ public class OptionsManager : MonoBehaviour
         //pia.LoadBindingOverridesFromJson(PlayerPrefs.GetString(PLAYER_SAVED_REBOUND_KEYBINDS));
 
         // Load any new bindings that are setup.
-        if(gameManager.instance != null) {
-            gameManager.instance.player.GetComponent<PlayerInputFunctions>().LoadSavedBindings();
-        }
+        //if(gameManager.instance != null) {
+        //    gameManager.instance.player.GetComponent<PlayerInputFunctions>().LoadSavedBindings();
+        //}
 
         applyButton.interactable = false;
         optionPendingChange = false;
@@ -220,6 +220,7 @@ public class OptionsManager : MonoBehaviour
         if(action != null) {
             action.PerformInteractiveRebinding(keybindItem.bindingIndex)
                 .WithCancelingThrough("<Keyboard>/escape")
+                .WithControlsExcluding("Mouse")
                 .OnCancel(
                     operation => {
                         IsKeybindingWindow.SetActive(false);
