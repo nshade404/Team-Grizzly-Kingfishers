@@ -342,7 +342,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &2050692539568227298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,5 +375,4 @@ MonoBehaviour:
   selectedTurret: {fileID: 0}
   timer: 5
   progress: {fileID: 5352376554505988866}
-  buildingFrame: {fileID: 8631678073023569363}
   isBuilding: 0

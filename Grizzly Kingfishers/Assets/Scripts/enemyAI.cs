@@ -10,6 +10,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
     [SerializeField] NavMeshAgent agent;
     [SerializeField] EffectableObjects Effectable;
     [SerializeField] Animator anim;
+    [SerializeField] AudioSource aud;
 
     [Header("----- Enemy Stats -----")]
     [Range(0, 10)][SerializeField] float health;
@@ -52,6 +53,8 @@ public class EnemyAI : MonoBehaviour, IDamage {
 
     public Transform target;
     public List<Transform> targets = new List<Transform>(); // Holds our list of targets that came into our attack range.
+    [SerializeField] AudioClip audShoot;
+    [Range(0, 1)][SerializeField] float audShootVol;
 
     // Start is called before the first frame update
     void Start() {
@@ -159,6 +162,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
             } else { 
                 Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.z));
                 Instantiate(bullet, shootPos.position, rot);
+                aud.PlayOneShot(audShoot, audShootVol);
             }
         }
         yield return new WaitForSeconds(shootRate);

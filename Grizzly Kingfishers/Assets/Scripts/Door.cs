@@ -5,6 +5,9 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     public GameObject keyPickup; // Reference to the key pickup GameObject
+    [SerializeField] AudioSource aud;
+    [SerializeField] AudioClip audOpen;
+    [Range(0, 1)][SerializeField] float audOpenVol;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -28,7 +31,9 @@ public class Door : MonoBehaviour
     private void OpenDoor()
     {
         Debug.Log("Door opened!");
-        Destroy(gameObject);
+        aud.PlayOneShot(audOpen, audOpenVol);
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        //Destroy(gameObject);
     }
 
     private void RemoveKey()

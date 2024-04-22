@@ -10,6 +10,7 @@ public class Turrets : MonoBehaviour, IDamage
     [SerializeField] Renderer model;
     [SerializeField] GameObject turretHead;
     [SerializeField] EffectableObjects Effectable;
+    [SerializeField] AudioSource aud;
     [Header("----- Turret Stats -----")]
     [SerializeField] string displayName;
     [Range(0, 50)][SerializeField] float health;
@@ -26,7 +27,8 @@ public class Turrets : MonoBehaviour, IDamage
 
     Transform target;
     List<Transform> targets = new List<Transform>(); // Holds our list of targets that came into our attack range.
-
+    [SerializeField] AudioClip audShoot;
+    [Range(0, 1)][SerializeField] float audShootVol;
     public string GetDisplayName() {
         return displayName;
     }
@@ -86,7 +88,7 @@ public class Turrets : MonoBehaviour, IDamage
     {
         isShooting = true;
         Instantiate(bullet, cannonBarrels[currentCannon].position, turretHead.transform.rotation);
-
+        aud.PlayOneShot(audShoot, audShootVol);
         currentCannon++; // increment to next barrel for next shot,
         if (currentCannon == cannonBarrels.Length) { // If we are at num barrels.length, cycle back to 0
             currentCannon = 0;
