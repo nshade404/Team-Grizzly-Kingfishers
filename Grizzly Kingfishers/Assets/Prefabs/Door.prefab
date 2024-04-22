@@ -51,7 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keyPickup: {fileID: 0}
   aud: {fileID: 620622898954065467}
-  audOpen: {fileID: 8300000, guid: 679aabe75631af8459bc48fb7bd1e54a, type: 3}
+  audOpen: {fileID: 8300000, guid: 890464806a5224a44b784a17a4136f1d, type: 3}
   audOpenVol: 0.5
 --- !u!33 &457230920598718145
 MeshFilter:

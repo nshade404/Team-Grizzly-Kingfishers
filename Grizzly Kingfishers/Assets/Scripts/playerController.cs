@@ -10,7 +10,7 @@ public class playerController : MonoBehaviour, IDamage
     [Header("----- Components -----")]
     [SerializeField] CharacterController controller;
     [SerializeField] AudioSource aud;
-    [SerializeField] AudioSource gunshots;
+    //[SerializeField] AudioSource gunshots;
     [SerializeField] EffectableObjects Effectable;
     [Header("----- Player Stats -----")]
     [Range(0, 10)][SerializeField] float health;
@@ -209,7 +209,7 @@ public class playerController : MonoBehaviour, IDamage
         isShooting = true;
 
         //Instantiate(selectedBullet, shootPos.position, transform.rotation);
-        //gunshots.PlayOneShot(shootSound, shootVol);
+        
         if(Effectable != null) {
             yield return new WaitForSeconds(Effectable.Effect_Blind(shootRate));
         }
@@ -223,6 +223,7 @@ public class playerController : MonoBehaviour, IDamage
         {
             isShooting = true;
             Instantiate(selectedBullet, shootPos.position, transform.rotation);
+            //gunshots.PlayOneShot(shootSound, shootVol);
             currentAmmo--; 
             yield return new WaitForSeconds(shootRate);
             isShooting = false;
