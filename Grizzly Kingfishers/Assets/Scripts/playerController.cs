@@ -223,7 +223,7 @@ public class playerController : MonoBehaviour, IDamage
         {
             isShooting = true;
             Instantiate(selectedBullet, shootPos.position, transform.rotation);
-            //gunshots.PlayOneShot(shootSound, shootVol);
+            aud.PlayOneShot(shootSound, shootVol);
             currentAmmo--; 
             yield return new WaitForSeconds(shootRate);
             isShooting = false;
