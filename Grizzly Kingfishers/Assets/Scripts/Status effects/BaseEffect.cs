@@ -8,7 +8,7 @@ public class BaseEffect : ScriptableObject
     float DurationRemaining = 0f;
     bool hasDOT = false;
     public bool isActive => DurationRemaining > 0f;
-    private float dotTimer = 1f;
+    protected float dotTimer = 1f;
 
     public virtual void EnableEffect()
     {

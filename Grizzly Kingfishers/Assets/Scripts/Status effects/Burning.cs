@@ -7,7 +7,6 @@ public class Burning : BaseEffect
 {
     [SerializeField] float modifiedDOT;
     [SerializeField] bool isDOT = true;
-    float dotTimer = 1f;
 
     public override float Effect_DOT(float originalDMG)
     {

@@ -8,7 +8,6 @@ public class Poison : BaseEffect
 {
     [SerializeField] float modifiedDOT;
     [SerializeField] bool isDOT = true;
-    float dotTimer = 1f;
     [SerializeField] float modifiedSpeed = .9f;
 
     public override float Effect_Speed(float originalSpeed)
