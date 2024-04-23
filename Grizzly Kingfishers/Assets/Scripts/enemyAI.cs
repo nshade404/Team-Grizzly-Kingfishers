@@ -174,11 +174,11 @@ public class EnemyAI : MonoBehaviour, IDamage {
         health -= amount;
         //agent.SetDestination(gameManager.instance.player.transform.position);
         StartCoroutine(flashRed());
-        if (health > 0)
+        if (health > 0 && isAlive)
         {
             StartCoroutine(damageAnimation());
         }
-        else if (health <= 0 && isAlive) 
+        else 
         {
             isAlive = false; // set to false so we no longer run this if gets hit again
 
@@ -216,8 +216,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
     IEnumerator deathAnimation()
     {
         anim.SetTrigger("Death");
-        agent.speed = 0;
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(3);
         Destroy(gameObject);
     }
     /// <summary>
