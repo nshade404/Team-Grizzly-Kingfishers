@@ -125,6 +125,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Camera"",
+                    ""type"": ""Value"",
+                    ""id"": ""f28a3047-2c65-473d-be46-3678f630dcbd"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -292,6 +301,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""PlaceTurret"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""207b5810-9dd0-4d9f-baec-5824e9994830"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Camera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -339,6 +359,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_SelectTurret5 = m_Player.FindAction("SelectTurret5", throwIfNotFound: true);
         m_Player_SelectTurret6 = m_Player.FindAction("SelectTurret6", throwIfNotFound: true);
         m_Player_PlaceTurret = m_Player.FindAction("PlaceTurret", throwIfNotFound: true);
+        m_Player_Camera = m_Player.FindAction("Camera", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Escape = m_UI.FindAction("Escape", throwIfNotFound: true);
@@ -414,6 +435,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SelectTurret5;
     private readonly InputAction m_Player_SelectTurret6;
     private readonly InputAction m_Player_PlaceTurret;
+    private readonly InputAction m_Player_Camera;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -429,6 +451,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @SelectTurret5 => m_Wrapper.m_Player_SelectTurret5;
         public InputAction @SelectTurret6 => m_Wrapper.m_Player_SelectTurret6;
         public InputAction @PlaceTurret => m_Wrapper.m_Player_PlaceTurret;
+        public InputAction @Camera => m_Wrapper.m_Player_Camera;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -471,6 +494,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @PlaceTurret.started += instance.OnPlaceTurret;
             @PlaceTurret.performed += instance.OnPlaceTurret;
             @PlaceTurret.canceled += instance.OnPlaceTurret;
+            @Camera.started += instance.OnCamera;
+            @Camera.performed += instance.OnCamera;
+            @Camera.canceled += instance.OnCamera;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -508,6 +534,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @PlaceTurret.started -= instance.OnPlaceTurret;
             @PlaceTurret.performed -= instance.OnPlaceTurret;
             @PlaceTurret.canceled -= instance.OnPlaceTurret;
+            @Camera.started -= instance.OnCamera;
+            @Camera.performed -= instance.OnCamera;
+            @Camera.canceled -= instance.OnCamera;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -584,6 +613,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnSelectTurret5(InputAction.CallbackContext context);
         void OnSelectTurret6(InputAction.CallbackContext context);
         void OnPlaceTurret(InputAction.CallbackContext context);
+        void OnCamera(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

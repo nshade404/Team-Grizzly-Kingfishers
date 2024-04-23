@@ -12,6 +12,7 @@ public class PlayerInputFunctions : MonoBehaviour
         if(playerInputActions == null) {
             playerInputActions = new PlayerInputActions();
             LoadSavedBindings();
+            UnbindAllActions();
         }
         playerInputActions.Player.Enable();
         // Jump
@@ -20,7 +21,7 @@ public class PlayerInputFunctions : MonoBehaviour
         // Sprint
         playerInputActions.Player.Sprint.started += Sprint;
         playerInputActions.Player.Sprint.canceled += Sprint;
-
+        // Turret
         playerInputActions.Player.ScrollSelectTurret.started += ScrollSelectTurret;
         playerInputActions.Player.SelectTurret1.started += SelectTurret1;
         playerInputActions.Player.SelectTurret2.started += SelectTurret2;
@@ -31,6 +32,23 @@ public class PlayerInputFunctions : MonoBehaviour
         playerInputActions.Player.PlaceTurret.started += PlaceTurret;
     }
 
+    public void UnbindAllActions() {
+        playerInputActions.Player.Jump.started -= Jump;
+        playerInputActions.Player.Jump.canceled -= Jump;
+        // Sprint
+        playerInputActions.Player.Sprint.started -= Sprint;
+        playerInputActions.Player.Sprint.canceled -= Sprint;
+        // Turret
+        playerInputActions.Player.ScrollSelectTurret.started -= ScrollSelectTurret;
+        playerInputActions.Player.SelectTurret1.started -= SelectTurret1;
+        playerInputActions.Player.SelectTurret2.started -= SelectTurret2;
+        playerInputActions.Player.SelectTurret3.started -= SelectTurret3;
+        playerInputActions.Player.SelectTurret4.started -= SelectTurret4;
+        playerInputActions.Player.SelectTurret5.started -= SelectTurret5;
+        playerInputActions.Player.SelectTurret6.started -= SelectTurret6;
+        playerInputActions.Player.PlaceTurret.started -= PlaceTurret;
+    }
+
     public void LoadSavedBindings() {
         string rebounds = PlayerPrefs.GetString(OptionsManager.PLAYER_SAVED_REBOUND_KEYBINDS, PlayerPrefs.GetString(OptionsManager.PLAYER_DEFAULT_KEYBINDS));
         playerInputActions.LoadBindingOverridesFromJson(rebounds);
@@ -38,10 +56,15 @@ public class PlayerInputFunctions : MonoBehaviour
 
     private void Update() {
         Move(playerInputActions.Player.Movement.ReadValue<Vector2>());
+        Look(playerInputActions.Player.Camera.ReadValue<Vector2>());
     }
 
     private void Move(Vector2 inVector) {
         gameManager.instance.playerScript.MoveDir = new Vector3(inVector.x, 0, inVector.y); // pass this to player controller
+    }
+
+    private void Look(Vector2 inVector) {
+        gameManager.instance.camController.MouseDir = inVector.normalized;
     }
 
     // Start is called before the first frame update

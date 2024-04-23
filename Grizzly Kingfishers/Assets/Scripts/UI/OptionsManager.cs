@@ -12,7 +12,9 @@ public class OptionsManager : MonoBehaviour
     public const int VOLUME_MAX = 100;
     public const string MASTER_VALUE = "MasterValue";
     public const string BGM_VALUE = "BGMValue";
-    public const string SFX_VALUE = "MasterValue";
+    public const string SFX_VALUE = "SFXValue";
+
+    public const string LOOK_SENSITIVITY = "LookSensitivity";
 
     public const string PLAYER_DEFAULT_KEYBINDS = "PlayerDefaultKeybinds";
     public const string PLAYER_SAVED_REBOUND_KEYBINDS = "PlayerSavedReboundKeybinds";
@@ -33,6 +35,7 @@ public class OptionsManager : MonoBehaviour
     public Slider masterSlider;
     public Slider bgmSlider;
     public Slider sfxSlider;
+    public Slider lookSlider;
 
     bool optionPendingChange;
     PlayerInputActions pia;
@@ -45,35 +48,24 @@ public class OptionsManager : MonoBehaviour
         masterSlider.maxValue = VOLUME_MAX;
         bgmSlider.maxValue = VOLUME_MAX;
         sfxSlider.maxValue = VOLUME_MAX;
-
         // Load in saved values.
         masterSlider.value = (int)(PlayerPrefs.GetFloat(MASTER_VALUE, 1) * VOLUME_MAX);
         bgmSlider.value = (int)(PlayerPrefs.GetFloat(BGM_VALUE, 1) * VOLUME_MAX);
         sfxSlider.value = (int)(PlayerPrefs.GetFloat(SFX_VALUE, 1) * VOLUME_MAX);
+        lookSlider.value = (PlayerPrefs.GetFloat(LOOK_SENSITIVITY, 0)); // if we have an pref for it, use that, otherwise use 0.
 
-        //pia = new PlayerInputActions();
-        //if (!PlayerPrefs.HasKey(PLAYER_DEFAULT_KEYBINDS)) {
-        //    PlayerPrefs.SetString(PLAYER_DEFAULT_KEYBINDS, pia.SaveBindingOverridesAsJson());
-        //}
         OpenOptions();
     }
 
+    /// <summary>
+    /// Used to setup any information we require when we first open the Options menu.
+    /// </summary>
     public void OpenOptions() {
-        //string reboundKeybinds = PlayerPrefs.GetString(PLAYER_SAVED_REBOUND_KEYBINDS, PlayerPrefs.GetString(PLAYER_DEFAULT_KEYBINDS));
-        //pia.LoadBindingOverridesFromJson(reboundKeybinds);
-
         if(pia == null) {
             pia = new PlayerInputActions();
         }
         string reboundKeybinds = PlayerPrefs.GetString(PLAYER_SAVED_REBOUND_KEYBINDS, PlayerPrefs.GetString(PLAYER_DEFAULT_KEYBINDS));
         pia.LoadBindingOverridesFromJson(reboundKeybinds);
-
-        //if (gameManager.instance != null) {
-        //    gameManager.instance.player.GetComponent<PlayerInputFunctions>().LoadSavedBindings();
-        //}
-        //else {
-            
-        //}
 
         DisplayAllKeybinds();
         optionPendingChange = false;
@@ -142,6 +134,13 @@ public class OptionsManager : MonoBehaviour
                     optionPendingChange = true;
                 }
                 break;
+            case 3: // Look Slider
+                if ((PlayerPrefs.GetFloat(LOOK_SENSITIVITY, 0)) != lookSlider.value) {
+                    // We have a new value, prompt an update to be saved
+                    Debug.Log(lookSlider.value + " Look Sensitivity");
+                    optionPendingChange = true;
+                }
+                break;
         }
 
         if (optionPendingChange) {
@@ -154,15 +153,19 @@ public class OptionsManager : MonoBehaviour
         PlayerPrefs.SetFloat(MASTER_VALUE, masterSlider.normalizedValue);
         PlayerPrefs.SetFloat(BGM_VALUE, bgmSlider.normalizedValue);
         PlayerPrefs.SetFloat(SFX_VALUE, sfxSlider.normalizedValue);
+        PlayerPrefs.SetFloat(LOOK_SENSITIVITY, lookSlider.value);
 
         PlayerPrefs.SetString(PLAYER_SAVED_REBOUND_KEYBINDS, pia.SaveBindingOverridesAsJson());
         //pia.LoadBindingOverridesFromJson(PlayerPrefs.GetString(PLAYER_SAVED_REBOUND_KEYBINDS));
 
         // Load any new bindings that are setup.
-        //if(gameManager.instance != null) {
-        //    gameManager.instance.player.GetComponent<PlayerInputFunctions>().LoadSavedBindings();
-        //}
+        if (gameManager.instance != null) {
+            gameManager.instance.player.GetComponent<PlayerInputFunctions>().LoadSavedBindings();
+            // Update the players camera sensitivity
+            gameManager.instance.camController.UpdateSensitivityFromPrefs();
+        }
 
+        PlayerPrefs.Save();
         applyButton.interactable = false;
         optionPendingChange = false;
         BackClickedWindow.SetActive(false);

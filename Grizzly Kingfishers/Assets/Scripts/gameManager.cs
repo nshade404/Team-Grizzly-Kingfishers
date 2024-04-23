@@ -35,6 +35,7 @@ public class gameManager : MonoBehaviour {
     public GameObject player;
     public playerController playerScript;
     public GameObject playerBase;
+    public cameraController camController;
 
     public bool isStartOfGame;
     public bool isPaused;
@@ -68,6 +69,7 @@ public class gameManager : MonoBehaviour {
         timeScaleOrig = Time.timeScale;
         StartCoroutine(startingPopup());
         playerBase = GameObject.FindWithTag("PlayerBase");
+        camController = player.GetComponentInChildren<cameraController>();
         //stateUnpaused();
         updateRocketPiecesUI();
         UpdateRepairKitsHeld();

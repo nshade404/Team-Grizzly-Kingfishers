@@ -19,6 +19,7 @@ public class buttonFunctions : MonoBehaviour
     public void quit()
     {
         gameManager.instance.stateUnpaused();
+        gameManager.instance.player.GetComponent<PlayerInputFunctions>()?.UnbindAllActions();
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
         gameManager.instance.loadingScreen.SetActive(true);

@@ -15,7 +15,7 @@ public class playerController : MonoBehaviour, IDamage
     [Header("----- Player Stats -----")]
     [Range(0, 10)][SerializeField] float health;
     [Range(1, 10)][SerializeField] int maxHealth;
-    [Range(1, 5)][SerializeField] float speed;
+    [SerializeField] float speed;
     [Range(1, 4)][SerializeField] float sprintMod;
     [Range(1, 3)][SerializeField] int jumps;
     [Range(5, 25)][SerializeField] int jumpSpeed;
