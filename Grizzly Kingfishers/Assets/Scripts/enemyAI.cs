@@ -191,6 +191,8 @@ public class EnemyAI : MonoBehaviour, IDamage {
             if(chance <= healthDropChance)
             {
                 Instantiate(healthDrop, transform.position, transform.rotation);
+
+                HealthDropFloatingMotion floatingMotion = healthDrop.AddComponent<HealthDropFloatingMotion>();
             }
         }
     }
@@ -219,6 +221,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
         yield return new WaitForSeconds(3);
         Destroy(gameObject);
     }
+
     /// <summary>
     /// I realize this is not the most efficient way, but we are having fun with this....
     /// please dont judge.... -Josh
