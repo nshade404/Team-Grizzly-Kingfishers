@@ -172,8 +172,8 @@ public class EnemyAI : MonoBehaviour, IDamage {
     public void takeDamage(float amount)
     {
         health -= amount;
-        //agent.SetDestination(gameManager.instance.player.transform.position);
         StartCoroutine(flashRed());
+        //agent.SetDestination(gameManager.instance.player.transform.position);
         if (health > 0 && isAlive)
         {
             StartCoroutine(damageAnimation());
@@ -185,7 +185,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
             agent.speed = 0;
             isShooting = false;
             StartCoroutine(deathAnimation());
-            gameManager.instance.updateGameGoal(-1);
+            //gameManager.instance.updateGameGoal(-1);
             gameManager.instance.AddScrap(Random.Range(minScrapDrop, maxScrapDrop));
             int chance = Random.Range(0, 101);
             if(chance <= healthDropChance)
@@ -211,14 +211,14 @@ public class EnemyAI : MonoBehaviour, IDamage {
         int speedSave = speed;
         agent.speed = 0;
         anim.SetTrigger("Damage");
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1f);
         agent.speed = speedSave;
     }
 
     IEnumerator deathAnimation()
     {
         anim.SetTrigger("Death");
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(3f);
         Destroy(gameObject);
     }
 
