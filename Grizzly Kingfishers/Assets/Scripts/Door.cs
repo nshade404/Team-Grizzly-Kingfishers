@@ -33,7 +33,7 @@ public class Door : MonoBehaviour
         Debug.Log("Door opened!");
         aud.PlayOneShot(audOpen, audOpenVol);
         gameObject.GetComponent<MeshRenderer>().enabled = false;
-        //Destroy(gameObject);
+        Destroy(gameObject);
     }
 
     private void RemoveKey()
