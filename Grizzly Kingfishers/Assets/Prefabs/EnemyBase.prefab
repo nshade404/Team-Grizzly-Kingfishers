@@ -137,6 +137,9 @@ MonoBehaviour:
   audInsult: []
   audInsultVol: 0
   disableEnemy: 0
+  fadeDuration: 5
+  opaqueMaterial: {fileID: 2100000, guid: 78660c09ff101ea4cb77de408a9527da, type: 2}
+  transparentMaterial: {fileID: 2100000, guid: 4b1ccba3b282b614b903ac56c66d920d, type: 2}
   playerInRange: 0
   target: {fileID: 0}
   targets: []

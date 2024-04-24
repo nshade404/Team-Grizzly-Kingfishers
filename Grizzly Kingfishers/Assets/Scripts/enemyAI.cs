@@ -235,8 +235,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
     IEnumerator deathAnimation()
     {
         anim.SetTrigger("Death");
-        yield return new WaitForSeconds(3f);
-        Destroy(gameObject);
+        yield return new WaitForSeconds(5f);
     }
 
     /// <summary>
