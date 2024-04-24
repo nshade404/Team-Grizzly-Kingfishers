@@ -196,9 +196,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
         }
         else 
         {
-            isAlive = false; // set to false so we no longer run this if gets hit again
-
-            if(isAlive == false) {
+            if(isAlive) {
                 agent.speed = 0;
                 isShooting = false;
                 //gameManager.instance.updateGameGoal(-1);
@@ -211,6 +209,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
                 }
                 StartCoroutine(deathAnimation());
             }
+            isAlive = false; // set to false so we no longer run this if gets hit again
         }
     }
 
