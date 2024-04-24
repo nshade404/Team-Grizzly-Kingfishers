@@ -102,11 +102,11 @@ public class EnemyAI : MonoBehaviour, IDamage {
         }
         
         // section to add idle animation to the enemy model
-        if (agent.velocity.magnitude <= 0.01f)
+        if (agent.velocity.magnitude <= 0.01f && isAlive)
         {
             anim.SetBool("isMoving", false);
         }
-        else
+        else if (agent.velocity.magnitude > 0.01f && isAlive)
         {
             anim.SetBool("isMoving", true);
         }
