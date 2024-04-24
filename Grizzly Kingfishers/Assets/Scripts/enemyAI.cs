@@ -196,9 +196,8 @@ public class EnemyAI : MonoBehaviour, IDamage {
         }
         else 
         {
-            if(isAlive) {
-                agent.speed = 0;
-                isShooting = false;
+            if(isAlive) 
+            {
                 //gameManager.instance.updateGameGoal(-1);
                 gameManager.instance.AddScrap(Random.Range(minScrapDrop, maxScrapDrop));
                 int chance = Random.Range(0, 101);
@@ -208,6 +207,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
                     HealthDropFloatingMotion floatingMotion = healthDrop.AddComponent<HealthDropFloatingMotion>();
                 }
                 StartCoroutine(deathAnimation());
+                isShooting = false;
             }
             isAlive = false; // set to false so we no longer run this if gets hit again
         }
@@ -222,19 +222,19 @@ public class EnemyAI : MonoBehaviour, IDamage {
 
     IEnumerator damageAnimation()
     {
-
-        agent.speed = speed;
-        int speedSave = speed;
+        float originalSpeed = agent.speed;
         agent.speed = 0;
         anim.SetTrigger("Damage");
         yield return new WaitForSeconds(1f);
-        agent.speed = speedSave;
+        agent.speed = originalSpeed;
     }
 
     IEnumerator deathAnimation()
     {
         anim.SetTrigger("Death");
+        agent.speed = 0.0f;
         yield return new WaitForSeconds(5f);
+        Destroy(gameObject);
     }
 
     /// <summary>
