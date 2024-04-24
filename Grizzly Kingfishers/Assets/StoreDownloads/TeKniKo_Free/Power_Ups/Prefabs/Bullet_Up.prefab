@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 960718757264017055}
   - component: {fileID: 6493042442749221634}
   - component: {fileID: 5010705684511400005}
+  - component: {fileID: 5571743579853272874}
   m_Layer: 0
   m_Name: Bullet_Up
   m_TagString: AmmoPickup
@@ -119,3 +120,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickups: []
+--- !u!114 &5571743579853272874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1609426563364382538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2f1a5be72e02f645a8410515f55a573, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floatHeight: 0.5
+  floatSpeed: 1

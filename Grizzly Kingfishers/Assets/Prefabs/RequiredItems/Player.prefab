@@ -117,6 +117,7 @@ MonoBehaviour:
   deathVol: 0.75
   shootSound: {fileID: 8300000, guid: 857a532679e2e584e8b012b80fb2c216, type: 3}
   shootVol: 0.68
+  AmmoModel: {fileID: 919132149155446097, guid: 922c2067d18091f4f96f481884258e16, type: 3}
 --- !u!114 &5148887818904458957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -670,6 +671,7 @@ MonoBehaviour:
   lockVertMin: -90
   lockVertMax: 90
   invertY: 0
+  adjustedSensitivity: 0
 --- !u!1001 &8904763051625919009
 PrefabInstance:
   m_ObjectHideFlags: 0
