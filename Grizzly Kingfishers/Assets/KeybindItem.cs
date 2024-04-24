@@ -7,13 +7,9 @@ using TMPro;
 public class KeybindItem : MonoBehaviour
 {
     public string bindingName;
-    public TMP_Text boundText;
-    public int bindingIndex;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public TMP_Text boundKeyboardText;
+    public TMP_Text boundGamepadText;
+    public int keyboardBindIndex;
+    public int gamepadBindIndex;
 
 }

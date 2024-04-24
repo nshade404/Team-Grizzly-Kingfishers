@@ -134,6 +134,33 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""StepSelectTurretPos"",
+                    ""type"": ""Button"",
+                    ""id"": ""4a3b9c9b-4867-45ed-be72-091a2d112b42"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""StepSelectTurretNeg"",
+                    ""type"": ""Button"",
+                    ""id"": ""6b13905c-134d-4bfc-91ec-48ce037e8e08"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""0c5888bc-de70-40eb-9e2e-9e7645e69c78"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -381,6 +408,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""f647ba14-bd45-4cbd-98df-211069fd202f"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlaceTurret"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""207b5810-9dd0-4d9f-baec-5824e9994830"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
@@ -398,6 +436,50 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Camera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""65bac65f-a22a-4e41-9442-4503ec64ffe9"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StepSelectTurretPos"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3422b42c-ed83-4bd6-9269-7a90cb8e4a83"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StepSelectTurretNeg"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""261c8df7-9bd4-419b-9043-7e5cc8d3881c"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2a2e61ac-6445-4e06-942b-b76cac70beec"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -422,6 +504,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""736f8572-3f21-498c-a8ac-f03c96991985"",
                     ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""179038c9-59bd-46e9-ba1a-c43750e0bc38"",
+                    ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -471,6 +564,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_SelectTurret6 = m_Player.FindAction("SelectTurret6", throwIfNotFound: true);
         m_Player_PlaceTurret = m_Player.FindAction("PlaceTurret", throwIfNotFound: true);
         m_Player_Camera = m_Player.FindAction("Camera", throwIfNotFound: true);
+        m_Player_StepSelectTurretPos = m_Player.FindAction("StepSelectTurretPos", throwIfNotFound: true);
+        m_Player_StepSelectTurretNeg = m_Player.FindAction("StepSelectTurretNeg", throwIfNotFound: true);
+        m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Escape = m_UI.FindAction("Escape", throwIfNotFound: true);
@@ -547,6 +643,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SelectTurret6;
     private readonly InputAction m_Player_PlaceTurret;
     private readonly InputAction m_Player_Camera;
+    private readonly InputAction m_Player_StepSelectTurretPos;
+    private readonly InputAction m_Player_StepSelectTurretNeg;
+    private readonly InputAction m_Player_Shoot;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -563,6 +662,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @SelectTurret6 => m_Wrapper.m_Player_SelectTurret6;
         public InputAction @PlaceTurret => m_Wrapper.m_Player_PlaceTurret;
         public InputAction @Camera => m_Wrapper.m_Player_Camera;
+        public InputAction @StepSelectTurretPos => m_Wrapper.m_Player_StepSelectTurretPos;
+        public InputAction @StepSelectTurretNeg => m_Wrapper.m_Player_StepSelectTurretNeg;
+        public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -608,6 +710,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Camera.started += instance.OnCamera;
             @Camera.performed += instance.OnCamera;
             @Camera.canceled += instance.OnCamera;
+            @StepSelectTurretPos.started += instance.OnStepSelectTurretPos;
+            @StepSelectTurretPos.performed += instance.OnStepSelectTurretPos;
+            @StepSelectTurretPos.canceled += instance.OnStepSelectTurretPos;
+            @StepSelectTurretNeg.started += instance.OnStepSelectTurretNeg;
+            @StepSelectTurretNeg.performed += instance.OnStepSelectTurretNeg;
+            @StepSelectTurretNeg.canceled += instance.OnStepSelectTurretNeg;
+            @Shoot.started += instance.OnShoot;
+            @Shoot.performed += instance.OnShoot;
+            @Shoot.canceled += instance.OnShoot;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -648,6 +759,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Camera.started -= instance.OnCamera;
             @Camera.performed -= instance.OnCamera;
             @Camera.canceled -= instance.OnCamera;
+            @StepSelectTurretPos.started -= instance.OnStepSelectTurretPos;
+            @StepSelectTurretPos.performed -= instance.OnStepSelectTurretPos;
+            @StepSelectTurretPos.canceled -= instance.OnStepSelectTurretPos;
+            @StepSelectTurretNeg.started -= instance.OnStepSelectTurretNeg;
+            @StepSelectTurretNeg.performed -= instance.OnStepSelectTurretNeg;
+            @StepSelectTurretNeg.canceled -= instance.OnStepSelectTurretNeg;
+            @Shoot.started -= instance.OnShoot;
+            @Shoot.performed -= instance.OnShoot;
+            @Shoot.canceled -= instance.OnShoot;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -743,6 +863,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnSelectTurret6(InputAction.CallbackContext context);
         void OnPlaceTurret(InputAction.CallbackContext context);
         void OnCamera(InputAction.CallbackContext context);
+        void OnStepSelectTurretPos(InputAction.CallbackContext context);
+        void OnStepSelectTurretNeg(InputAction.CallbackContext context);
+        void OnShoot(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

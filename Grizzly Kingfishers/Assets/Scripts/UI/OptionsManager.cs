@@ -42,6 +42,8 @@ public class OptionsManager : MonoBehaviour
 
     string reboundKeybinds;
 
+    [SerializeField] bool DeleteBindings = false;
+
     private void Start() {
         applyButton.interactable = false;
 
@@ -54,16 +56,22 @@ public class OptionsManager : MonoBehaviour
         sfxSlider.value = (int)(PlayerPrefs.GetFloat(SFX_VALUE, 1) * VOLUME_MAX);
         lookSlider.value = (PlayerPrefs.GetFloat(LOOK_SENSITIVITY, 0)); // if we have an pref for it, use that, otherwise use 0.
 
-        OpenOptions();
+        if (DeleteBindings) {
+            PlayerPrefs.DeleteKey(PLAYER_DEFAULT_KEYBINDS);
+            PlayerPrefs.DeleteKey(PLAYER_SAVED_REBOUND_KEYBINDS);
+
+            PlayerPrefs.SetString(PLAYER_DEFAULT_KEYBINDS, pia.SaveBindingOverridesAsJson());
+        }
     }
 
     /// <summary>
     /// Used to setup any information we require when we first open the Options menu.
     /// </summary>
     public void OpenOptions() {
-        if(pia == null) {
+        if (pia == null) {
             pia = new PlayerInputActions();
         }
+
         string reboundKeybinds = PlayerPrefs.GetString(PLAYER_SAVED_REBOUND_KEYBINDS, PlayerPrefs.GetString(PLAYER_DEFAULT_KEYBINDS));
         pia.LoadBindingOverridesFromJson(reboundKeybinds);
 
@@ -210,29 +218,63 @@ public class OptionsManager : MonoBehaviour
 
         for (int i = 0; i < keybinds.Length; i++) {
             InputAction action = pia.FindAction(keybinds[i].bindingName);
-            string boundKey = action.GetBindingDisplayString(keybinds[i].bindingIndex);
-            keybinds[i].boundText.text = boundKey;
-            Debug.Log(keybinds[i].bindingName + " has " + boundKey);
+            if (keybinds[i].boundKeyboardText != null) {
+                string boundKey = action.GetBindingDisplayString(keybinds[i].keyboardBindIndex);
+                keybinds[i].boundKeyboardText.text = boundKey;
+            }
+            if (keybinds[i].boundGamepadText != null) {
+                string gamepadKey = action.GetBindingDisplayString(keybinds[i].gamepadBindIndex);
+                keybinds[i].boundGamepadText.text = gamepadKey;
+            }
         }
     }
 
-    public void InteractiveRebinding(KeybindItem keybindItem) {
+    public void InteractiveKeyboardRebinding(KeybindItem keybindItem) {
         // Verify this is actually disabled.
         pia.Player.Disable();
 
         InputAction action = pia.FindAction(keybindItem.bindingName);
         if(action != null) {
-            action.PerformInteractiveRebinding(keybindItem.bindingIndex)
+            action.PerformInteractiveRebinding(keybindItem.keyboardBindIndex)
                 .WithCancelingThrough("<Keyboard>/escape")
                 .WithControlsExcluding("Mouse")
+                .WithControlsExcluding("Gamepad")
                 .OnCancel(
                     operation => {
                         IsKeybindingWindow.SetActive(false);
                     })
                 .OnComplete(callback => {
-                    keybindItem.boundText.text = action.GetBindingDisplayString(keybindItem.bindingIndex);
-                    Debug.Log(keybindItem.bindingName + " " + keybindItem.bindingIndex + " " + action.GetBindingDisplayString(keybindItem.bindingIndex));
-                    Debug.Log(action.bindings[keybindItem.bindingIndex].overridePath);
+                    keybindItem.boundKeyboardText.text = action.GetBindingDisplayString(keybindItem.keyboardBindIndex);
+                    Debug.Log(keybindItem.bindingName + " " + keybindItem.keyboardBindIndex + " " + action.GetBindingDisplayString(keybindItem.keyboardBindIndex));
+                    Debug.Log(action.bindings[keybindItem.keyboardBindIndex].overridePath);
+                    //action.ApplyBindingOverride(keybindItem.bindingIndex, action.bindings[keybindItem.bindingIndex].overridePath);
+                    IsKeybindingWindow.SetActive(false);
+                    applyButton.interactable = true;
+                    optionPendingChange = true;
+                    callback.Dispose();
+                }).Start();
+            IsKeybindingWindow.SetActive(true);
+        }
+    }
+
+    public void InteractiveGamepadRebinding(KeybindItem keybindItem) {
+        // Verify this is actually disabled.
+        pia.Player.Disable();
+
+        InputAction action = pia.FindAction(keybindItem.bindingName);
+        if (action != null) {
+            action.PerformInteractiveRebinding(keybindItem.gamepadBindIndex)
+                .WithCancelingThrough("<Keyboard>/escape")
+                .WithControlsExcluding("Mouse")
+                .WithControlsExcluding("Keyboard")
+                .OnCancel(
+                    operation => {
+                        IsKeybindingWindow.SetActive(false);
+                    })
+                .OnComplete(callback => {
+                    keybindItem.boundGamepadText.text = action.GetBindingDisplayString(keybindItem.gamepadBindIndex);
+                    Debug.Log(keybindItem.bindingName + " " + keybindItem.gamepadBindIndex + " " + action.GetBindingDisplayString(keybindItem.gamepadBindIndex));
+                    Debug.Log(action.bindings[keybindItem.gamepadBindIndex].overridePath);
                     //action.ApplyBindingOverride(keybindItem.bindingIndex, action.bindings[keybindItem.bindingIndex].overridePath);
                     IsKeybindingWindow.SetActive(false);
                     applyButton.interactable = true;

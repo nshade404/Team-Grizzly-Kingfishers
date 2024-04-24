@@ -15,6 +15,8 @@ public class PlayerInputFunctions : MonoBehaviour
             UnbindAllActions();
         }
         playerInputActions.Player.Enable();
+        // Shoot
+        playerInputActions.Player.Shoot.started += Shoot;
         // Jump
         playerInputActions.Player.Jump.started += Jump;
         playerInputActions.Player.Jump.canceled += Jump;
@@ -23,6 +25,8 @@ public class PlayerInputFunctions : MonoBehaviour
         playerInputActions.Player.Sprint.canceled += Sprint;
         // Turret
         playerInputActions.Player.ScrollSelectTurret.started += ScrollSelectTurret;
+        playerInputActions.Player.StepSelectTurretPos.started += StepSelectTurretPos;
+        playerInputActions.Player.StepSelectTurretNeg.started += StepSelectTurretNeg;
         playerInputActions.Player.SelectTurret1.started += SelectTurret1;
         playerInputActions.Player.SelectTurret2.started += SelectTurret2;
         playerInputActions.Player.SelectTurret3.started += SelectTurret3;
@@ -33,6 +37,9 @@ public class PlayerInputFunctions : MonoBehaviour
     }
 
     public void UnbindAllActions() {
+        // Shoot
+        playerInputActions.Player.Shoot.started -= Shoot;
+        // Jump
         playerInputActions.Player.Jump.started -= Jump;
         playerInputActions.Player.Jump.canceled -= Jump;
         // Sprint
@@ -40,6 +47,8 @@ public class PlayerInputFunctions : MonoBehaviour
         playerInputActions.Player.Sprint.canceled -= Sprint;
         // Turret
         playerInputActions.Player.ScrollSelectTurret.started -= ScrollSelectTurret;
+        playerInputActions.Player.StepSelectTurretPos.started -= StepSelectTurretPos;
+        playerInputActions.Player.StepSelectTurretNeg.started -= StepSelectTurretNeg;
         playerInputActions.Player.SelectTurret1.started -= SelectTurret1;
         playerInputActions.Player.SelectTurret2.started -= SelectTurret2;
         playerInputActions.Player.SelectTurret3.started -= SelectTurret3;
@@ -67,10 +76,12 @@ public class PlayerInputFunctions : MonoBehaviour
         gameManager.instance.camController.MouseDir = inVector.normalized;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public void Shoot(InputAction.CallbackContext context) {
+        switch (context.phase) {
+            case InputActionPhase.Started:
+                gameManager.instance.playerScript.IsShooting = true;
+                break;
+        }
     }
 
     public void Jump(InputAction.CallbackContext context) {
@@ -102,16 +113,16 @@ public class PlayerInputFunctions : MonoBehaviour
             case InputActionPhase.Started: // cycle selected turret forward/backwards with scroll wheel... Need to extend this somehow to a button also (Q and E?)
                 int value = (int)context.ReadValue<Vector2>().y;
                 if (value > 0) {
-                    gameManager.instance.playerScript.selectTurret(1);
+                    CycleSelectTurret(1);
                 }
                 if (value < 0) {
-                    gameManager.instance.playerScript.selectTurret(-1);
+                    CycleSelectTurret(-1);
                 }
                 break;
         }
     }
 
-    // Note: This block is not ideal... but don't have time to figure out a cleaner way to figure this out for the time being...
+    #region Keyboard Select Turrets
     public void SelectTurret1(InputAction.CallbackContext context) {
         switch (context.phase) {
             case InputActionPhase.Started:
@@ -159,10 +170,7 @@ public class PlayerInputFunctions : MonoBehaviour
                 break;
         }
     }
-    
-    public void SetSelectTurret(int index) {
-        gameManager.instance.playerScript.SetSelectedTurret(index);
-    }
+    #endregion
 
     public void PlaceTurret(InputAction.CallbackContext context) {
         switch (context.phase) {
@@ -170,6 +178,30 @@ public class PlayerInputFunctions : MonoBehaviour
                 gameManager.instance.playerScript.PlaceTurret();
                 break;
         }
+    }
+
+    public void StepSelectTurretPos(InputAction.CallbackContext context) {
+        switch (context.phase) {
+            case InputActionPhase.Started:
+                CycleSelectTurret(1);
+                break;
+        }
+    }
+
+    public void StepSelectTurretNeg(InputAction.CallbackContext context) {
+        switch (context.phase) {
+            case InputActionPhase.Started:
+                CycleSelectTurret(-1);
+                break;
+        }
+    }
+
+    public void SetSelectTurret(int index) {
+        gameManager.instance.playerScript.SetSelectedTurret(index);
+    }
+
+    private void CycleSelectTurret(int value) {
+        gameManager.instance.playerScript.selectTurret(value);
     }
 
 }

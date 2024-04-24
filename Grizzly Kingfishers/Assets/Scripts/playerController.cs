@@ -82,6 +82,8 @@ public class playerController : MonoBehaviour, IDamage
         get; set;
     }
 
+    public bool IsShooting { get; set; }
+
     public float Speed
     {
         get { return speed; }
@@ -114,10 +116,14 @@ public class playerController : MonoBehaviour, IDamage
             Movement();
             //selectTurret();
 
-            if (Input.GetButton("Shoot") && !isShooting)
-            {
+            if (IsShooting && !isShooting) {
                 StartCoroutine(Shoot());
             }
+
+            //if (Input.GetButton("Shoot") && !isShooting)
+            //{
+            //    StartCoroutine(Shoot());
+            //}
             //if (Input.GetButtonDown("PlaceTurret"))
             //{
             //    PlaceTurret();
@@ -186,8 +192,6 @@ public class playerController : MonoBehaviour, IDamage
         }
     }
 
-
-
     IEnumerator playSteps()
     {
         playingSteps = true;
@@ -207,7 +211,7 @@ public class playerController : MonoBehaviour, IDamage
     IEnumerator Shoot()
     {
         isShooting = true;
-
+        IsShooting = false; // Property for InputActions to trigger a shot.
         //Instantiate(selectedBullet, shootPos.position, transform.rotation);
         
         if(Effectable != null) {
