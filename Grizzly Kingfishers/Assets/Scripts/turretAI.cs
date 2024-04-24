@@ -60,7 +60,7 @@ public class Turrets : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        if(target != null) { // If we have a valid target, go ahead and start shooting at it.
+        if(target != null && target.GetComponent<EnemyAI>().IsAlive) { // If we have a valid target, go ahead and start shooting at it.
             Vector3 targetDir = target.position - turretHead.transform.position;
             Quaternion rot = Quaternion.LookRotation(new Vector3(targetDir.x, transform.position.y, targetDir.z));
             turretHead.transform.rotation = Quaternion.Lerp(turretHead.transform.rotation, rot, Time.deltaTime * turretRotateSpeed);
@@ -71,7 +71,7 @@ public class Turrets : MonoBehaviour, IDamage
         }
         else { // Otherwise check if we have more targets that came into range and switch to them
             if(targets.Count > 0) {
-                if(targets.First() == null) {
+                if(targets.First() == null || !targets.First().GetComponent<EnemyAI>().IsAlive) {
                     targets.RemoveAt(0);
                 }
                 if (targets.Count > 0) { // We still have targets to select from

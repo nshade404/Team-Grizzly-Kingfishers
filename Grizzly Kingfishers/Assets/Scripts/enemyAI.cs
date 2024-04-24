@@ -57,6 +57,8 @@ public class EnemyAI : MonoBehaviour, IDamage {
     [SerializeField] AudioClip audShoot;
     [Range(0, 1)][SerializeField] float audShootVol;
 
+    public bool IsAlive { get { return isAlive; } }
+
     // Start is called before the first frame update
     void Start() {
         gameManager.instance.updateGameGoal(1);
@@ -96,10 +98,13 @@ public class EnemyAI : MonoBehaviour, IDamage {
             return;
         }
 
-        if (playerInRange && !CanSeePlayer()) {
+        if (isAlive) {
+            CanSeePlayer();
         }
-        else if (!playerInRange) {
-        }
+        //if (playerInRange && !CanSeePlayer()) {
+        //}
+        //else if (!playerInRange) {
+        //}
         
         // section to add idle animation to the enemy model
         if (agent.velocity.magnitude <= 0.01f && isAlive)
@@ -193,17 +198,18 @@ public class EnemyAI : MonoBehaviour, IDamage {
         {
             isAlive = false; // set to false so we no longer run this if gets hit again
 
-            agent.speed = 0;
-            isShooting = false;
-            StartCoroutine(deathAnimation());
-            //gameManager.instance.updateGameGoal(-1);
-            gameManager.instance.AddScrap(Random.Range(minScrapDrop, maxScrapDrop));
-            int chance = Random.Range(0, 101);
-            if(chance <= healthDropChance)
-            {
-                Instantiate(healthDrop, transform.position, transform.rotation);
+            if(isAlive == false) {
+                agent.speed = 0;
+                isShooting = false;
+                StartCoroutine(deathAnimation());
+                //gameManager.instance.updateGameGoal(-1);
+                gameManager.instance.AddScrap(Random.Range(minScrapDrop, maxScrapDrop));
+                int chance = Random.Range(0, 101);
+                if (chance <= healthDropChance) {
+                    Instantiate(healthDrop, transform.position, transform.rotation);
 
-                HealthDropFloatingMotion floatingMotion = healthDrop.AddComponent<HealthDropFloatingMotion>();
+                    HealthDropFloatingMotion floatingMotion = healthDrop.AddComponent<HealthDropFloatingMotion>();
+                }
             }
         }
     }
@@ -260,18 +266,4 @@ public class EnemyAI : MonoBehaviour, IDamage {
 
         Debug.Log(saying);
     }
-
-    //private void OnTriggerEnter(Collider other) {
-    //    if (other.CompareTag("Player") || other.CompareTag("Turret")) {
-    //        playerInRange = true;
-    //        target = other.GetComponent<Transform>();
-    //    }
-    //}
-
-    //private void OnTriggerExit(Collider other) {
-    //    if (other.CompareTag("Player") || other.CompareTag("Turret")) {
-    //        playerInRange = false;
-    //        agent.stoppingDistance = 0;
-    //    }
-    //}
 }
