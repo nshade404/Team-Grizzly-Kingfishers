@@ -43,6 +43,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
     Color startColor = Color.white;
     bool isShooting;
     bool isAlive;
+    bool isMoving;
     bool destinationChosen; // Tracks if we are in wander mode or not.
     float originalStoppingDistance; // used to capture our defined stopping distance on nav mesh agent.
     Vector3 startingPos; // captures our starting position for our wandering functionality.
@@ -98,6 +99,16 @@ public class EnemyAI : MonoBehaviour, IDamage {
         if (playerInRange && !CanSeePlayer()) {
         }
         else if (!playerInRange) {
+        }
+        
+        // section to add idle animation to the enemy model
+        if (agent.velocity.magnitude <= 0.01f)
+        {
+            anim.SetBool("isMoving", false);
+        }
+        else
+        {
+            anim.SetBool("isMoving", true);
         }
     }
 
