@@ -201,7 +201,6 @@ public class EnemyAI : MonoBehaviour, IDamage {
             if(isAlive == false) {
                 agent.speed = 0;
                 isShooting = false;
-                StartCoroutine(deathAnimation());
                 //gameManager.instance.updateGameGoal(-1);
                 gameManager.instance.AddScrap(Random.Range(minScrapDrop, maxScrapDrop));
                 int chance = Random.Range(0, 101);
@@ -210,6 +209,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
 
                     HealthDropFloatingMotion floatingMotion = healthDrop.AddComponent<HealthDropFloatingMotion>();
                 }
+                StartCoroutine(deathAnimation());
             }
         }
     }
