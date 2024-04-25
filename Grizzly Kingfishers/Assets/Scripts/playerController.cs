@@ -71,6 +71,8 @@ public class playerController : MonoBehaviour, IDamage
     bool isShooting;
     bool playingSteps;
 
+    PlayerInputActions pia; 
+
     public Vector3 MoveDir { get; set; } = Vector3.zero;
 
     public bool IsJumping
@@ -102,7 +104,7 @@ public class playerController : MonoBehaviour, IDamage
         controller = GetComponent<CharacterController>();
         gameManager.instance.SetSelectedTurretUI(selectedTurret.GetComponent<Turrets>(), 0);
         //gameManager.instance.costOfTurret(selectedTurret.name, selectedTurret.GetComponent<Turrets>().GetTurretCost()); // Update selected turret on startup.
-
+        pia = GetComponent<PlayerInputFunctions>().playerInputActions;
     }
 
     // Update is called once per frame
@@ -117,7 +119,7 @@ public class playerController : MonoBehaviour, IDamage
             Movement();
             //selectTurret();
 
-            if (IsShooting && !isShooting) {
+            if (pia.Player.Shoot.IsPressed() && !isShooting) {
                 StartCoroutine(Shoot());
             }
 

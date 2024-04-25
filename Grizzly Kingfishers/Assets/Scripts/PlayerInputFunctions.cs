@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputFunctions : MonoBehaviour
 {
-    PlayerInputActions playerInputActions;
+    public PlayerInputActions playerInputActions;
 
     private void Awake() {
 
@@ -16,7 +16,7 @@ public class PlayerInputFunctions : MonoBehaviour
         }
         playerInputActions.Player.Enable();
         // Shoot
-        playerInputActions.Player.Shoot.started += Shoot;
+        //playerInputActions.Player.Shoot.started += Shoot;
         // Jump
         playerInputActions.Player.Jump.started += Jump;
         playerInputActions.Player.Jump.canceled += Jump;
@@ -80,6 +80,11 @@ public class PlayerInputFunctions : MonoBehaviour
         switch (context.phase) {
             case InputActionPhase.Started:
                 gameManager.instance.playerScript.IsShooting = true;
+                Debug.Log("Shoot Started");
+                break;
+            case InputActionPhase.Canceled:
+                //gameManager.instance.playerScript.IsShooting = false;
+                Debug.Log("Shoot Canceled");
                 break;
         }
     }
