@@ -16,12 +16,9 @@ public class LerpTowardsPlayer : MonoBehaviour
 
     void Start()
     {
-        // Get the reference to the parent transform
-
         parentTransform = transform.parent;
     }
-
-    // Check if the collider that triggered the event is the child's collider
+   
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -30,7 +27,6 @@ public class LerpTowardsPlayer : MonoBehaviour
         }
     }
 
-    // Disable lerping when the collider exits
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -41,7 +37,6 @@ public class LerpTowardsPlayer : MonoBehaviour
 
     void Update()
     {
-        // Only lerp towards the player if shouldLerp is true
         if (shouldLerp)
         {
             Transform playerPosition = gameManager.instance.player.transform;
