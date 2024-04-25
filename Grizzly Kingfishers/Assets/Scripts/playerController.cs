@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
 public class playerController : MonoBehaviour, IDamage
@@ -281,42 +282,38 @@ public class playerController : MonoBehaviour, IDamage
     {
         if (other.CompareTag("HealthPickup"))
         {
-            PickUpHealth(other.gameObject);
+                PickUpHealth(other.gameObject);
         }
-        
+
         else if (other.CompareTag("AmmoPickup"))
         {
-            PickupAmmo(other.gameObject);
+                PickupAmmo(other.gameObject);
         }
 
         else if (other.CompareTag("Key"))
         {
-            PickUpKey(other.gameObject);
+                PickUpKey(other.gameObject);
         }
         else if (other.CompareTag("RocketPiece"))
         {
-
             if (!hasRocketPiece)
             {
-                PickUpRocket(other.gameObject);
+                    PickUpRocket(other.gameObject);
 
             }
         }
         else if (other.CompareTag("PlayerBase"))
         {
-
             if (hasRocketPiece)
             {
-                RemoveRocketPiece();
-                gameManager.instance.rocketPiecesCollected++;
-                gameManager.instance.updateRocketPiecesUI();
-                gameManager.instance.UpdateRepairKitsHeld();
+                    RemoveRocketPiece();
+                    gameManager.instance.rocketPiecesCollected++;
+                    gameManager.instance.updateRocketPiecesUI();
+                    gameManager.instance.UpdateRepairKitsHeld();
             }
         }
     }
-
-
-
+    
     void PickUpRocket(GameObject rocket)
     {
         hasRocketPiece = true;
@@ -335,7 +332,7 @@ public class playerController : MonoBehaviour, IDamage
 
     void PickUpHealth(GameObject healthPickup)
     {
-
+        LerpTowardsPlayer lerpObject = healthPickup.AddComponent<LerpTowardsPlayer>();
         health += healthPickupAmount;
         if (health > maxHealth)
         {
@@ -348,6 +345,7 @@ public class playerController : MonoBehaviour, IDamage
 
     void PickupAmmo(GameObject ammo)
     {
+        LerpTowardsPlayer lerpObject = ammo.AddComponent<LerpTowardsPlayer>();
         currentAmmo += ammoPickupAmount;
         if ( currentAmmo > maxAmmo)
         {

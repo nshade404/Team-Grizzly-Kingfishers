@@ -6879,6 +6879,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4789679178849582462, guid: 482a23eb854875b4ea0a9d1394443a6b, type: 3}
+      propertyPath: floatSpeed
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -21434,6 +21438,14 @@ PrefabInstance:
     - target: {fileID: 5766254608244252584, guid: d2acd61f3f3a052479763f8860bc9294, type: 3}
       propertyPath: m_Name
       value: HealthPickup
+      objectReference: {fileID: 0}
+    - target: {fileID: 8647402924277241675, guid: d2acd61f3f3a052479763f8860bc9294, type: 3}
+      propertyPath: floatSpeed
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8647402924277241675, guid: d2acd61f3f3a052479763f8860bc9294, type: 3}
+      propertyPath: minDistance
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
