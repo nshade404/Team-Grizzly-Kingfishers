@@ -10,7 +10,7 @@ public class VolumeControl : MonoBehaviour
     [SerializeField] string volumeParameter = "MasterVolume";
     [SerializeField] AudioMixer mixer;
     [SerializeField] Slider slider;
-    [SerializeField] float multiplier = 5f;
+    [SerializeField] float multiplier = 10f;
     // Start is called before the first frame update
     void Start()
     {
