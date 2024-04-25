@@ -1854,7 +1854,7 @@ MonoBehaviour:
   volumeParameter: MasterVolume
   mixer: {fileID: 24100000, guid: 77cf3e60c57d7974b99e2b9b0d5673f7, type: 2}
   slider: {fileID: 1518377860}
-  multiplier: 30
+  multiplier: 5
 --- !u!114 &1518377860 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2627616442388504411, guid: 884019ffa83f3e44ab291ef1aa5dd794, type: 3}
@@ -2062,7 +2062,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: 77cf3e60c57d7974b99e2b9b0d5673f7, type: 2}
   m_audioClip: {fileID: 8300000, guid: 401a06dda9453f345b599a9db428dfb2, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2893,7 +2893,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2627616442388504411, guid: 884019ffa83f3e44ab291ef1aa5dd794, type: 3}
       propertyPath: m_Value
-      value: 0.8
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2627616442388504411, guid: 884019ffa83f3e44ab291ef1aa5dd794, type: 3}
       propertyPath: m_MaxValue
