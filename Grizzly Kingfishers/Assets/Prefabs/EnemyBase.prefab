@@ -122,6 +122,8 @@ MonoBehaviour:
   Effectable: {fileID: 5603207018323567512}
   anim: {fileID: -3563734931954008179}
   aud: {fileID: -3077422509532506732}
+  capsuleCollider: {fileID: 2840146266340885588}
+  rb: {fileID: 1708670849906851377}
   health: 3
   speed: 3
   shootRate: 0.5

@@ -11,6 +11,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
     [SerializeField] EffectableObjects Effectable;
     [SerializeField] Animator anim;
     [SerializeField] AudioSource aud;
+    [SerializeField] Collider capsuleCollider;
 
     [Header("----- Enemy Stats -----")]
     [Range(0, 10)][SerializeField] float health;
@@ -231,9 +232,23 @@ public class EnemyAI : MonoBehaviour, IDamage {
 
     IEnumerator deathAnimation()
     {
+
         anim.SetTrigger("Death");
         agent.speed = 0.0f;
         yield return new WaitForSeconds(5f);
+        capsuleCollider.enabled = false;
+        Vector3 targetPosition = transform.position - new Vector3(0, 3f, 0);
+        float lerpTime = 0f;
+        float lerpDuration = 3f;
+        Vector3 initialPosition = transform.position;
+        while (lerpTime < lerpDuration)
+        {
+            transform.position = Vector3.Lerp(initialPosition, targetPosition, lerpTime / lerpDuration);
+
+            lerpTime += Time.deltaTime;
+
+            yield return null;
+        }
         Destroy(gameObject);
     }
 
