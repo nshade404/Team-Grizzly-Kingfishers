@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class TitleScreenManager : MonoBehaviour
 {
@@ -8,6 +9,11 @@ public class TitleScreenManager : MonoBehaviour
     [SerializeField] GameObject OptionScreen;
     [SerializeField] GameObject CreditScreen;
     [SerializeField] GameObject LoadingScreen;
+
+    // First buttons selectable.
+    [SerializeField] GameObject titleFirst;
+    [SerializeField] GameObject optionFirst;
+    [SerializeField] GameObject creditFirst;
 
     [SerializeField] int secondsForLoadingScreen;
 
@@ -29,17 +35,20 @@ public class TitleScreenManager : MonoBehaviour
 
     public void ReturnToTitle(bool fromOptions = false) {
         HideAllScreens();
+        EventSystem.current.SetSelectedGameObject(titleFirst);
         TitleScreen.SetActive(true);
     }
 
     public void OnOptionsClicked() {
         HideAllScreens();
+        EventSystem.current.SetSelectedGameObject(optionFirst);
         OptionScreen.GetComponent<OptionsManager>().OpenOptions();
         OptionScreen.SetActive(true);
     }
 
     public void OnCreditsClicked() {
         HideAllScreens();
+        EventSystem.current.SetSelectedGameObject(creditFirst);
         CreditScreen.SetActive(true);
     }
 
@@ -47,6 +56,7 @@ public class TitleScreenManager : MonoBehaviour
         TitleScreen.SetActive(false);
         OptionScreen.SetActive(false);
         CreditScreen.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     /// <summary>

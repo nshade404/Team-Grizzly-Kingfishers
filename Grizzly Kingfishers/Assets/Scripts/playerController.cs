@@ -407,7 +407,6 @@ public class playerController : MonoBehaviour, IDamage
             // gamemanager.instance.insufficentfunds call
         }
     }
-
 }
 
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
@@ -24,13 +25,14 @@ public class OptionsManager : MonoBehaviour
     [SerializeField] private List<OptionBtn> optionBtns;
     [SerializeField] TitleScreenManager titleScreenManager;
     [SerializeField] Button applyButton;
+    [SerializeField] Button backButton;
     [SerializeField] GameObject BackClickedWindow;
     [SerializeField] GameObject IsKeybindingWindow;
     [SerializeField] GameObject ResetBindingsWindow;
-    private OptionBtn selectedBtn;
-    public Sprite btnIdle;
-    public Sprite btnHover;
-    public Sprite btnSelected;
+    [SerializeField] private OptionBtn selectedBtn;
+    //public Sprite btnIdle;
+    //public Sprite btnHover;
+    //public Sprite btnSelected;
 
     public Slider masterSlider;
     public Slider bgmSlider;
@@ -62,6 +64,8 @@ public class OptionsManager : MonoBehaviour
 
             PlayerPrefs.SetString(PLAYER_DEFAULT_KEYBINDS, pia.SaveBindingOverridesAsJson());
         }
+
+        OnButtonSelect(optionBtns[0]);
     }
 
     /// <summary>
@@ -85,8 +89,21 @@ public class OptionsManager : MonoBehaviour
     public void OnButtonSelect(OptionBtn btn) {
         selectedBtn = btn;
         ResetAllButtons();
-        btn.btnBackground.sprite = btnSelected;
+        //btn.btnBackground.sprite = btnSelected;
         btn.optionScreen.SetActive(true);
+
+        // Set the apply buttons navigation dynamically to be the currently selected button.
+        Navigation newApplyNav = new Navigation();
+        newApplyNav.mode = Navigation.Mode.Explicit;
+        newApplyNav.selectOnUp = btn.GetComponent<Button>();
+        newApplyNav.selectOnRight = backButton;
+        applyButton.navigation = newApplyNav;
+
+        Navigation newBackNav = new Navigation();
+        newBackNav.mode = Navigation.Mode.Explicit;
+        newBackNav.selectOnUp = btn.GetComponent<Button>();
+        newBackNav.selectOnLeft = applyButton;
+        backButton.navigation = newBackNav;
     }
 
     /// <summary>
@@ -98,7 +115,7 @@ public class OptionsManager : MonoBehaviour
         }
 
         ResetAllButtons();
-        btn.btnBackground.sprite = btnHover;
+        //btn.btnBackground.sprite = btnHover;
     }
 
     /// <summary>
@@ -112,14 +129,14 @@ public class OptionsManager : MonoBehaviour
     /// Resets all buttons except the selected button back to default states.
     /// </summary>
     private void ResetAllButtons() {
-        foreach(OptionBtn btn in optionBtns) {
-            // If we have a currently selected button, don't change it...
-            if(selectedBtn != null && btn == selectedBtn) {
-                continue;
-            }
-            btn.btnBackground.sprite = btnIdle;
-            btn.optionScreen.SetActive(false);
-        }
+        //foreach(OptionBtn btn in optionBtns) {
+        //    // If we have a currently selected button, don't change it...
+        //    if(selectedBtn != null && btn == selectedBtn) {
+        //        continue;
+        //    }
+        //    //btn.btnBackground.sprite = btnIdle;
+        //    btn.optionScreen.SetActive(false);
+        //}
     }
 
     public void SliderValueChanged(int index) {
@@ -174,6 +191,7 @@ public class OptionsManager : MonoBehaviour
         }
 
         PlayerPrefs.Save();
+        EventSystem.current.SetSelectedGameObject(backButton.gameObject);
         applyButton.interactable = false;
         optionPendingChange = false;
         BackClickedWindow.SetActive(false);
