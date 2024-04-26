@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class KeyPickup : MonoBehaviour
 {
+    /*
     public List<GameObject> pickups;
     private Dictionary<GameObject, bool> pickupStates = new Dictionary<GameObject, bool>();
     private bool hasKey = false;
@@ -69,6 +70,6 @@ public class KeyPickup : MonoBehaviour
     {
         return hasRocketPiece;
     }
+    */
 }
-
 

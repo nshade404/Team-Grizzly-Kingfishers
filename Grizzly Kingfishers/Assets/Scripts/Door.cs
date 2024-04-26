@@ -16,7 +16,9 @@ public class Door : MonoBehaviour
             //if (playerController != null && playerController.HasKey())
             if (gameManager.instance.playerScript.HasKey())
             {
-                OpenDoor();
+                //OpenDoor();
+
+                StartCoroutine(doorAnimation());
                 RemoveKey();
                 gameManager.instance.playerScript.keysCollected--;
             }
@@ -28,14 +30,15 @@ public class Door : MonoBehaviour
         }
     }
 
-    private void OpenDoor()
+    /*private void OpenDoor()
     {
         Debug.Log("Door opened!");
         aud.PlayOneShot(audOpen, audOpenVol);
         gameObject.GetComponent<MeshRenderer>().enabled = false;
+
         Destroy(gameObject);
     }
-
+    */
     private void RemoveKey()
     {
         if (keyPickup != null)
@@ -45,5 +48,24 @@ public class Door : MonoBehaviour
         
 
       
+    }
+
+    IEnumerator doorAnimation()
+    {
+        aud.PlayOneShot(audOpen, audOpenVol);
+        gameObject.GetComponent<Collider>().enabled = false;
+        Vector3 targetPosition = transform.position - new Vector3(0, -4f, 0);
+        float lerpTime = 0f;
+        float lerpDuration = 2f;
+        Vector3 initialPosition = transform.position;
+        while (lerpTime < lerpDuration)
+        {
+            transform.position = Vector3.Lerp(initialPosition, targetPosition, lerpTime / lerpDuration);
+
+            lerpTime += Time.deltaTime;
+
+            yield return null;
+        }
+        Destroy(gameObject);
     }
 }

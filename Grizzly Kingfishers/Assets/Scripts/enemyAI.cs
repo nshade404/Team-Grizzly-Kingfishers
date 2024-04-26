@@ -237,7 +237,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
         agent.speed = 0.0f;
         yield return new WaitForSeconds(5f);
         capsuleCollider.enabled = false;
-        Vector3 targetPosition = transform.position - new Vector3(0, 3f, 0);
+        Vector3 targetPosition = transform.position - new Vector3(0, -3f, 0);
         float lerpTime = 0f;
         float lerpDuration = 3f;
         Vector3 initialPosition = transform.position;
