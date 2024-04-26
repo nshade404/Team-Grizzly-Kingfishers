@@ -15,6 +15,7 @@ TagManager:
   - Turret
   - AmmoPickup
   - minimap
+  - CollectablePickup
   layers:
   - Default
   - TransparentFX

@@ -30,6 +30,7 @@ public class playerController : MonoBehaviour, IDamage
     public int keysCollected = 0;
     public int rocketPiecesCollected = 0;
     public int ammoPickupAmount = 30;
+    public int pickupCollected = 0;
     public float jumpForce = 5f;
     public float maxJumpForce = 10f;
     public float minJumpForce = 5f;
@@ -284,34 +285,41 @@ public class playerController : MonoBehaviour, IDamage
     {
         if (other.CompareTag("HealthPickup"))
         {
-                PickUpHealth(other.gameObject);
+            PickUpHealth(other.gameObject);
         }
 
         else if (other.CompareTag("AmmoPickup"))
         {
-                PickupAmmo(other.gameObject);
+            PickupAmmo(other.gameObject);
         }
 
         else if (other.CompareTag("Key"))
         {
-                PickUpKey(other.gameObject);
+            PickUpKey(other.gameObject);
         }
         else if (other.CompareTag("RocketPiece"))
         {
             if (!hasRocketPiece)
             {
-                    PickUpRocket(other.gameObject);
+                PickUpRocket(other.gameObject);
 
             }
         }
+
+        else if (other.CompareTag("CollectablePickup"))
+        {
+            PickupCollectable(other.gameObject);
+        }
+
+
         else if (other.CompareTag("PlayerBase"))
         {
             if (hasRocketPiece)
             {
-                    RemoveRocketPiece();
-                    gameManager.instance.rocketPiecesCollected++;
-                    gameManager.instance.updateRocketPiecesUI();
-                    gameManager.instance.UpdateRepairKitsHeld();
+                RemoveRocketPiece();
+                gameManager.instance.rocketPiecesCollected++;
+                gameManager.instance.updateRocketPiecesUI();
+                gameManager.instance.UpdateRepairKitsHeld();
             }
         }
     }
@@ -361,6 +369,14 @@ public class playerController : MonoBehaviour, IDamage
         keysCollected++;
         Destroy(keyPickup);
 
+    }
+
+    void PickupCollectable(GameObject collectable)
+    {
+        LerpTowardsPlayer lerpObject = collectable.AddComponent<LerpTowardsPlayer>();
+
+        pickupCollected++;
+        Destroy(collectable);
     }
 
     public bool HasKey()
