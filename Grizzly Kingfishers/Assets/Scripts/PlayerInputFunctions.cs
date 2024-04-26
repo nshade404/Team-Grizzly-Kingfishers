@@ -15,8 +15,6 @@ public class PlayerInputFunctions : MonoBehaviour
             UnbindAllActions();
         }
         playerInputActions.Player.Enable();
-        // Shoot
-        //playerInputActions.Player.Shoot.started += Shoot;
         // Jump
         playerInputActions.Player.Jump.started += Jump;
         playerInputActions.Player.Jump.canceled += Jump;
@@ -37,8 +35,6 @@ public class PlayerInputFunctions : MonoBehaviour
     }
 
     public void UnbindAllActions() {
-        // Shoot
-        playerInputActions.Player.Shoot.started -= Shoot;
         // Jump
         playerInputActions.Player.Jump.started -= Jump;
         playerInputActions.Player.Jump.canceled -= Jump;
@@ -74,19 +70,6 @@ public class PlayerInputFunctions : MonoBehaviour
 
     private void Look(Vector2 inVector) {
         gameManager.instance.camController.MouseDir = inVector.normalized;
-    }
-
-    public void Shoot(InputAction.CallbackContext context) {
-        switch (context.phase) {
-            case InputActionPhase.Started:
-                gameManager.instance.playerScript.IsShooting = true;
-                Debug.Log("Shoot Started");
-                break;
-            case InputActionPhase.Canceled:
-                //gameManager.instance.playerScript.IsShooting = false;
-                Debug.Log("Shoot Canceled");
-                break;
-        }
     }
 
     public void Jump(InputAction.CallbackContext context) {
