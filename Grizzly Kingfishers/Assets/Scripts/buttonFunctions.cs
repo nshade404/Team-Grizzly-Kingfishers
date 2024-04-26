@@ -13,6 +13,7 @@ public class buttonFunctions : MonoBehaviour
     public void restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        gameManager.instance.player.GetComponent<PlayerInputFunctions>()?.UnbindAllActions();
         gameManager.instance.stateUnpaused();
     }
 
