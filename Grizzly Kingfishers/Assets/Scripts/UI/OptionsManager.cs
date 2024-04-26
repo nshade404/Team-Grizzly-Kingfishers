@@ -129,14 +129,14 @@ public class OptionsManager : MonoBehaviour
     /// Resets all buttons except the selected button back to default states.
     /// </summary>
     private void ResetAllButtons() {
-        //foreach(OptionBtn btn in optionBtns) {
-        //    // If we have a currently selected button, don't change it...
-        //    if(selectedBtn != null && btn == selectedBtn) {
-        //        continue;
-        //    }
-        //    //btn.btnBackground.sprite = btnIdle;
-        //    btn.optionScreen.SetActive(false);
-        //}
+        foreach (OptionBtn btn in optionBtns) {
+            // If we have a currently selected button, don't change it...
+            if (selectedBtn != null && btn == selectedBtn) {
+                continue;
+            }
+            //btn.btnBackground.sprite = btnIdle;
+            btn.optionScreen.SetActive(false);
+        }
     }
 
     public void SliderValueChanged(int index) {
