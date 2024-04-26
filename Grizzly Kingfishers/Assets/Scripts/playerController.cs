@@ -72,9 +72,13 @@ public class playerController : MonoBehaviour, IDamage
     bool isShooting;
     bool playingSteps;
 
-    PlayerInputActions pia; 
+    public PlayerInputActions pia; 
 
     public Vector3 MoveDir { get; set; } = Vector3.zero;
+
+    public int GetNumKeys() { return keysCollected; }
+    public int GetCurrentAmmoCount() { return currentAmmo; }
+    public int GetMaxAmmoCount() { return maxAmmo; }
 
     public bool IsJumping
     {
@@ -86,7 +90,7 @@ public class playerController : MonoBehaviour, IDamage
         get; set;
     }
 
-    public bool IsShooting { get; set; }
+    //public bool IsShooting { get; set; }
 
     public float Speed
     {
@@ -103,9 +107,9 @@ public class playerController : MonoBehaviour, IDamage
         updatePlayerUI();
         selectedTurret = turrets.First();
         controller = GetComponent<CharacterController>();
-        gameManager.instance.SetSelectedTurretUI(selectedTurret.GetComponent<Turrets>(), 0);
-        //gameManager.instance.costOfTurret(selectedTurret.name, selectedTurret.GetComponent<Turrets>().GetTurretCost()); // Update selected turret on startup.
         pia = GetComponent<PlayerInputFunctions>().playerInputActions;
+        gameManager.instance.InitializeTurretUI();
+        gameManager.instance.SetSelectedTurretUI(selectedTurret.GetComponent<Turrets>(), 0);
     }
 
     // Update is called once per frame
@@ -123,15 +127,6 @@ public class playerController : MonoBehaviour, IDamage
             if (pia.Player.Shoot.IsPressed() && !isShooting) {
                 StartCoroutine(Shoot());
             }
-
-            //if (Input.GetButton("Shoot") && !isShooting)
-            //{
-            //    StartCoroutine(Shoot());
-            //}
-            //if (Input.GetButtonDown("PlaceTurret"))
-            //{
-            //    PlaceTurret();
-            //}
         }
     }
 
@@ -148,11 +143,7 @@ public class playerController : MonoBehaviour, IDamage
             playerVel = Vector3.zero;
         }
 
-        // 1st person camera controls
         Vector3 moveDir;
-        //moveDir = new Vector3(MoveDir.x * transform.right, 0, MoveDir.z * transform.forward);
-        //moveDir = Input.GetAxis("Horizontal") * transform.right
-        //        + Input.GetAxis("Vertical") * transform.forward;
         moveDir = MoveDir.x * transform.right
                 + MoveDir.z * transform.forward;
 
@@ -215,8 +206,7 @@ public class playerController : MonoBehaviour, IDamage
     IEnumerator Shoot()
     {
         isShooting = true;
-        IsShooting = false; // Property for InputActions to trigger a shot.
-        //Instantiate(selectedBullet, shootPos.position, transform.rotation);
+        //IsShooting = false; // Property for InputActions to trigger a shot.
         
         if(Effectable != null) {
             yield return new WaitForSeconds(Effectable.Effect_Blind(shootRate));
@@ -232,7 +222,8 @@ public class playerController : MonoBehaviour, IDamage
             isShooting = true;
             Instantiate(selectedBullet, shootPos.position, transform.rotation);
             aud.PlayOneShot(shootSound, shootVol);
-            currentAmmo--; 
+            currentAmmo--;
+            gameManager.instance.UpdateAmmoCount();
             yield return new WaitForSeconds(shootRate);
             isShooting = false;
         }
@@ -360,6 +351,7 @@ public class playerController : MonoBehaviour, IDamage
         if ( currentAmmo > maxAmmo)
         {
             currentAmmo = maxAmmo;
+            gameManager.instance.UpdateAmmoCount();
         }
         Destroy(ammo);
     }
@@ -368,7 +360,7 @@ public class playerController : MonoBehaviour, IDamage
     {
         keysCollected++;
         Destroy(keyPickup);
-
+        gameManager.instance.UpdateKeysHeld();
     }
 
     void PickupCollectable(GameObject collectable)

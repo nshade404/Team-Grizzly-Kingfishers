@@ -12,14 +12,16 @@ using Unity.VisualScripting;
 public class gameManager : MonoBehaviour {
     public static gameManager instance;
 
-    [SerializeField] GameObject menuActive;
-    [SerializeField] GameObject menuPause;
+    public GameObject menuActive;
+    public GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject objectivePopup;
     [SerializeField] TMP_Text rocketPiecesCollectedText;
     [SerializeField] TMP_Text heldRocketPiecesText;
+    [SerializeField] TMP_Text keyText;
     [SerializeField] TMP_Text scrapText;
+    [SerializeField] TMP_Text ammoText;
     [SerializeField] GameObject enemySpawn;
     [SerializeField] TurretDetailsUI selectedTurretDetailsUI;
     public float spawnTime;
@@ -61,6 +63,10 @@ public class gameManager : MonoBehaviour {
     [SerializeField] Sprite turretBtnIconIdle;
     [SerializeField] Sprite turretBtnIconSelected;
 
+    bool objectivePopupShowing;
+
+    UIInputActions uia;
+
     // Start is called before the first frame update
     void Awake() {
         instance = this;
@@ -70,22 +76,58 @@ public class gameManager : MonoBehaviour {
         StartCoroutine(startingPopup());
         playerBase = GameObject.FindWithTag("PlayerBase");
         camController = player.GetComponentInChildren<cameraController>();
-        //stateUnpaused();
-        updateRocketPiecesUI();
-        UpdateRepairKitsHeld();
-        UpdateScrapUI();
+
+        uia = GetComponent<UIInputFunctions>().uia;
     }
 
     private void Start() {
-        InitializeTurretUI();
+        //InitializeTurretUI();
+        updateRocketPiecesUI();
+        UpdateRepairKitsHeld();
+        UpdateKeysHeld();
+        UpdateAmmoCount();
+        UpdateScrapUI();
     }
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetButtonDown("Cancel") && menuActive == null) {
+
+    }
+
+    public void CancelPressed() {
+        //if (objectivePopupShowing) {
+        //    StopCoroutine(startingPopup());
+        //    menuActive.SetActive(false);
+        //    menuActive = null;
+        //    objectivePopupShowing = false;
+        //}
+
+        if (menuActive == null) {
             statePaused();
             menuActive = menuPause;
             menuActive.SetActive(isPaused);
+        }
+        else if(menuActive != null) {
+            // we have a menu opened.... figure out how to handle...
+            string menuName = menuActive.gameObject.name;
+            Debug.Log(menuName);
+            switch (menuName) {
+                case "Pause Menu":
+                    GetComponent<buttonFunctions>().resume();
+                    break;
+                case "OptionScreen":
+                    optionScreen.GetComponent<OptionsManager>().BackButtonClicked();
+                    break;
+                case "BackPendingChanges":
+                    optionScreen.GetComponent<OptionsManager>().BackButtonNoClicked();
+                    break;
+                case "ObjectivePopup":
+                    StopCoroutine(startingPopup());
+                    menuActive.SetActive(false);
+                    menuActive = null;
+                    objectivePopupShowing = false;
+                    break;
+            }
         }
     }
 
@@ -108,9 +150,11 @@ public class gameManager : MonoBehaviour {
     IEnumerator startingPopup() {
         menuActive = objectivePopup;
         menuActive.SetActive(true);
+        objectivePopupShowing = true;
         yield return new WaitForSeconds(7.5f);
         menuActive.SetActive(false);
         menuActive = null;
+        objectivePopupShowing = false;
     }
 
     public void updateGameGoal(int amount) {
@@ -188,6 +232,14 @@ public class gameManager : MonoBehaviour {
         }
     }
 
+    public void UpdateAmmoCount() {
+        ammoText.text = string.Format("{0}/{1}", playerScript.GetCurrentAmmoCount().ToString(), playerScript.GetMaxAmmoCount().ToString());
+    }
+
+    public void UpdateKeysHeld() {
+        keyText.text = playerScript.GetNumKeys().ToString();
+    }
+
     public void AddScrap(int amount) {
         scrapWallet += amount;
         UpdateScrapUI();
@@ -216,14 +268,18 @@ public class gameManager : MonoBehaviour {
         selectedTurretDetailsUI.cost.text = turret.GetTurretCost().ToString();
     }
 
-    private void InitializeTurretUI() {
+    public void InitializeTurretUI() {
         for(int i = 0; i < playerScript.turrets.Count; i++) {
             // Safety check in case some reason player has more turrets in list
             if(i >= turretButtons.Count) { break; }
 
             turretButtons[i].btnBackground.sprite = turretBtnIconIdle;
             turretButtons[i].icon.sprite = playerScript.turrets[i].GetComponent<Turrets>().turretIcon;
-            turretButtons[i].cost.text = playerScript.turrets[i].GetComponent<Turrets>().GetTurretCost().ToString();
+            //turretButtons[i].cost.text = playerScript.turrets[i].GetComponent<Turrets>().GetTurretCost().ToString();
+            string turretNumber = "SelectTurret" + (i + 1);
+            string turretBinding = playerScript.pia.FindAction(turretNumber).GetBindingDisplayString(0);
+            turretButtons[i].cost.text = turretBinding;
+            //turretButtons[i].cost.text = (i + 1).ToString();
         }
     }
 

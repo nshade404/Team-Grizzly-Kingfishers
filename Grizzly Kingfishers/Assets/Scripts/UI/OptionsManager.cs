@@ -202,6 +202,7 @@ public class OptionsManager : MonoBehaviour
         if (optionPendingChange) {
             // if so, show pop up asking if they want to save or discard changes
             BackClickedWindow.SetActive(true);
+            gameManager.instance.menuActive = BackClickedWindow;
         } else {
             CloseOptionsScreen();
             pia.Player.Enable();
@@ -215,6 +216,12 @@ public class OptionsManager : MonoBehaviour
     }
 
     public void BackButtonNoClicked() {
+        // reset slider values here.
+        masterSlider.value = (int)(PlayerPrefs.GetFloat(MASTER_VALUE, 1) * VOLUME_MAX);
+        bgmSlider.value = (int)(PlayerPrefs.GetFloat(BGM_VALUE, 1) * VOLUME_MAX);
+        sfxSlider.value = (int)(PlayerPrefs.GetFloat(SFX_VALUE, 1) * VOLUME_MAX);
+        lookSlider.value = (PlayerPrefs.GetFloat(LOOK_SENSITIVITY, 0)); // if we have an pref for it, use that, otherwise use 0.
+
         BackClickedWindow.SetActive(false);
         CloseOptionsScreen();
     }
@@ -227,6 +234,7 @@ public class OptionsManager : MonoBehaviour
         else { // otherwise we are in game, return to game...
             BackClickedWindow.SetActive(false);
             gameObject.SetActive(false);
+            gameManager.instance.menuActive = gameManager.instance.menuPause;
         }
     }
 

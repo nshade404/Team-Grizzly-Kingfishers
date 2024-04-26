@@ -21,6 +21,7 @@ public class Door : MonoBehaviour
                 StartCoroutine(doorAnimation());
                 RemoveKey();
                 gameManager.instance.playerScript.keysCollected--;
+                gameManager.instance.UpdateKeysHeld();
             }
             else
             {
