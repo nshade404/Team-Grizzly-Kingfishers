@@ -351,8 +351,8 @@ public class playerController : MonoBehaviour, IDamage
         if ( currentAmmo > maxAmmo)
         {
             currentAmmo = maxAmmo;
-            gameManager.instance.UpdateAmmoCount();
         }
+        gameManager.instance.UpdateAmmoCount();
         Destroy(ammo);
     }
 
