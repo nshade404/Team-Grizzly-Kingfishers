@@ -89496,6 +89496,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: -3212301846533594789, guid: fb5503ca2356c2d4bb00bb0358b04011, type: 3}
+    - target: {fileID: 620622898954065467, guid: 086412499111ecd448839203faf186a8, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 7927020938770195631, guid: 77cf3e60c57d7974b99e2b9b0d5673f7, type: 2}
     - target: {fileID: 4600526944290596606, guid: 086412499111ecd448839203faf186a8, type: 3}
       propertyPath: m_Size.y
       value: 1.5
@@ -91660,6 +91664,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: -3212301846533594789, guid: fb5503ca2356c2d4bb00bb0358b04011, type: 3}
+    - target: {fileID: 620622898954065467, guid: 086412499111ecd448839203faf186a8, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 7927020938770195631, guid: 77cf3e60c57d7974b99e2b9b0d5673f7, type: 2}
     - target: {fileID: 1214150849924058922, guid: 086412499111ecd448839203faf186a8, type: 3}
       propertyPath: keyPickup
       value: 
