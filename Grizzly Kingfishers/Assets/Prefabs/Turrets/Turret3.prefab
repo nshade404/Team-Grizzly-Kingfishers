@@ -152,7 +152,8 @@ MonoBehaviour:
   scrapCost: 10
   turretRotateSpeed: 4
   turretIcon: {fileID: 21300000, guid: 303ee7b5bcfb2bf4182ae877795f5826, type: 3}
-  audShoot: {fileID: 0}
+  viewCone: 90
+  audShoot: {fileID: 8300000, guid: 857a532679e2e584e8b012b80fb2c216, type: 3}
   audShootVol: 0
 --- !u!114 &2626461655418206886
 MonoBehaviour:

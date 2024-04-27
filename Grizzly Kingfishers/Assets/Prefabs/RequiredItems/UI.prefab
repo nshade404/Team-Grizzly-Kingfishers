@@ -4938,7 +4938,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Ojective\n\nKill Enemies to get Scrap\n\nUse Scrap to build Turrets\n\nFind
+  m_text: "Objective\n\nKill Enemies to get Scrap\n\nUse Scrap to build Turrets\n\nFind
     Rocket Pieces \n\nBring back to base to build Rocket\n\nSurvive and Escape\n\n\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 63cdafa64b0d33f438f8394b40cde2d0, type: 2}

@@ -31,7 +31,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
     [Header("----- Drops -----")]
     [SerializeField] int minScrapDrop;
     [SerializeField] int maxScrapDrop;
-    [SerializeField] GameObject healthDrop;
+    [SerializeField] GameObject[] possibleDrops;
     [Range(0,100)][SerializeField] int healthDropChance;
 
     [Header("----- Drops -----")]
@@ -201,11 +201,12 @@ public class EnemyAI : MonoBehaviour, IDamage {
             {
                 //gameManager.instance.updateGameGoal(-1);
                 gameManager.instance.AddScrap(Random.Range(minScrapDrop, maxScrapDrop));
+                int droppedItem = Random.Range(0, possibleDrops.Length);
                 int chance = Random.Range(0, 101);
                 if (chance <= healthDropChance) {
-                    Instantiate(healthDrop, transform.position, transform.rotation);
+                    Instantiate(possibleDrops[droppedItem], transform.position, transform.rotation);
 
-                    HealthDropFloatingMotion floatingMotion = healthDrop.AddComponent<HealthDropFloatingMotion>();
+                    HealthDropFloatingMotion floatingMotion = possibleDrops[droppedItem].AddComponent<HealthDropFloatingMotion>();
                 }
                 StartCoroutine(deathAnimation());
                 isShooting = false;

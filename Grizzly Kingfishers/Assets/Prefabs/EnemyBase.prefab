@@ -123,7 +123,6 @@ MonoBehaviour:
   anim: {fileID: -3563734931954008179}
   aud: {fileID: -3077422509532506732}
   capsuleCollider: {fileID: 2840146266340885588}
-  rb: {fileID: 1708670849906851377}
   health: 3
   speed: 3
   shootRate: 0.5
@@ -135,7 +134,9 @@ MonoBehaviour:
   faceTargetSpeed: 5
   minScrapDrop: 1
   maxScrapDrop: 5
-  healthDrop: {fileID: 5766254608244252584, guid: d2acd61f3f3a052479763f8860bc9294, type: 3}
+  possibleDrops:
+  - {fileID: 5766254608244252584, guid: d2acd61f3f3a052479763f8860bc9294, type: 3}
+  - {fileID: 1609426563364382538, guid: 482a23eb854875b4ea0a9d1394443a6b, type: 3}
   healthDropChance: 10
   audInsult: []
   audInsultVol: 0

@@ -21,6 +21,10 @@ public class Turrets : MonoBehaviour, IDamage
     [Range(0, 5)][SerializeField] int turretRotateSpeed;
     public Sprite turretIcon;
 
+    [Header("----- Detection Settings -----")]
+    [SerializeField] int viewCone; // our field of view
+
+
     Color startColor = Color.white;
     bool isShooting;
     int currentCannon;
@@ -65,9 +69,20 @@ public class Turrets : MonoBehaviour, IDamage
             Quaternion rot = Quaternion.LookRotation(new Vector3(targetDir.x, transform.position.y, targetDir.z));
             turretHead.transform.rotation = Quaternion.Lerp(turretHead.transform.rotation, rot, Time.deltaTime * turretRotateSpeed);
 
+            // TODO: Josh, Wanted to get them to only shoot when they are within their 'viewcone' but don't have time to debug this more right now...
+            //float angleToTarget = Vector3.Angle(targetDir, turretHead.transform.forward);
+            //RaycastHit hit;
+            //if(Physics.Raycast(turretHead.transform.position, targetDir, out hit)) {
+            //    bool hitisTargetable = hit.collider.CompareTag("Enemy");
+            //    if(hitisTargetable && angleToTarget <= viewCone) {
+                    
+            //    }
+            //}
+
             if (!isShooting) {
                 StartCoroutine(FireCannon());
             }
+
         }
         else { // Otherwise check if we have more targets that came into range and switch to them
             if(targets.Count > 0) {
