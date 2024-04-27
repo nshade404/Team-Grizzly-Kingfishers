@@ -8,8 +8,6 @@ public class CreditsManager : MonoBehaviour
 {
     public Text creditsText;
     public string creditsFilePath = "Assets/RocketAwayCredits.txt";
-    public float scrollSpeed = 1f;
-    public float scrollSensitivity = 1f;
 
     private string[] creditLines;
     private float startYPos;
