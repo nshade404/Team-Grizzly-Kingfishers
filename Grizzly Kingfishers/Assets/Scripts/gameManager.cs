@@ -152,7 +152,10 @@ public class gameManager : MonoBehaviour {
         menuActive.SetActive(true);
         objectivePopupShowing = true;
         yield return new WaitForSeconds(7.5f);
-        menuActive.SetActive(false);
+        if (menuActive != null)
+        {
+            menuActive.SetActive(false);
+        }
         menuActive = null;
         objectivePopupShowing = false;
     }
