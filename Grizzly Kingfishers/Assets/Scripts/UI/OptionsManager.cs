@@ -146,6 +146,7 @@ public class OptionsManager : MonoBehaviour
                     // We have a new value, prompt an update to be saved
                     optionPendingChange = true;
                 }
+                
                 break;
             case 1: // BGM slider
                 if ((int)(PlayerPrefs.GetFloat(BGM_VALUE, 1) * VOLUME_MAX) != bgmSlider.value) {
@@ -170,6 +171,12 @@ public class OptionsManager : MonoBehaviour
 
         if (optionPendingChange) {
             applyButton.interactable = true;
+            if (titleScreenManager != null) { // we are on titlescreen.
+                titleScreenManager.GetVolumeControl().PreviewVolume(masterSlider.normalizedValue, bgmSlider.normalizedValue, sfxSlider.normalizedValue);
+            }
+            else if (gameManager.instance != null) { // we are in game.
+                gameManager.instance.GetVolumeControl().PreviewVolume(masterSlider.normalizedValue, bgmSlider.normalizedValue, sfxSlider.normalizedValue);
+            }
         }
     }
 
@@ -190,6 +197,14 @@ public class OptionsManager : MonoBehaviour
             gameManager.instance.camController.UpdateSensitivityFromPrefs();
         }
 
+        // Update audio options
+        if (titleScreenManager != null) { // we are on titlescreen.
+            titleScreenManager.GetVolumeControl().UpdateVolumes();
+        }
+        else if (gameManager.instance != null) { // we are in game.
+            gameManager.instance.GetVolumeControl().UpdateVolumes();
+        }
+
         PlayerPrefs.Save();
         EventSystem.current.SetSelectedGameObject(backButton.gameObject);
         applyButton.interactable = false;
@@ -202,7 +217,9 @@ public class OptionsManager : MonoBehaviour
         if (optionPendingChange) {
             // if so, show pop up asking if they want to save or discard changes
             BackClickedWindow.SetActive(true);
-            gameManager.instance.menuActive = BackClickedWindow;
+            if(gameManager.instance != null) {
+                gameManager.instance.menuActive = BackClickedWindow;
+            }
         } else {
             CloseOptionsScreen();
             pia.Player.Enable();

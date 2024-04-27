@@ -17,6 +17,10 @@ public class TitleScreenManager : MonoBehaviour
 
     [SerializeField] int secondsForLoadingScreen;
 
+    [SerializeField] VolumeControl volumeControl;
+
+    public VolumeControl GetVolumeControl() { return volumeControl; }
+
     private void Start() {
         ReturnToTitle();
     }

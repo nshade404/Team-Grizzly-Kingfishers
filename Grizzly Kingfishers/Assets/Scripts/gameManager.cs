@@ -63,9 +63,14 @@ public class gameManager : MonoBehaviour {
     [SerializeField] Sprite turretBtnIconIdle;
     [SerializeField] Sprite turretBtnIconSelected;
 
+    [Header("----- Audio Items -----")]
+    [SerializeField] VolumeControl volumeControl;
+
     bool objectivePopupShowing;
 
     UIInputActions uia;
+
+    public VolumeControl GetVolumeControl() { return volumeControl; }
 
     // Start is called before the first frame update
     void Awake() {
@@ -110,7 +115,6 @@ public class gameManager : MonoBehaviour {
         else if(menuActive != null) {
             // we have a menu opened.... figure out how to handle...
             string menuName = menuActive.gameObject.name;
-            Debug.Log(menuName);
             switch (menuName) {
                 case "Pause Menu":
                     GetComponent<buttonFunctions>().resume();
