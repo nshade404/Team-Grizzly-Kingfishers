@@ -66,7 +66,8 @@ public class EnemyAI : MonoBehaviour, IDamage {
         target = null;
 
         if (model != null) { // capture initial material color.
-            startColor = model.material.color;
+            SetStartColor();
+            //startColor = model.material.color;
         } else {
             Debug.Log("Forgot to set reference for 'model' in EnemyAI!!");
         }
@@ -78,6 +79,42 @@ public class EnemyAI : MonoBehaviour, IDamage {
 
         agent.SetDestination(gameManager.instance.playerBase.transform.position);
         isAlive = true;
+    }
+
+    private void SetStartColor() {
+        Bullet ourBullet = bullet.GetComponent<Bullet>();
+        Color newColor = Color.white;
+        switch (ourBullet.GetDamageType()) {
+            case Bullet.DamageType.Normal:
+                newColor = model.material.color;
+                break;
+            case Bullet.DamageType.Poison:
+                newColor = Color.green;
+                break;
+            case Bullet.DamageType.Fire:
+                newColor = Color.red;
+                break;
+            case Bullet.DamageType.Ice:
+                newColor = Color.cyan;
+                break;
+            case Bullet.DamageType.Stone:
+                newColor = Color.gray;
+                break;
+            case Bullet.DamageType.Electric:
+                newColor = Color.yellow;
+                break;
+            case Bullet.DamageType.PocketSand:
+                newColor = Color.black;
+                break;
+            case Bullet.DamageType.visciousMockery:
+                newColor = Color.magenta;
+                break;
+        }
+        Renderer[] meshPieces = GetComponentsInChildren<Renderer>();
+        for(int i = 0; i < meshPieces.Length; i++) {
+            meshPieces[i].material.color = newColor;   
+        }
+        startColor = newColor;
     }
 
     // Update is called once per frame
@@ -208,6 +245,8 @@ public class EnemyAI : MonoBehaviour, IDamage {
 
                     HealthDropFloatingMotion floatingMotion = possibleDrops[droppedItem].AddComponent<HealthDropFloatingMotion>();
                 }
+                //agent.speed = 0;
+                agent.enabled = false;
                 StartCoroutine(deathAnimation());
                 isShooting = false;
             }
@@ -228,7 +267,9 @@ public class EnemyAI : MonoBehaviour, IDamage {
         agent.speed = 0;
         anim.SetTrigger("Damage");
         yield return new WaitForSeconds(0.5f);
-        agent.speed = originalSpeed;
+        if (IsAlive) {
+            agent.speed = originalSpeed;
+        }
     }
 
     IEnumerator deathAnimation()
