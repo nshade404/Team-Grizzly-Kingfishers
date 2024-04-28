@@ -7,6 +7,7 @@ public class buttonFunctions : MonoBehaviour
 {
     public void resume()
     {
+        gameManager.instance.playerScript.pia.Enable();
         gameManager.instance.stateUnpaused();
     }
 

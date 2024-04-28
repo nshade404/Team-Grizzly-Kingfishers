@@ -16,10 +16,22 @@ public class UIInputFunctions : MonoBehaviour
         uia.UI.Enable();
 
         uia.UI.Cancel.performed += CancelPressed;
+        //uia.UI.Pause.performed += StartPressed;
     }
 
     public void UnbindAllActions() {
-        uia.UI.Cancel.performed -= CancelPressed;
+        uia.UI.Submit.performed -= CancelPressed;
+        //uia.UI.Pause.performed -= StartPressed;
+    }
+
+    private void StartPressed(InputAction.CallbackContext context) {
+        switch (context.phase) {
+            case InputActionPhase.Performed:
+                if (gameManager.instance != null) {
+                    //gameManager.instance.StartPressed();
+                }
+                break;
+        }
     }
 
     private void CancelPressed(InputAction.CallbackContext context) {

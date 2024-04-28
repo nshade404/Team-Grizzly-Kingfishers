@@ -32,6 +32,8 @@ public class PlayerInputFunctions : MonoBehaviour
         playerInputActions.Player.SelectTurret5.started += SelectTurret5;
         playerInputActions.Player.SelectTurret6.started += SelectTurret6;
         playerInputActions.Player.PlaceTurret.started += PlaceTurret;
+
+        playerInputActions.UI.Escape.performed += StartPressed;
     }
 
     public void UnbindAllActions() {
@@ -52,6 +54,7 @@ public class PlayerInputFunctions : MonoBehaviour
         playerInputActions.Player.SelectTurret5.started -= SelectTurret5;
         playerInputActions.Player.SelectTurret6.started -= SelectTurret6;
         playerInputActions.Player.PlaceTurret.started -= PlaceTurret;
+        playerInputActions.UI.Escape.performed -= StartPressed;
     }
 
     public void LoadSavedBindings() {
@@ -62,6 +65,17 @@ public class PlayerInputFunctions : MonoBehaviour
     private void Update() {
         Move(playerInputActions.Player.Movement.ReadValue<Vector2>());
         Look(playerInputActions.Player.Camera.ReadValue<Vector2>());
+    }
+
+    private void StartPressed(InputAction.CallbackContext context) {
+        switch (context.phase) {
+            case InputActionPhase.Performed:
+                Debug.Log(context);
+                if (gameManager.instance != null) {
+                    //gameManager.instance.StartPressed();
+                }
+                break;
+        }
     }
 
     private void Move(Vector2 inVector) {

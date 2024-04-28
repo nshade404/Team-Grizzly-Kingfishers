@@ -8,6 +8,7 @@ using UnityEditor;
 using UnityEngine.Rendering;
 using UnityEngine.InputSystem;
 using Unity.VisualScripting;
+using UnityEngine.EventSystems;
 
 public class gameManager : MonoBehaviour {
     public static gameManager instance;
@@ -16,6 +17,7 @@ public class gameManager : MonoBehaviour {
     public GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
+    [SerializeField] GameObject resumeBtn;
     [SerializeField] GameObject objectivePopup;
     [SerializeField] TMP_Text rocketPiecesCollectedText;
     [SerializeField] TMP_Text heldRocketPiecesText;
@@ -66,9 +68,9 @@ public class gameManager : MonoBehaviour {
     [Header("----- Audio Items -----")]
     [SerializeField] VolumeControl volumeControl;
 
-    bool objectivePopupShowing;
+    public bool objectivePopupShowing;
 
-    UIInputActions uia;
+    public UIInputActions uia;
 
     public VolumeControl GetVolumeControl() { return volumeControl; }
 
@@ -99,6 +101,16 @@ public class gameManager : MonoBehaviour {
 
     }
 
+    public void StartPressed() {
+        if (menuActive == null) {
+            statePaused();
+            menuActive = menuPause;
+            menuActive.SetActive(isPaused);
+            playerScript.pia.Disable();
+            EventSystem.current.SetSelectedGameObject(resumeBtn);
+        }
+    }
+
     public void CancelPressed() {
         //if (objectivePopupShowing) {
         //    StopCoroutine(startingPopup());
@@ -111,8 +123,10 @@ public class gameManager : MonoBehaviour {
             statePaused();
             menuActive = menuPause;
             menuActive.SetActive(isPaused);
+            playerScript.pia.Disable();
+            EventSystem.current.SetSelectedGameObject(resumeBtn);
         }
-        else if(menuActive != null) {
+        else  if (menuActive != null) {
             // we have a menu opened.... figure out how to handle...
             string menuName = menuActive.gameObject.name;
             switch (menuName) {
