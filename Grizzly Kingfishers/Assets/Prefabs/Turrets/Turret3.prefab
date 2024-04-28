@@ -142,7 +142,7 @@ MonoBehaviour:
   model: {fileID: 143405731565175140}
   turretHead: {fileID: 143405731562921892}
   Effectable: {fileID: 0}
-  aud: {fileID: 0}
+  aud: {fileID: 7874864447480630910}
   displayName: Fire Tower
   health: 20
   cannonBarrels:

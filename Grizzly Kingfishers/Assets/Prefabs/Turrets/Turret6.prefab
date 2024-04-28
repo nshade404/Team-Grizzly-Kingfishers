@@ -157,7 +157,7 @@ MonoBehaviour:
   model: {fileID: 5466001246032022465}
   turretHead: {fileID: 5466001246034220289}
   Effectable: {fileID: 0}
-  aud: {fileID: 0}
+  aud: {fileID: -8535974628185566426}
   displayName: Tesla
   health: 20
   cannonBarrels:
