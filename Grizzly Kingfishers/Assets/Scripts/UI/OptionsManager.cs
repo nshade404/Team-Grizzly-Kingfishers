@@ -30,6 +30,8 @@ public class OptionsManager : MonoBehaviour
     [SerializeField] GameObject IsKeybindingWindow;
     [SerializeField] GameObject ResetBindingsWindow;
     [SerializeField] private OptionBtn selectedBtn;
+    [SerializeField] AudioSource aud;
+    [SerializeField] AudioClip efx;
     //public Sprite btnIdle;
     //public Sprite btnHover;
     //public Sprite btnSelected;
@@ -91,6 +93,7 @@ public class OptionsManager : MonoBehaviour
         ResetAllButtons();
         //btn.btnBackground.sprite = btnSelected;
         btn.optionScreen.SetActive(true);
+        aud.PlayOneShot(efx, VOLUME_MAX);
 
         // Set the apply buttons navigation dynamically to be the currently selected button.
         Navigation newApplyNav = new Navigation();

@@ -3,7 +3,20 @@ guid: d0791943c0e1b014e9b8cdb13081fbda
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - titleScreenManager: {instanceID: 0}
+  - applyButton: {instanceID: 0}
+  - backButton: {instanceID: 0}
+  - BackClickedWindow: {instanceID: 0}
+  - IsKeybindingWindow: {instanceID: 0}
+  - ResetBindingsWindow: {instanceID: 0}
+  - selectedBtn: {instanceID: 0}
+  - aud: {instanceID: 0}
+  - efx: {fileID: 8300000, guid: fe7bd41ae8bbcd24694aba7c7cbc7b55, type: 3}
+  - masterSlider: {instanceID: 0}
+  - bgmSlider: {instanceID: 0}
+  - sfxSlider: {instanceID: 0}
+  - lookSlider: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
