@@ -93,7 +93,7 @@ public class OptionsManager : MonoBehaviour
         ResetAllButtons();
         //btn.btnBackground.sprite = btnSelected;
         btn.optionScreen.SetActive(true);
-        aud.PlayOneShot(efx, VOLUME_MAX);
+        aud.PlayOneShot(efx, aud.volume);
 
         // Set the apply buttons navigation dynamically to be the currently selected button.
         Navigation newApplyNav = new Navigation();
