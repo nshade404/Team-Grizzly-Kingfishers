@@ -78,10 +78,10 @@ public class gameManager : MonoBehaviour {
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<playerController>();
         timeScaleOrig = Time.timeScale;
+        objectivePopupShowing = false;
         StartCoroutine(startingPopup());
         playerBase = GameObject.FindWithTag("PlayerBase");
         camController = player.GetComponentInChildren<cameraController>();
-
         uia = GetComponent<UIInputFunctions>().uia;
     }
 
