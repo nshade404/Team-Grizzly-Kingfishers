@@ -7,7 +7,7 @@ using System.IO;
 public class CreditsManager : MonoBehaviour
 {
     public Text creditsText;
-    public string creditsFilePath = "Assets/RocketAwayCredits.txt";
+    public string creditsFilePath = "Assets/Scripts/RocketAwayCredits.txt";
 
     private string[] creditLines;
     private float startYPos;
