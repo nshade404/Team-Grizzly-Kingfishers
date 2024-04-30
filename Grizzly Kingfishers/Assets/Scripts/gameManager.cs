@@ -94,6 +94,7 @@ public class gameManager : MonoBehaviour {
         UpdateKeysHeld();
         UpdateAmmoCount();
         UpdateScrapUI();
+        GetVolumeControl().UpdateVolumes();
     }
 
     // Update is called once per frame

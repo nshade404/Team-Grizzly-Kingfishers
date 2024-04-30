@@ -39,6 +39,7 @@ public class TitleScreenManager : MonoBehaviour
 
     public void ReturnToTitle(bool fromOptions = false) {
         HideAllScreens();
+        volumeControl.UpdateVolumes();
         EventSystem.current.SetSelectedGameObject(titleFirst);
         TitleScreen.SetActive(true);
     }

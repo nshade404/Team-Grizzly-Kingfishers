@@ -65,7 +65,9 @@ public class Turrets : MonoBehaviour, IDamage
     void Update()
     {
         if(target != null && target.GetComponent<EnemyAI>().IsAlive) { // If we have a valid target, go ahead and start shooting at it.
-            Vector3 targetDir = target.position - turretHead.transform.position;
+
+            int randPos = Random.Range(0, 5);
+            Vector3 targetDir = (target.position + (target.transform.forward * randPos)) - turretHead.transform.position;
             Quaternion rot = Quaternion.LookRotation(new Vector3(targetDir.x, transform.position.y, targetDir.z));
             turretHead.transform.rotation = Quaternion.Lerp(turretHead.transform.rotation, rot, Time.deltaTime * turretRotateSpeed);
 

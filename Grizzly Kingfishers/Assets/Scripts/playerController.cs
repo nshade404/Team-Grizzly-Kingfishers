@@ -220,7 +220,8 @@ public class playerController : MonoBehaviour, IDamage
         if (currentAmmo > 0) 
         {
             isShooting = true;
-            Instantiate(selectedBullet, shootPos.position, transform.rotation);
+            Instantiate(selectedBullet, shootPos.position, Camera.main.transform.rotation);
+            //Instantiate(selectedBullet, shootPos.position, transform.rotation);
             aud.PlayOneShot(shootSound, shootVol);
             currentAmmo--;
             gameManager.instance.UpdateAmmoCount();
