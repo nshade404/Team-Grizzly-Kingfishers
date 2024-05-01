@@ -20,7 +20,7 @@ public class UIInputFunctions : MonoBehaviour
     }
 
     public void UnbindAllActions() {
-        uia.UI.Submit.performed -= CancelPressed;
+        uia.UI.Cancel.performed -= CancelPressed;
         //uia.UI.Pause.performed -= StartPressed;
     }
 

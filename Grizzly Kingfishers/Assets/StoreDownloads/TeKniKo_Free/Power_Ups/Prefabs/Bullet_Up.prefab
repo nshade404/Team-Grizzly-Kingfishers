@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 5010705684511400005}
   - component: {fileID: 5571743579853272874}
   - component: {fileID: 5276228256728477348}
+  - component: {fileID: -834482876642322063}
+  - component: {fileID: 3785407324897053884}
   m_Layer: 0
   m_Name: Bullet_Up
   m_TagString: AmmoPickup
@@ -201,6 +203,34 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &-834482876642322063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1609426563364382538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2f1a5be72e02f645a8410515f55a573, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floatHeight: 0.5
+  floatSpeed: 1
+--- !u!114 &3785407324897053884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1609426563364382538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2f1a5be72e02f645a8410515f55a573, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floatHeight: 0.5
+  floatSpeed: 1
 --- !u!1 &7652716451630121971
 GameObject:
   m_ObjectHideFlags: 0

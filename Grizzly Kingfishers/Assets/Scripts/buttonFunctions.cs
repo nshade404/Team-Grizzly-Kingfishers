@@ -14,14 +14,14 @@ public class buttonFunctions : MonoBehaviour
     public void restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        gameManager.instance.player.GetComponent<PlayerInputFunctions>()?.UnbindAllActions();
+        gameManager.instance.GetComponent<UIInputFunctions>().UnbindAllActions();
         gameManager.instance.stateUnpaused();
     }
 
     public void quit()
     {
         gameManager.instance.stateUnpaused();
-        gameManager.instance.player.GetComponent<PlayerInputFunctions>()?.UnbindAllActions();
+        gameManager.instance.player.GetComponent<PlayerInputFunctions>().UnbindAllActions();
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
         gameManager.instance.loadingScreen.SetActive(true);

@@ -246,6 +246,7 @@ public class EnemyAI : MonoBehaviour, IDamage {
                     HealthDropFloatingMotion floatingMotion = possibleDrops[droppedItem].AddComponent<HealthDropFloatingMotion>();
                 }
                 //agent.speed = 0;
+                GetComponent<CapsuleCollider>().enabled = false;
                 agent.enabled = false;
                 StartCoroutine(deathAnimation());
                 isShooting = false;
