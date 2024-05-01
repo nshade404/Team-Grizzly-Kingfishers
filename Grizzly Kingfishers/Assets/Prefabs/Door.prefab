@@ -52,6 +52,8 @@ MonoBehaviour:
   keyPickup: {fileID: 0}
   aud: {fileID: 620622898954065467}
   audOpen: {fileID: 8300000, guid: 890464806a5224a44b784a17a4136f1d, type: 3}
+  audLocked: {fileID: 8300000, guid: e6afa1fa1123e634c9bff876bbdcb5f1, type: 3}
+  audLockedVol: 0.859
   audOpenVol: 0.5
 --- !u!33 &457230920598718145
 MeshFilter:

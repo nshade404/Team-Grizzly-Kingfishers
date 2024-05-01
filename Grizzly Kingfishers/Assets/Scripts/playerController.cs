@@ -299,6 +299,7 @@ public class playerController : MonoBehaviour, IDamage
             if (!hasRocketPiece)
             {
                 PickUpRocket(other.gameObject);
+                aud.PlayOneShot(repairKitSound, repairKitVol);
 
             }
         }

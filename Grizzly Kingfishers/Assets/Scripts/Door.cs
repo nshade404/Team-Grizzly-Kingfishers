@@ -7,6 +7,8 @@ public class Door : MonoBehaviour
     public GameObject keyPickup; // Reference to the key pickup GameObject
     [SerializeField] AudioSource aud;
     [SerializeField] AudioClip audOpen;
+    [SerializeField] AudioClip audLocked;
+    [Range(0, 1)][SerializeField] float audLockedVol;
     [Range(0, 1)][SerializeField] float audOpenVol;
 
     private void OnTriggerEnter(Collider other)
@@ -25,6 +27,7 @@ public class Door : MonoBehaviour
             }
             else
             {
+                aud.PlayOneShot(audLocked, audLockedVol);
                 Debug.Log("Player does not have a key!");
                
             }

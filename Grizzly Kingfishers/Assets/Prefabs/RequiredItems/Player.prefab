@@ -113,13 +113,15 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a9dc84517b2f3364c877f03c437acfdd, type: 3}
   - {fileID: 8300000, guid: 24b9bd15bde577343a4564d26ae805b9, type: 3}
   - {fileID: 8300000, guid: 8956113d37766fb469871bf5dd4251dc, type: 3}
-  audStepsVol: 0.01
+  audStepsVol: 0.023
   deathSound: {fileID: 8300000, guid: 374cb7c7f0126a44d86677d29589608a, type: 3}
   deathVol: 0.75
   shootSound: {fileID: 8300000, guid: 857a532679e2e584e8b012b80fb2c216, type: 3}
   shootVol: 0.68
   rocketSound: {fileID: 8300000, guid: bd9d05e241933aa468a3f27b0dea9839, type: 3}
   rocketVol: 0.68
+  repairKitSound: {fileID: 8300000, guid: d906be539e6ac2a42a499f8bdbc79506, type: 3}
+  repairKitVol: 0
 --- !u!114 &5148887818904458957
 MonoBehaviour:
   m_ObjectHideFlags: 0
