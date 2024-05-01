@@ -32,9 +32,6 @@ public class OptionsManager : MonoBehaviour
     [SerializeField] private OptionBtn selectedBtn;
     [SerializeField] AudioSource aud;
     [SerializeField] AudioClip efx;
-    //public Sprite btnIdle;
-    //public Sprite btnHover;
-    //public Sprite btnSelected;
 
     public Slider masterSlider;
     public Slider bgmSlider;
@@ -66,8 +63,6 @@ public class OptionsManager : MonoBehaviour
 
             PlayerPrefs.SetString(PLAYER_DEFAULT_KEYBINDS, pia.SaveBindingOverridesAsJson());
         }
-
-        OnButtonSelect(optionBtns[0]);
     }
 
     /// <summary>
@@ -81,9 +76,10 @@ public class OptionsManager : MonoBehaviour
         string reboundKeybinds = PlayerPrefs.GetString(PLAYER_SAVED_REBOUND_KEYBINDS, PlayerPrefs.GetString(PLAYER_DEFAULT_KEYBINDS));
         pia.LoadBindingOverridesFromJson(reboundKeybinds);
 
+        EventSystem.current.SetSelectedGameObject(optionBtns[0].gameObject);
         if (gameManager.instance != null) {
-            EventSystem.current.SetSelectedGameObject(optionBtns[0].gameObject);
         }
+        OnButtonSelect(optionBtns[0]);
 
         DisplayAllKeybinds();
         optionPendingChange = false;
@@ -114,25 +110,6 @@ public class OptionsManager : MonoBehaviour
     }
 
     /// <summary>
-    /// What we do when we mouse over an option screen button
-    /// </summary>
-    public void OnButtonEnter(OptionBtn btn) {
-        if(btn == selectedBtn) {
-            return;
-        }
-
-        ResetAllButtons();
-        //btn.btnBackground.sprite = btnHover;
-    }
-
-    /// <summary>
-    /// What we do when we exit an option screen button.
-    /// </summary>
-    public void OnButtonExit(OptionBtn btn) {
-        ResetAllButtons();
-    }
-
-    /// <summary>
     /// Resets all buttons except the selected button back to default states.
     /// </summary>
     private void ResetAllButtons() {
@@ -141,7 +118,6 @@ public class OptionsManager : MonoBehaviour
             if (selectedBtn != null && btn == selectedBtn) {
                 continue;
             }
-            //btn.btnBackground.sprite = btnIdle;
             btn.optionScreen.SetActive(false);
         }
     }

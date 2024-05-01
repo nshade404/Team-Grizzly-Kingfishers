@@ -11,20 +11,4 @@ public class OptionBtn : MonoBehaviour/*, IPointerEnterHandler, IPointerExitHand
     //public Image btnBackground;
     public GameObject optionScreen;
 
-    private void Start() {
-        //btnBackground = GetComponent<Image>();
-        optionScreen.SetActive(false);
-    }
-
-    //public void OnPointerClick(PointerEventData eventData) {
-    //    optionManager.OnButtonSelect(this);
-    //}
-
-    //public void OnPointerEnter(PointerEventData eventData) {
-    //    optionManager.OnButtonEnter(this);
-    //}
-
-    //public void OnPointerExit(PointerEventData eventData) {
-    //    optionManager.OnButtonExit(this);
-    //}
 }
