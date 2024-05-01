@@ -28,9 +28,9 @@ public class cameraController : MonoBehaviour
         // get input
         //float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivity;
         //float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * sensitivity;
-        float mouseY = MouseDir.y * Time.deltaTime * (sensitivity + adjustedSensitivity);
-        float mouseX = MouseDir.x * Time.deltaTime * (sensitivity + adjustedSensitivity);
-      
+        float mouseY = MouseDir.y * Time.deltaTime * adjustedSensitivity;
+        float mouseX = MouseDir.x * Time.deltaTime * adjustedSensitivity;
+        Debug.Log(string.Format("MouseX: {0} MouseY:{0}", mouseX, mouseY));
         // invert look up/down
         if (invertY) {
             rotX += mouseY;
@@ -50,7 +50,8 @@ public class cameraController : MonoBehaviour
     }
 
     public void UpdateSensitivityFromPrefs() {
-        float modifier = PlayerPrefs.GetFloat(OptionsManager.LOOK_SENSITIVITY, 0f);
-        adjustedSensitivity = (sensitivity / 2) * modifier;
+        float modifier = PlayerPrefs.GetFloat(OptionsManager.LOOK_SENSITIVITY, 1f);
+        adjustedSensitivity = sensitivity * modifier;
     }
 }
+    
