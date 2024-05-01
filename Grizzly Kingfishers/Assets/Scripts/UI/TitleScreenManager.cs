@@ -19,10 +19,25 @@ public class TitleScreenManager : MonoBehaviour
 
     [SerializeField] VolumeControl volumeControl;
 
+    [SerializeField] GameObject currSelectedObject;
+
+    public GameObject CurrentSelectedObject {
+        get { return currSelectedObject; }
+        set { currSelectedObject = value; }
+    }
+
     public VolumeControl GetVolumeControl() { return volumeControl; }
 
     private void Start() {
         ReturnToTitle();
+    }
+
+    private void Update() {
+        if(EventSystem.current.currentSelectedGameObject != null && EventSystem.current.currentSelectedGameObject != CurrentSelectedObject) {
+            CurrentSelectedObject = EventSystem.current.currentSelectedGameObject;
+        } else if(EventSystem.current.currentSelectedGameObject == null) {
+            EventSystem.current.SetSelectedGameObject(CurrentSelectedObject);
+        }
     }
 
     /// <summary>
@@ -40,7 +55,8 @@ public class TitleScreenManager : MonoBehaviour
     public void ReturnToTitle(bool fromOptions = false) {
         HideAllScreens();
         volumeControl.UpdateVolumes();
-        EventSystem.current.SetSelectedGameObject(titleFirst);
+        CurrentSelectedObject = titleFirst;
+        EventSystem.current.SetSelectedGameObject(CurrentSelectedObject);
         TitleScreen.SetActive(true);
     }
 

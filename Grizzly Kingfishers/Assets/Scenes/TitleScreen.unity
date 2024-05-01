@@ -3144,6 +3144,7 @@ MonoBehaviour:
   creditFirst: {fileID: 804906395}
   secondsForLoadingScreen: 0
   volumeControl: {fileID: 1407129109}
+  currSelectedObject: {fileID: 0}
 --- !u!1001 &659878810272246912
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3252,6 +3253,10 @@ PrefabInstance:
     - target: {fileID: 111436514575575420, guid: 884019ffa83f3e44ab291ef1aa5dd794, type: 3}
       propertyPath: m_Name
       value: OptionScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 111436514575575420, guid: 884019ffa83f3e44ab291ef1aa5dd794, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1531496049719128419, guid: 884019ffa83f3e44ab291ef1aa5dd794, type: 3}
       propertyPath: titleScreenManager
