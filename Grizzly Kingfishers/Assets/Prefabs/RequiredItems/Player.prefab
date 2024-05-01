@@ -113,13 +113,15 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a9dc84517b2f3364c877f03c437acfdd, type: 3}
   - {fileID: 8300000, guid: 24b9bd15bde577343a4564d26ae805b9, type: 3}
   - {fileID: 8300000, guid: 8956113d37766fb469871bf5dd4251dc, type: 3}
-  audStepsVol: 0.01
+  audStepsVol: 0.2
   deathSound: {fileID: 8300000, guid: 374cb7c7f0126a44d86677d29589608a, type: 3}
-  deathVol: 0.75
+  deathVol: 0.2
   shootSound: {fileID: 8300000, guid: 857a532679e2e584e8b012b80fb2c216, type: 3}
-  shootVol: 0.68
+  shootVol: 0.2
   rocketSound: {fileID: 8300000, guid: bd9d05e241933aa468a3f27b0dea9839, type: 3}
   rocketVol: 0.68
+  repairKitSound: {fileID: 0}
+  repairKitVol: 0
 --- !u!114 &5148887818904458957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -637,7 +639,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 247
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -686,6 +688,10 @@ PrefabInstance:
       propertyPath: orthographic size
       value: 23.97
       objectReference: {fileID: 0}
+    - target: {fileID: 1373253415834884808, guid: f1352479bc67cd444a63b93b00b7d04f, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 257
+      objectReference: {fileID: 0}
     - target: {fileID: 5347443561023545493, guid: f1352479bc67cd444a63b93b00b7d04f, type: 3}
       propertyPath: m_Name
       value: MinimapCamera
@@ -696,7 +702,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7818473757988806313, guid: f1352479bc67cd444a63b93b00b7d04f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 7818473757988806313, guid: f1352479bc67cd444a63b93b00b7d04f, type: 3}
       propertyPath: m_LocalPosition.z

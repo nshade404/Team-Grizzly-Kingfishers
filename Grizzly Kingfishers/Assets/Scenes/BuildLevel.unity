@@ -65738,21 +65738,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1663198965133044872, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.5
-      objectReference: {fileID: 0}
     - target: {fileID: 3725882325504470215, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 5451696468100691940, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: 7927020938770195631, guid: 77cf3e60c57d7974b99e2b9b0d5673f7, type: 2}
-    - target: {fileID: 5592327700004721630, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 247
       objectReference: {fileID: 0}
     - target: {fileID: 6506310894502256878, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -65793,42 +65781,6 @@ PrefabInstance:
     - target: {fileID: 6506310894502256878, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7537570453666244841, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
-      propertyPath: orthographic
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7537570453666244841, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
-      propertyPath: m_OcclusionCulling
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7537570453666244841, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 257
-      objectReference: {fileID: 0}
-    - target: {fileID: 8190014280377636313, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8493498545602200069, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
-      propertyPath: deathVol
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8493498545602200069, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
-      propertyPath: shootVol
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8493498545602200069, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
-      propertyPath: AmmoModel
-      value: 
-      objectReference: {fileID: 919132149155446097, guid: 922c2067d18091f4f96f481884258e16, type: 3}
-    - target: {fileID: 8493498545602200069, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
-      propertyPath: audJumpVol
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8493498545602200069, guid: e45d8a1fe3b017042a84c77c91348a0d, type: 3}
-      propertyPath: audStepsVol
-      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
