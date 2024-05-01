@@ -17,7 +17,7 @@ public class gameManager : MonoBehaviour {
     public GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
-    [SerializeField] GameObject resumeBtn;
+    public GameObject resumeBtn;
     [SerializeField] GameObject objectivePopup;
     [SerializeField] TMP_Text rocketPiecesCollectedText;
     [SerializeField] TMP_Text heldRocketPiecesText;
@@ -72,6 +72,12 @@ public class gameManager : MonoBehaviour {
 
     public UIInputActions uia;
 
+    [SerializeField] GameObject currSelectedObject;
+    public GameObject CurrentSelectedObject {
+        get { return currSelectedObject; }
+        set { currSelectedObject = value; }
+    }
+
     public VolumeControl GetVolumeControl() { return volumeControl; }
 
     // Start is called before the first frame update
@@ -99,7 +105,13 @@ public class gameManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-
+        if (EventSystem.current.currentSelectedGameObject != null && EventSystem.current.currentSelectedGameObject != CurrentSelectedObject) {
+            CurrentSelectedObject = EventSystem.current.currentSelectedGameObject;
+            //EventSystem.current.SetSelectedGameObject(CurrentSelectedObject); // set teh selected option to the new option
+        }
+        else if (EventSystem.current.currentSelectedGameObject == null) {
+            EventSystem.current.SetSelectedGameObject(CurrentSelectedObject);
+        }
     }
 
     public void StartPressed() {
@@ -108,7 +120,6 @@ public class gameManager : MonoBehaviour {
             menuActive = menuPause;
             menuActive.SetActive(isPaused);
             playerScript.pia.Disable();
-            EventSystem.current.SetSelectedGameObject(resumeBtn);
         }
     }
 
@@ -155,6 +166,8 @@ public class gameManager : MonoBehaviour {
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
+        CurrentSelectedObject = resumeBtn;
+        EventSystem.current.SetSelectedGameObject(CurrentSelectedObject);
     }
 
     public void stateUnpaused() {
@@ -164,6 +177,8 @@ public class gameManager : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Locked;
         menuActive.SetActive(false);
         menuActive = null;
+        CurrentSelectedObject = null;
+        EventSystem.current.SetSelectedGameObject(CurrentSelectedObject);
     }
 
     IEnumerator startingPopup() {

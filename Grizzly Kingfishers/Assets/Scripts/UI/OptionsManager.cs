@@ -81,6 +81,10 @@ public class OptionsManager : MonoBehaviour
         string reboundKeybinds = PlayerPrefs.GetString(PLAYER_SAVED_REBOUND_KEYBINDS, PlayerPrefs.GetString(PLAYER_DEFAULT_KEYBINDS));
         pia.LoadBindingOverridesFromJson(reboundKeybinds);
 
+        if (gameManager.instance != null) {
+            EventSystem.current.SetSelectedGameObject(optionBtns[0].gameObject);
+        }
+
         DisplayAllKeybinds();
         optionPendingChange = false;
     }
@@ -254,7 +258,10 @@ public class OptionsManager : MonoBehaviour
         else { // otherwise we are in game, return to game...
             BackClickedWindow.SetActive(false);
             gameObject.SetActive(false);
+
             gameManager.instance.menuActive = gameManager.instance.menuPause;
+            gameManager.instance.CurrentSelectedObject = gameManager.instance.resumeBtn;
+            EventSystem.current.SetSelectedGameObject(gameManager.instance.CurrentSelectedObject);
         }
     }
 
