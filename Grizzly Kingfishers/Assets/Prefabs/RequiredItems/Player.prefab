@@ -118,6 +118,8 @@ MonoBehaviour:
   deathVol: 0.75
   shootSound: {fileID: 8300000, guid: 857a532679e2e584e8b012b80fb2c216, type: 3}
   shootVol: 0.68
+  rocketSound: {fileID: 8300000, guid: bd9d05e241933aa468a3f27b0dea9839, type: 3}
+  rocketVol: 0.68
 --- !u!114 &5148887818904458957
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -64,6 +64,11 @@ public class playerController : MonoBehaviour, IDamage
     [Range(0f, 1f)][SerializeField] float deathVol;
     [SerializeField] AudioClip shootSound;
     [Range(0f, 1f)][SerializeField] float shootVol;
+    [SerializeField] AudioClip rocketSound;
+    [Range(0f, 1f)][SerializeField]float rocketVol;
+    [SerializeField] AudioClip repairKitSound;
+    [Range(0f, 1f)][SerializeField]float repairKitVol;
+
 
 
     int jumpCount;
@@ -309,6 +314,7 @@ public class playerController : MonoBehaviour, IDamage
             if (hasRocketPiece)
             {
                 RemoveRocketPiece();
+                aud.PlayOneShot(rocketSound, rocketVol);
                 gameManager.instance.rocketPiecesCollected++;
                 gameManager.instance.updateRocketPiecesUI();
                 gameManager.instance.UpdateRepairKitsHeld();
