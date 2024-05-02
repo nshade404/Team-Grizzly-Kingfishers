@@ -15,12 +15,19 @@ public class Bullet : MonoBehaviour {
         visciousMockery
     }
 
+    public enum OwnerTag {
+        Player = 0,
+        Turret,
+        Enemy
+    }
+
     [SerializeField] Rigidbody rb;
 
     public float damage;
     public float speed;
     [SerializeField] int destroyTime;
     [SerializeField] DamageType type;
+    public OwnerTag ownerTag;
 
     [Header("----- Bullet Effects -----")]
     public float effTime;
@@ -44,14 +51,29 @@ public class Bullet : MonoBehaviour {
 
         IDamage dmg = other.GetComponent<IDamage>();
         if (dmg != null) {
-            dmg.takeDamage(damage);
+
+            if (ownerTag == OwnerTag.Player ||
+                ownerTag == OwnerTag.Turret) {
+                if (other.CompareTag("Enemy")) {
+                    dmg.takeDamage(damage);
+                }
+            }
+
+            if(ownerTag == OwnerTag.Enemy) {
+                if (!other.CompareTag("Enemy")) {
+                    {
+                        dmg.takeDamage(damage);
+                    }
+                }
+            }
         }
+
+
         type = GetDamageType();
 
-        switch ((int)type)
-        {
+        switch ((int)type) {
             case 0:
-                effTime = 0; 
+                effTime = 0;
                 slowPerc = 0;
                 blind = false;
                 break;
@@ -60,7 +82,7 @@ public class Bullet : MonoBehaviour {
                 slowPerc = 0.1f;
                 blind = false;
                 break;
-            case 2: 
+            case 2:
                 effTime = 5;
                 slowPerc = 0;
                 blind = false;
@@ -68,7 +90,7 @@ public class Bullet : MonoBehaviour {
             case 3:
                 effTime = 2;
                 slowPerc += .1f;
-                blind = false; 
+                blind = false;
                 break;
             case 4:
                 effTime = 1;
