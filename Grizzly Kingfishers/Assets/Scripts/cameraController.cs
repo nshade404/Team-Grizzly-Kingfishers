@@ -25,12 +25,8 @@ public class cameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // get input
-        //float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivity;
-        //float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * sensitivity;
         float mouseY = MouseDir.y * Time.deltaTime * adjustedSensitivity;
         float mouseX = MouseDir.x * Time.deltaTime * adjustedSensitivity;
-        Debug.Log(string.Format("MouseX: {0} MouseY:{0}", mouseX, mouseY));
         // invert look up/down
         if (invertY) {
             rotX += mouseY;

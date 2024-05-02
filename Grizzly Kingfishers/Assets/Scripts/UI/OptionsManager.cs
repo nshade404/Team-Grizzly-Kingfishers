@@ -326,12 +326,18 @@ public class OptionsManager : MonoBehaviour
         // Delete the currently saved ones...
         PlayerPrefs.DeleteKey(PLAYER_SAVED_REBOUND_KEYBINDS);
         // Load up the defaults via gameManager or titlescreenmanager depending on where we are.
-        if(gameManager.instance != null) { // We are in game with gameManager.
-            gameManager.instance.player.GetComponent<PlayerInputFunctions>()?.LoadSavedBindings();
-        }else if(titleScreenManager != null) { // check if we are in title screen...
-            string rebounds = PlayerPrefs.GetString(OptionsManager.PLAYER_SAVED_REBOUND_KEYBINDS, PlayerPrefs.GetString(OptionsManager.PLAYER_DEFAULT_KEYBINDS));
-            pia.LoadBindingOverridesFromJson(rebounds);
-        }
+        //if(gameManager.instance != null) { // We are in game with gameManager.
+        //    //gameManager.instance.player.GetComponent<PlayerInputFunctions>().LoadSavedBindings();
+        //    string rebounds = PlayerPrefs.GetString(OptionsManager.PLAYER_SAVED_REBOUND_KEYBINDS, PlayerPrefs.GetString(OptionsManager.PLAYER_DEFAULT_KEYBINDS));
+        //    pia.LoadBindingOverridesFromJson(rebounds);
+        //}
+        //else if(titleScreenManager != null) { // check if we are in title screen...
+        //    string rebounds = PlayerPrefs.GetString(OptionsManager.PLAYER_SAVED_REBOUND_KEYBINDS, PlayerPrefs.GetString(OptionsManager.PLAYER_DEFAULT_KEYBINDS));
+        //    pia.LoadBindingOverridesFromJson(rebounds);
+        //}
+
+        string rebounds = PlayerPrefs.GetString(PLAYER_SAVED_REBOUND_KEYBINDS, PlayerPrefs.GetString(PLAYER_DEFAULT_KEYBINDS));
+        pia.LoadBindingOverridesFromJson(rebounds);
 
         ResetBindingsWindow.SetActive(false);
         
