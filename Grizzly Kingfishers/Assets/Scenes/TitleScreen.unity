@@ -3254,14 +3254,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: OptionScreen
       objectReference: {fileID: 0}
-    - target: {fileID: 111436514575575420, guid: 884019ffa83f3e44ab291ef1aa5dd794, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1531496049719128419, guid: 884019ffa83f3e44ab291ef1aa5dd794, type: 3}
       propertyPath: titleScreenManager
       value: 
       objectReference: {fileID: 2051045863}
+    - target: {fileID: 3989627270593002248, guid: 884019ffa83f3e44ab291ef1aa5dd794, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6012838445507806403, guid: 884019ffa83f3e44ab291ef1aa5dd794, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3340,6 +3340,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6012838445507806403, guid: 884019ffa83f3e44ab291ef1aa5dd794, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7107382749032190162, guid: 884019ffa83f3e44ab291ef1aa5dd794, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
