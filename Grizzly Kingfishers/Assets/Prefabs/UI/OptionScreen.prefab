@@ -928,7 +928,6 @@ MonoBehaviour:
   optionBtns:
   - {fileID: 5613178411642761918}
   - {fileID: 7890068297621835132}
-  - {fileID: 2806419146878291196}
   - {fileID: 1093642559899369650}
   titleScreenManager: {fileID: 0}
   applyButton: {fileID: 2810064969439885144}
@@ -4853,8 +4852,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5738586846509341300}
   m_HandleRect: {fileID: 865043806937337965}
   m_Direction: 2
-  m_Value: 1.0000004
-  m_Size: 0.6111073
+  m_Value: 1
+  m_Size: 0.6106637
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -21263,7 +21262,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 99.99991}
+  m_AnchoredPosition: {x: 0, y: 99.999985}
   m_SizeDelta: {x: 1225, y: 900}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2419388036375228464
