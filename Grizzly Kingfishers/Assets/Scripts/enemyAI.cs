@@ -215,7 +215,9 @@ public class EnemyAI : MonoBehaviour, IDamage {
                 FireInsult();
             } else { 
                 Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.z));
-                Instantiate(bullet, shootPos.position, rot);
+                GameObject firedBullet = Instantiate(bullet, shootPos.position, rot);
+                firedBullet.GetComponent<Bullet>().ownerTag = Bullet.OwnerTag.Enemy;
+
                 aud.PlayOneShot(audShoot, audShootVol);
             }
         }

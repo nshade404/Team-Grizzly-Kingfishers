@@ -11,15 +11,26 @@ public class VolumeControl : MonoBehaviour
     public const string BGM_VOLUME = "BGMVolume";
     public const string SFX_VOLUME = "SFXVolume";
 
+    public static VolumeControl Instance { get; private set; }
+
     //[SerializeField] string volumeParameter = "MasterVolume";
     [SerializeField] AudioMixer mixer;
     //[SerializeField] Slider slider;
     [SerializeField] float multiplier = 30f;
-    // Start is called before the first frame update
+
+    [SerializeField] AudioSource bgmAudSrc;
+    [SerializeField] AudioSource sfxAudSrc;
 
     float savedMasterVolume = 0.0f;
     float savedBGMVolume = 0.0f;
     float savedSFXVolume = 0.0f;
+
+    public AudioSource GetBGMAudSrc { get { return bgmAudSrc; } }
+    public AudioSource GetSFXAudSrc { get { return sfxAudSrc; } }
+
+    private void Awake() {
+        Instance = this;
+    }
 
     void Start()
     {

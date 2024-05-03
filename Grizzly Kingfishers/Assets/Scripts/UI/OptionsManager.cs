@@ -30,7 +30,7 @@ public class OptionsManager : MonoBehaviour
     [SerializeField] GameObject IsKeybindingWindow;
     [SerializeField] GameObject ResetBindingsWindow;
     [SerializeField] private OptionBtn selectedBtn;
-    [SerializeField] AudioSource aud;
+    //[SerializeField] AudioSource aud;
     [SerializeField] AudioClip efx;
 
     public Slider masterSlider;
@@ -89,11 +89,12 @@ public class OptionsManager : MonoBehaviour
     /// What happens when we click on an option screen button
     /// </summary>
     public void OnButtonSelect(OptionBtn btn) {
+        VolumeControl.Instance.GetSFXAudSrc.PlayOneShot(efx, VolumeControl.Instance.GetSFXAudSrc.volume);
         selectedBtn = btn;
         ResetAllButtons();
         //btn.btnBackground.sprite = btnSelected;
         btn.optionScreen.SetActive(true);
-        aud.PlayOneShot(efx, aud.volume);
+        
 
         // Set the apply buttons navigation dynamically to be the currently selected button.
         Navigation newApplyNav = new Navigation();
@@ -164,6 +165,7 @@ public class OptionsManager : MonoBehaviour
     }
 
     public void ApplyChanges() {
+        VolumeControl.Instance.GetSFXAudSrc.PlayOneShot(efx, VolumeControl.Instance.GetSFXAudSrc.volume);
         // apply all pending changes to playerprefs.
         PlayerPrefs.SetFloat(MASTER_VALUE, masterSlider.normalizedValue);
         PlayerPrefs.SetFloat(BGM_VALUE, bgmSlider.normalizedValue);
@@ -196,6 +198,7 @@ public class OptionsManager : MonoBehaviour
     }
 
     public void BackButtonClicked() {
+        VolumeControl.Instance.GetSFXAudSrc.PlayOneShot(efx, VolumeControl.Instance.GetSFXAudSrc.volume);
         // Check if any pending options need to be saved...
         if (optionPendingChange) {
             // if so, show pop up asking if they want to save or discard changes
@@ -204,6 +207,7 @@ public class OptionsManager : MonoBehaviour
                 gameManager.instance.menuActive = BackClickedWindow;
             }
         } else {
+            
             CloseOptionsScreen();
             pia.Player.Enable();
         }
@@ -221,7 +225,7 @@ public class OptionsManager : MonoBehaviour
         bgmSlider.value = (int)(PlayerPrefs.GetFloat(BGM_VALUE, 1) * VOLUME_MAX);
         sfxSlider.value = (int)(PlayerPrefs.GetFloat(SFX_VALUE, 1) * VOLUME_MAX);
         lookSlider.value = (PlayerPrefs.GetFloat(LOOK_SENSITIVITY, 0)); // if we have an pref for it, use that, otherwise use 0.
-
+        VolumeControl.Instance.GetSFXAudSrc.PlayOneShot(efx, VolumeControl.Instance.GetSFXAudSrc.volume);
         BackClickedWindow.SetActive(false);
         CloseOptionsScreen();
     }
@@ -326,12 +330,18 @@ public class OptionsManager : MonoBehaviour
         // Delete the currently saved ones...
         PlayerPrefs.DeleteKey(PLAYER_SAVED_REBOUND_KEYBINDS);
         // Load up the defaults via gameManager or titlescreenmanager depending on where we are.
-        if(gameManager.instance != null) { // We are in game with gameManager.
-            gameManager.instance.player.GetComponent<PlayerInputFunctions>()?.LoadSavedBindings();
-        }else if(titleScreenManager != null) { // check if we are in title screen...
-            string rebounds = PlayerPrefs.GetString(OptionsManager.PLAYER_SAVED_REBOUND_KEYBINDS, PlayerPrefs.GetString(OptionsManager.PLAYER_DEFAULT_KEYBINDS));
-            pia.LoadBindingOverridesFromJson(rebounds);
-        }
+        //if(gameManager.instance != null) { // We are in game with gameManager.
+        //    //gameManager.instance.player.GetComponent<PlayerInputFunctions>().LoadSavedBindings();
+        //    string rebounds = PlayerPrefs.GetString(OptionsManager.PLAYER_SAVED_REBOUND_KEYBINDS, PlayerPrefs.GetString(OptionsManager.PLAYER_DEFAULT_KEYBINDS));
+        //    pia.LoadBindingOverridesFromJson(rebounds);
+        //}
+        //else if(titleScreenManager != null) { // check if we are in title screen...
+        //    string rebounds = PlayerPrefs.GetString(OptionsManager.PLAYER_SAVED_REBOUND_KEYBINDS, PlayerPrefs.GetString(OptionsManager.PLAYER_DEFAULT_KEYBINDS));
+        //    pia.LoadBindingOverridesFromJson(rebounds);
+        //}
+
+        string rebounds = PlayerPrefs.GetString(PLAYER_SAVED_REBOUND_KEYBINDS, PlayerPrefs.GetString(PLAYER_DEFAULT_KEYBINDS));
+        pia.LoadBindingOverridesFromJson(rebounds);
 
         ResetBindingsWindow.SetActive(false);
         

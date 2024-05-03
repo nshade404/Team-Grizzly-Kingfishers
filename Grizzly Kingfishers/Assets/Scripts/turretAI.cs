@@ -104,7 +104,8 @@ public class Turrets : MonoBehaviour, IDamage
     IEnumerator FireCannon()
     {
         isShooting = true;
-        Instantiate(bullet, cannonBarrels[currentCannon].position, turretHead.transform.rotation);
+        GameObject firedBullet = Instantiate(bullet, cannonBarrels[currentCannon].position, turretHead.transform.rotation);
+        firedBullet.GetComponent<Bullet>().ownerTag = Bullet.OwnerTag.Turret;
         aud.PlayOneShot(audShoot, audShootVol);
         currentCannon++; // increment to next barrel for next shot,
         if (currentCannon == cannonBarrels.Length) { // If we are at num barrels.length, cycle back to 0

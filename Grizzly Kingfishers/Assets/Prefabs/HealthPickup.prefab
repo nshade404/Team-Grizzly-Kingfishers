@@ -98,6 +98,9 @@ GameObject:
   - component: {fileID: -1515904524692299432}
   - component: {fileID: -4037883166379126461}
   - component: {fileID: 6829204747796993950}
+  - component: {fileID: -4301465991786794075}
+  - component: {fileID: -1336543363671405930}
+  - component: {fileID: 2757713444491228720}
   m_Layer: 0
   m_Name: HealthPickup
   m_TagString: HealthPickup
@@ -246,6 +249,48 @@ MonoBehaviour:
   floatHeight: 0.5
   floatSpeed: 1
 --- !u!114 &6829204747796993950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5766254608244252584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2f1a5be72e02f645a8410515f55a573, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floatHeight: 0.5
+  floatSpeed: 1
+--- !u!114 &-4301465991786794075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5766254608244252584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2f1a5be72e02f645a8410515f55a573, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floatHeight: 0.5
+  floatSpeed: 1
+--- !u!114 &-1336543363671405930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5766254608244252584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2f1a5be72e02f645a8410515f55a573, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floatHeight: 0.5
+  floatSpeed: 1
+--- !u!114 &2757713444491228720
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
