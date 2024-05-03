@@ -68,6 +68,7 @@ public class playerController : MonoBehaviour, IDamage
     [Range(0f, 1f)][SerializeField]float rocketVol;
     [SerializeField] AudioClip repairKitSound;
     [Range(0f, 1f)][SerializeField]float repairKitVol;
+    [SerializeField] AudioClip reloadSound;
 
 
 
@@ -199,11 +200,11 @@ public class playerController : MonoBehaviour, IDamage
 
         if (IsSprinting)
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.3f);
         }
         else
         {
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.5f);
         }
         playingSteps = false;
     }
@@ -289,6 +290,7 @@ public class playerController : MonoBehaviour, IDamage
         else if (other.CompareTag("AmmoPickup"))
         {
             PickupAmmo(other.gameObject);
+            aud.PlayOneShot(reloadSound, aud.volume);
         }
 
         else if (other.CompareTag("Key"))
