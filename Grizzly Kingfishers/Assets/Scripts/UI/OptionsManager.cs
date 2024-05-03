@@ -89,11 +89,12 @@ public class OptionsManager : MonoBehaviour
     /// What happens when we click on an option screen button
     /// </summary>
     public void OnButtonSelect(OptionBtn btn) {
+        aud.PlayOneShot(efx, aud.volume);
         selectedBtn = btn;
         ResetAllButtons();
         //btn.btnBackground.sprite = btnSelected;
         btn.optionScreen.SetActive(true);
-        aud.PlayOneShot(efx, aud.volume);
+        
 
         // Set the apply buttons navigation dynamically to be the currently selected button.
         Navigation newApplyNav = new Navigation();
@@ -164,6 +165,7 @@ public class OptionsManager : MonoBehaviour
     }
 
     public void ApplyChanges() {
+        aud.PlayOneShot(efx, aud.volume);
         // apply all pending changes to playerprefs.
         PlayerPrefs.SetFloat(MASTER_VALUE, masterSlider.normalizedValue);
         PlayerPrefs.SetFloat(BGM_VALUE, bgmSlider.normalizedValue);
@@ -196,14 +198,17 @@ public class OptionsManager : MonoBehaviour
     }
 
     public void BackButtonClicked() {
+        aud.PlayOneShot(efx, aud.volume);
         // Check if any pending options need to be saved...
         if (optionPendingChange) {
             // if so, show pop up asking if they want to save or discard changes
             BackClickedWindow.SetActive(true);
             if(gameManager.instance != null) {
+                aud.PlayOneShot(efx, aud.volume);
                 gameManager.instance.menuActive = BackClickedWindow;
             }
         } else {
+            
             CloseOptionsScreen();
             pia.Player.Enable();
         }
@@ -222,6 +227,7 @@ public class OptionsManager : MonoBehaviour
         sfxSlider.value = (int)(PlayerPrefs.GetFloat(SFX_VALUE, 1) * VOLUME_MAX);
         lookSlider.value = (PlayerPrefs.GetFloat(LOOK_SENSITIVITY, 0)); // if we have an pref for it, use that, otherwise use 0.
 
+        aud.PlayOneShot(efx, aud.volume);
         BackClickedWindow.SetActive(false);
         CloseOptionsScreen();
     }
