@@ -120,8 +120,8 @@ MonoBehaviour:
   shootVol: 0.2
   rocketSound: {fileID: 8300000, guid: bd9d05e241933aa468a3f27b0dea9839, type: 3}
   rocketVol: 0.68
-  repairKitSound: {fileID: 0}
-  repairKitVol: 0
+  repairKitSound: {fileID: 8300000, guid: d4cddb517e52fe147a36cfd3d65707a3, type: 3}
+  repairKitVol: 0.2
   reloadSound: {fileID: 8300000, guid: c491315e7d760854cac7f7604803faee, type: 3}
 --- !u!114 &5148887818904458957
 MonoBehaviour:

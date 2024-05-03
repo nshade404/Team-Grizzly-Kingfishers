@@ -164,7 +164,8 @@ public class playerController : MonoBehaviour, IDamage
             isJumping = true;
             jumpTimeCounter = 0f;
             jumpCount++;
-            aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
+            //aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
+            VolumeControl.Instance.GetSFXAudSrc.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
         }
 
         if (IsJumping)
@@ -197,6 +198,7 @@ public class playerController : MonoBehaviour, IDamage
     {
         playingSteps = true;
         aud.PlayOneShot(audSteps[Random.Range(0, audSteps.Length)], audStepsVol);
+        //VolumeControl.Instance.GetSFXAudSrc.PlayOneShot(audSteps[Random.Range(0, audSteps.Length)], audStepsVol);
 
         if (IsSprinting)
         {
@@ -230,6 +232,7 @@ public class playerController : MonoBehaviour, IDamage
             firedBullet.GetComponent<Bullet>().ownerTag = Bullet.OwnerTag.Player;
             //Instantiate(selectedBullet, shootPos.position, transform.rotation);
             aud.PlayOneShot(shootSound, shootVol);
+            //VolumeControl.Instance.GetSFXAudSrc.PlayOneShot(shootSound, shootVol);
             currentAmmo--;
             gameManager.instance.UpdateAmmoCount();
             yield return new WaitForSeconds(shootRate);
@@ -248,6 +251,7 @@ public class playerController : MonoBehaviour, IDamage
         {
             health -= amount;
             aud.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
+            //VolumeControl.Instance.GetSFXAudSrc.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
             StartCoroutine(flashDamageScreen());
             updatePlayerUI();
 
@@ -290,7 +294,8 @@ public class playerController : MonoBehaviour, IDamage
         else if (other.CompareTag("AmmoPickup"))
         {
             PickupAmmo(other.gameObject);
-            aud.PlayOneShot(reloadSound, aud.volume);
+            //aud.PlayOneShot(reloadSound, aud.volume);
+            VolumeControl.Instance.GetSFXAudSrc.PlayOneShot(reloadSound, aud.volume);
         }
 
         else if (other.CompareTag("Key"))
@@ -302,7 +307,8 @@ public class playerController : MonoBehaviour, IDamage
             if (!hasRocketPiece)
             {
                 PickUpRocket(other.gameObject);
-                aud.PlayOneShot(repairKitSound, repairKitVol);
+                //aud.PlayOneShot(repairKitSound, repairKitVol);
+                VolumeControl.Instance.GetSFXAudSrc.PlayOneShot(repairKitSound, repairKitVol);
 
             }
         }
@@ -318,7 +324,8 @@ public class playerController : MonoBehaviour, IDamage
             if (hasRocketPiece)
             {
                 RemoveRocketPiece();
-                aud.PlayOneShot(rocketSound, rocketVol);
+                //aud.PlayOneShot(rocketSound, rocketVol);
+                VolumeControl.Instance.GetSFXAudSrc.PlayOneShot(rocketSound, rocketVol);
                 gameManager.instance.rocketPiecesCollected++;
                 gameManager.instance.updateRocketPiecesUI();
                 gameManager.instance.UpdateRepairKitsHeld();
