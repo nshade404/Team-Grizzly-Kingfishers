@@ -24,7 +24,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] int currentAmmo = 0;
     [SerializeField] int maxAmmo = 30;
     bool isImmune = false;
-    float immunityDuration = 0.1f;
+    float immunityDuration = 0.8f;
     public List<GameObject> collectedItems = new List<GameObject>();
     public int healthPickupAmount = 10;
     public int keysCollected = 0;
