@@ -64,7 +64,8 @@ public class PlayerInputFunctions : MonoBehaviour
 
     private void Update() {
         Move(playerInputActions.Player.Movement.ReadValue<Vector2>());
-        Look(playerInputActions.Player.Camera.ReadValue<Vector2>() * Time.deltaTime);
+        //Look(playerInputActions.Player.Camera.ReadValue<Vector2>() * Time.deltaTime);
+        Look(Mouse.current.delta.ReadValue() * Time.deltaTime);
     }
 
     private void StartPressed(InputAction.CallbackContext context) {
@@ -83,6 +84,9 @@ public class PlayerInputFunctions : MonoBehaviour
     }
 
     private void Look(Vector2 inVector) {
+        Debug.Log("---Look---");
+        Debug.Log(inVector);
+        Debug.Log(inVector.normalized);
         //gameManager.instance.camController.MouseDir = new Vector3(inVector.x, inVector.y, 0);// inVector.normalized;
         gameManager.instance.camController.MouseDir = inVector.normalized;
     }
